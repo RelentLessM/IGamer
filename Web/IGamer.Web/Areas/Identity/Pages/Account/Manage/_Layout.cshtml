@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<section class="banner_part">
+    <div class="container">
+        <div class="banner_text">
+            <div class="banner_text_iner">
+                <h1>Manage your account</h1>
+
+                <div>
+                    <h4>Change your account settings</h4>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">
+                            <partial name="_ManageNav" />
+                        </div>
+                        <div class="col-md-9">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
