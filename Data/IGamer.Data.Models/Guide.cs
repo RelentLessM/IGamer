@@ -2,8 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using IGamer.Data.Common.Models;
+    using IGamer.Data.Models.Enums;
 
     public class Guide : BaseDeletableModel<string>
     {
@@ -13,28 +15,34 @@
             this.Comments = new HashSet<CommentOnGuide>();
         }
 
+        [Required]
+        [StringLength(100, ErrorMessage = "{0} must be between {2} and {1} characters.", MinimumLength = 6)]
         public string Title { get; set; }
 
+        [Required]
+        [MinLength(400, ErrorMessage = "Content must be at least 400 symbols.")]
         public string Description { get; set; }
 
+        [Required]
         public string UserId { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
-        public ICollection<CommentOnGuide> Comments { get; set; }
+        public virtual ICollection<CommentOnGuide> Comments { get; set; }
 
         public int Likes { get; set; }
 
         public int Dislikes { get; set; }
 
+        [Required]
         public string ImageUrl { get; set; }
 
-        public int CategoryId { get; set; }
+        [Required]
+        public virtual CategoryOfGuide Category { get; set; }
 
-        public CategoryOfGuide Category { get; set; }
-
+        [Required]
         public string GameId { get; set; }
 
-        public Game Game { get; set; }
+        public virtual Game Game { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace IGamer.Data.Models
+﻿namespace IGamer.Data.Models.Enums
 {
     public enum CategoryOfGuide
     {

@@ -24,6 +24,16 @@
         {
         }
 
+        public DbSet<Blog> Blogs { get; set; }
+
+        public DbSet<CommentOnBlog> CommentOnBlogs { get; set; }
+
+        public DbSet<CommentOnGuide> CommentOnGuides { get; set; }
+
+        public DbSet<Game> Games { get; set; }
+
+        public DbSet<Guide> Guides { get; set; }
+
         public DbSet<Setting> Settings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);

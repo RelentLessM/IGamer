@@ -48,5 +48,7 @@ namespace IGamer.Data.Models
         public virtual ICollection<Guide> Guides { get; set; }
 
         public virtual ICollection<SuggestionGame> Suggestions { get; set; }
+
+        public string ImageUrl { get; set; }
     }
 }
