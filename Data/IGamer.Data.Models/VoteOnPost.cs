@@ -3,15 +3,14 @@
     using System.ComponentModel.DataAnnotations;
 
     using IGamer.Data.Common.Models;
+    using IGamer.Data.Models.Enums;
 
-    public class CommentOnBlog : BaseDeletableModel<int>
+    public class VoteOnPost : BaseModel<int>
     {
         [Required]
-        public string Description { get; set; }
+        public string PostId { get; set; }
 
-        public int Likes { get; set; }
-
-        public int Dislikes { get; set; }
+        public virtual Post Post { get; set; }
 
         [Required]
         public string UserId { get; set; }
@@ -19,8 +18,6 @@
         public virtual ApplicationUser User { get; set; }
 
         [Required]
-        public string BlogId { get; set; }
-
-        public virtual Blog Blog { get; set; }
+        public VoteType VoteType { get; set; }
     }
 }

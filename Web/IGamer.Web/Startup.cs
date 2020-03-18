@@ -1,4 +1,6 @@
-﻿namespace IGamer.Web
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace IGamer.Web
 {
     using System.Reflection;
 
@@ -46,7 +48,10 @@
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options =>
+                {
+                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                });
             services.AddRazorPages();
 
             services.AddSingleton(this.configuration);
@@ -57,7 +62,7 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender("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"));
             services.AddTransient<ISettingsService, SettingsService>();
         }
 

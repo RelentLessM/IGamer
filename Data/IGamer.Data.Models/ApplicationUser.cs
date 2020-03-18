@@ -16,11 +16,15 @@ namespace IGamer.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
-            this.Blogs = new HashSet<Blog>();
+            this.Posts = new HashSet<Post>();
             this.Guides = new HashSet<Guide>();
-            this.CommentsOnBlogs = new HashSet<CommentOnBlog>();
+            this.CommentsOnPosts = new HashSet<CommentOnPost>();
             this.CommentsOnGuide = new HashSet<CommentOnGuide>();
             this.Suggestions = new HashSet<SuggestionGame>();
+            this.VotesForGuides = new HashSet<VoteOnGuide>();
+            this.VotesForPosts = new HashSet<VoteOnPost>();
+            this.VotesOnGuideComments = new HashSet<VoteOnGuideComment>();
+            this.VotesOnPostComments = new HashSet<VoteOnPostComment>();
         }
 
         // Audit info
@@ -39,15 +43,23 @@ namespace IGamer.Data.Models
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
-        public virtual ICollection<Blog> Blogs { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
 
-        public virtual ICollection<CommentOnBlog> CommentsOnBlogs { get; set; }
+        public virtual ICollection<CommentOnPost> CommentsOnPosts { get; set; }
 
         public virtual ICollection<CommentOnGuide> CommentsOnGuide { get; set; }
 
         public virtual ICollection<Guide> Guides { get; set; }
 
         public virtual ICollection<SuggestionGame> Suggestions { get; set; }
+
+        public virtual ICollection<VoteOnGuide> VotesForGuides { get; set; }
+
+        public virtual ICollection<VoteOnPost> VotesForPosts { get; set; }
+
+        public virtual ICollection<VoteOnGuideComment> VotesOnGuideComments { get; set; }
+
+        public virtual ICollection<VoteOnPostComment> VotesOnPostComments { get; set; }
 
         public string ImageUrl { get; set; }
     }

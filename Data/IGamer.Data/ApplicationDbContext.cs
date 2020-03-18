@@ -24,9 +24,9 @@
         {
         }
 
-        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Post> Posts { get; set; }
 
-        public DbSet<CommentOnBlog> CommentOnBlogs { get; set; }
+        public DbSet<CommentOnPost> CommentOnPosts { get; set; }
 
         public DbSet<CommentOnGuide> CommentOnGuides { get; set; }
 
@@ -35,6 +35,14 @@
         public DbSet<Guide> Guides { get; set; }
 
         public DbSet<Setting> Settings { get; set; }
+
+        public DbSet<VoteOnPostComment> VotesOnPostComments { get; set; }
+
+        public DbSet<VoteOnGuideComment> VotesOnGuideComments { get; set; }
+
+        public DbSet<VoteOnGuide> VotesOnGuides { get; set; }
+
+        public DbSet<VoteOnPost> VotesOnPosts { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

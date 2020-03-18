@@ -7,12 +7,13 @@
     using IGamer.Data.Common.Models;
     using IGamer.Data.Models.Enums;
 
-    public class Blog : BaseDeletableModel<string>
+    public class Post : BaseDeletableModel<string>
     {
-        public Blog()
+        public Post()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Comments = new HashSet<CommentOnBlog>();
+            this.Comments = new HashSet<CommentOnPost>();
+            this.Votes = new HashSet<VoteOnPost>();
         }
 
         [Required]
@@ -29,12 +30,10 @@
         public virtual ApplicationUser User { get; set; }
 
         [Required]
-        public virtual CategoryOfBlog Category { get; set; }
+        public virtual CategoryOfPost Category { get; set; }
 
-        public virtual ICollection<CommentOnBlog> Comments { get; set; }
+        public virtual ICollection<CommentOnPost> Comments { get; set; }
 
-        public int Likes { get; set; }
-
-        public int Dislikes { get; set; }
+        public virtual ICollection<VoteOnPost> Votes { get; set; }
     }
 }

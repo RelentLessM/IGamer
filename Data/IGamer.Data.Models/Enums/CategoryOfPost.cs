@@ -1,6 +1,6 @@
 ﻿namespace IGamer.Data.Models.Enums
 {
-    public enum CategoryOfBlog
+    public enum CategoryOfPost
     {
         Action = 1,
         Adventure = 2,
