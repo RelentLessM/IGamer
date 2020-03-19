@@ -27,7 +27,7 @@
 
         public IActionResult All()
         {
-            var posts = this.postService.GetAll<PostViewServiceModel>().To<PostViewModel>().ToList();
+            var posts = this.postService.GetAll<PostViewModel>();
             var result = new PostsAllViewModel() { Posts = posts };
             return this.View(result);
         }
@@ -58,7 +58,12 @@
 
             await this.postService.Create(model, userId);
 
-            return this.Redirect("/");
+            return this.RedirectToAction("ById");
+        }
+
+        public async Task<IActionResult> ById()
+        {
+            return null;
         }
     }
 }

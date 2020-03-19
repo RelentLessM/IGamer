@@ -25,14 +25,11 @@
                     @foreach (var post in Model.Posts)
                     {
                         <article class="blog_item">
-                            <div class="l_blog_item">
-                                kjsnadksniunekwjnfdscxkvlxcnvkdslnvdlksfjlkdsmcxlmvdlk
-                            </div>
                             <div class="blog_item_img">
                                 <img class="card-img rounded-0" src="~/img/blog/single_blog_1.png" alt="">
                                 <a href="#" class="blog_item_date">
-                                    <h3>@post.CreatedOn.Day</h3>
-                                    <p>@post.CreatedOn.Month</p>
+                                    <h3>@post.CreatedOn.ToString("dd")</h3>
+                                    <p>@post.CreatedOn.ToString("MMM")</p>
                                 </a>
                             </div>
 

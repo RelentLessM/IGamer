@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace IGamer.Services.Data.Posts
+﻿namespace IGamer.Services.Data.Posts
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
-
-    using IGamer.Services.Data.ServiceModels;
 
     public interface IPostService
     {
-        IQueryable<T> GetAll<T>();
+        //IQueryable<T> GetAll<T>();
+        IEnumerable<T> GetAll<T>();
 
         // Task<string> Create(CreatePostServiceModel model);
         Task<string> Create<T>(T model, string userId);

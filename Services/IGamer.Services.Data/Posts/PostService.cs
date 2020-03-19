@@ -1,4 +1,6 @@
-﻿namespace IGamer.Services.Data.Posts
+﻿using System.Collections.Generic;
+
+namespace IGamer.Services.Data.Posts
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -17,8 +19,8 @@
             this.repository = repository;
         }
 
-        public IQueryable<T> GetAll<T>()
-            => this.repository.All().OrderByDescending(x => x.Title).To<T>();
+        public IEnumerable<T> GetAll<T>()
+            => this.repository.All().OrderByDescending(x => x.Title).To<T>().ToList();
 
         public async Task<string> Create<T>(T model, string userId)
         {
