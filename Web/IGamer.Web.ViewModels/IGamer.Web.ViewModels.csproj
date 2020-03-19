@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\IGamer.Data.Models\IGamer.Data.Models.csproj" />
-    <ProjectReference Include="..\..\Services\IGamer.Services.Data\IGamer.Services.Data.csproj" />
     <ProjectReference Include="..\..\Services\IGamer.Services.Mapping\IGamer.Services.Mapping.csproj" />
   </ItemGroup>
 

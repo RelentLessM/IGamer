@@ -2216,7 +2216,7 @@ ul {
 
             /* line 29, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_menu.scss */
             .main_menu .main-menu-item ul li .nav-link:hover {
-                color: #ff0000;
+                color: purple;
             }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {

@@ -1,10 +1,8 @@
-﻿using IGamer.Data.Models;
-
-namespace IGamer.Web.ViewModels.Posts
+﻿namespace IGamer.Web.ViewModels.Posts
 {
     using System;
 
-    using IGamer.Services.Data.ServiceModels;
+    using IGamer.Data.Models;
     using IGamer.Services.Mapping;
 
     public class PostViewModel : /*IMapFrom<PostViewServiceModel>,*/ IMapFrom<Post>

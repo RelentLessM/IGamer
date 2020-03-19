@@ -1,4 +1,5 @@
-﻿using IGamer.Services.Data.Posts;
+﻿using IGamer.Services.Data.CategoryList;
+using IGamer.Services.Data.Posts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IGamer.Web
@@ -66,6 +67,7 @@ namespace IGamer.Web
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender("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"));
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IPostService, PostService>();
+            services.AddTransient<ICategoryListService, CategoryListService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

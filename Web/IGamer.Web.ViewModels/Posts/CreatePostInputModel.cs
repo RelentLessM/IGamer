@@ -6,7 +6,6 @@
     using AutoMapper;
     using IGamer.Data.Models;
     using IGamer.Data.Models.Enums;
-    using IGamer.Services.Data.ServiceModels;
     using IGamer.Services.Mapping;
 
     public class CreatePostInputModel : /*IMapTo<CreatePostServiceModel>, */IMapTo<Post>, IHaveCustomMappings

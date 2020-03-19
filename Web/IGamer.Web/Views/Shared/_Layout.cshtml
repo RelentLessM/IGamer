@@ -50,45 +50,7 @@
 
                             <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                                 <ul class="navbar-nav">
-                                    <li class="nav-item">
-                                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="fighter.html">fighter</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="team.html">team</a>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="blog.html" id="blockDropdown"
-                                           role="button" data-toggle="dropdown" aria-haspopup="true"
-                                           aria-expanded="false">
-                                            Blog
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="blockDropdown" id="blockMenu">
-                                            <a class="dropdown-item" href="blog.html"> blog</a>
-                                            <a class="dropdown-item" href="single-blog.html">Single blog</a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="blog.html" id="pagesDropdown"
-                                           role="button" data-toggle="dropdown" aria-haspopup="true"
-                                           aria-expanded="false">
-                                            pages
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="pagesDropdown" id="pagesMenu">
-                                            <a class="dropdown-item" href="elements.html">Elements</a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="contact.html">Contact</a>
-                                    </li>
+                                   <vc:nav-bar></vc:nav-bar>
                                 </ul>
                                 <partial name="_LoginPartial" />
                             </div>
