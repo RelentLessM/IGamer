@@ -17,7 +17,7 @@
         }
 
         [Required]
-        [StringLength(20,ErrorMessage = "The title must be between {2} and {1} characters.", MinimumLength = 6)]
+        [StringLength(20, ErrorMessage = "The title must be between {2} and {1} characters.", MinimumLength = 6)]
         public string Title { get; set; }
 
         [Required]

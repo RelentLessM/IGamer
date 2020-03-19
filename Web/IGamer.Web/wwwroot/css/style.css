@@ -4483,7 +4483,7 @@ h1, h2, h3, h4, h5, h6 {
     outline: none;
     line-height: 40px;
     padding: 0 30px;
-    font-size: .8em;
+    font-size: medium;
     text-align: center;
     text-decoration: none;
     font-weight: 500;
@@ -5685,6 +5685,11 @@ h1, h2, h3, h4, h5, h6 {
 /* line 1096, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_elements.scss */
 .mt-30 {
     margin-top: 30px;
+}
+
+/* line 1082, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_elements.scss */
+.form-select .nice-select::after {
+    right: 20px;
 }
 
 /* line 1099, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_elements.scss */
