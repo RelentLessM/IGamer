@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.10.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.2" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.164" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -21,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\IGamer.Data.Common\IGamer.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\IGamer.Data.Models\IGamer.Data.Models.csproj" />
+    <ProjectReference Include="..\..\IGamer.Common\IGamer.Common.csproj" />
     <ProjectReference Include="..\..\Web\IGamer.Web.ViewModels\IGamer.Web.ViewModels.csproj" />
     <ProjectReference Include="..\IGamer.Services.Mapping\IGamer.Services.Mapping.csproj" />
   </ItemGroup>

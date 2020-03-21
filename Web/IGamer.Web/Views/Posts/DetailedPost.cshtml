@@ -1,0 +1,180 @@
+﻿@model IGamer.Web.ViewModels.Posts.DetailedPostViewModel
+@{
+    ViewData["Title"] = "Post Details";
+}
+
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2>@ViewData["Title"]</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="blog_area single-post-area section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 posts-list">
+                <div class="single-post">
+                    @*<div class="feature-img">
+                        <img class="img-fluid" src="img/blog/single_blog_1.png" alt="">
+                    </div>*@
+                    <div class="blog_details">
+                        <h2>
+                            @Model.Title
+                        </h2>
+                        <ul class="blog-info-link mt-3 mb-4">
+                            <li><a href="#"><i class="fa fa-stream"></i>@Model.Category</a></li>
+                            <li><a href="#"><i class="far fa-comments"></i> @Model.CommentsCount</a></li>
+                        </ul>
+                        <p class="excert">
+                            @Model.Description
+                        </p>
+                        <div class="quote-wrapper">
+                            <div class="quotes">
+                                MCSE boot camps have its supporters and its detractors. Some people do not understand why you
+                                should have to spend money on boot camp when you can get the MCSE study materials yourself at
+                                a fraction of the camp price. However, who has the willpower to actually sit through a
+                                self-imposed MCSE training.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-top">
+                    <div class="d-sm-flex justify-content-between text-center">
+                        <p class="like-info">
+                            <span class="align-middle"><i class="far fa-heart"></i></span>@Model.VotesCount
+                            people like this
+                        </p>
+                    </div>
+                </div>
+                <div class="blog-author">
+                    <div class="media align-items-center">
+                        <img src="@Model.UserImageUrl" alt="author">
+                        <div class="media-body">
+                            <a href="#">
+                                <h4>@Model.UserUserName</h4>
+                            </a>
+                            <p>
+                                @Model.Title
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="comments-area">
+                    <h4>05 Comments</h4>
+                    <div class="comment-list">
+                        <div class="single-comment justify-content-between d-flex">
+                            <div class="user justify-content-between d-flex">
+                                <div class="thumb">
+                                    <img src="img/comment/comment_1.png" alt="">
+                                </div>
+                                <div class="desc">
+                                    <p class="comment">
+                                        Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                        Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <h5>
+                                                <a href="#">Emilly Blunt</a>
+                                            </h5>
+                                            <p class="date">December 4, 2017 at 3:12 pm </p>
+                                        </div>
+                                        <div class="reply-btn">
+                                            <a href="#" class="btn-reply text-uppercase">reply</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-list">
+                        <div class="single-comment justify-content-between d-flex">
+                            <div class="user justify-content-between d-flex">
+                                <div class="thumb">
+                                    <img src="img/comment/comment_2.png" alt="">
+                                </div>
+                                <div class="desc">
+                                    <p class="comment">
+                                        Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                        Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <h5>
+                                                <a href="#">Emilly Blunt</a>
+                                            </h5>
+                                            <p class="date">December 4, 2017 at 3:12 pm </p>
+                                        </div>
+                                        <div class="reply-btn">
+                                            <a href="#" class="btn-reply text-uppercase">reply</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-list">
+                        <div class="single-comment justify-content-between d-flex">
+                            <div class="user justify-content-between d-flex">
+                                <div class="thumb">
+                                    <img src="img/comment/comment_3.png" alt="">
+                                </div>
+                                <div class="desc">
+                                    <p class="comment">
+                                        Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                        Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <h5>
+                                                <a href="#">Emilly Blunt</a>
+                                            </h5>
+                                            <p class="date">December 4, 2017 at 3:12 pm </p>
+                                        </div>
+                                        <div class="reply-btn">
+                                            <a href="#" class="btn-reply text-uppercase">reply</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment-form">
+                    <h4>Leave a Reply</h4>
+                    <form class="form-contact comment_form" action="#" id="commentForm">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+                                              placeholder="Write Comment"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <button type="submit" class="button button-contactForm btn_1">
+                                Send Message <i class="flaticon-right-arrow"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <vc:search-bar></vc:search-bar>
+                    <vc:category-list></vc:category-list>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

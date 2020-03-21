@@ -10,5 +10,7 @@
 
         // Task<string> Create(CreatePostServiceModel model);
         Task<string> Create<T>(T model, string userId);
+
+        Task<T> Details<T>(string id);
     }
 }

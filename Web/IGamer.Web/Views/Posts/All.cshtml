@@ -1,5 +1,4 @@
-﻿@using IGamer.Data.Models.Enums
-@model IGamer.Web.ViewModels.Posts.PostsAllViewModel
+﻿@model IGamer.Web.ViewModels.Posts.PostsAllViewModel
 @{
     this.ViewData["Title"] = "Forum";
 }
@@ -35,11 +34,11 @@
                             </div>
 
                             <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
+                                <a class="d-inline-block" asp-area="" asp-controller="Posts" asp-action="DetailedPost" asp-route-id="@post.Id">
                                     <h2>@post.Title</h2>
                                 </a>
                                 <p>
-                                    @post.Description
+                                    @post.ShortDescription
                                 </p>
                                 <ul class="blog-info-link">
                                     <li class="text-light"><a href="#"><i class="far fa-user"></i> @post.UserUserName</a></li>

@@ -56,14 +56,15 @@
 
             var userId = userManager.GetUserId(this.User);
 
-            await this.postService.Create(model, userId);
+            var postId = await this.postService.Create(model, userId);
 
-            return this.RedirectToAction("ById");
+            return this.RedirectToAction("DetailedPost", new { id = postId });
         }
 
-        public async Task<IActionResult> ById()
+        public async Task<IActionResult> DetailedPost(string id)
         {
-            return null;
+            var post = await this.postService.Details<DetailedPostViewModel>(id);
+            return this.View(post);
         }
     }
 }

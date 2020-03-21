@@ -1,4 +1,6 @@
-﻿using IGamer.Services.Data.CategoryList;
+﻿using CloudinaryDotNet;
+using IGamer.Services.Data.CategoryList;
+using IGamer.Services.Data.CloudinaryHelper;
 using IGamer.Services.Data.Posts;
 using Microsoft.AspNetCore.Mvc;
 
@@ -58,6 +60,16 @@ namespace IGamer.Web
 
             services.AddSingleton(this.configuration);
 
+            //Cloudinary
+            Account account = new Account(
+                this.configuration["Cloudinary:CloudName"],
+                this.configuration["Cloudinary:ApiKey"],
+                this.configuration["Cloudinary:ApiSecret"]);
+
+            Cloudinary cloudinary = new Cloudinary(account);
+
+            services.AddSingleton(cloudinary);
+
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
@@ -68,6 +80,7 @@ namespace IGamer.Web
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<ICategoryListService, CategoryListService>();
+            services.AddTransient<ICloudinaryHelper, CloudinaryHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

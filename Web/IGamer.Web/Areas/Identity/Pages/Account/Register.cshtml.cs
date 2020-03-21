@@ -1,4 +1,8 @@
-﻿namespace IGamer.Web.Areas.Identity.Pages.Account
+﻿using CloudinaryDotNet;
+using IGamer.Services.Data.CloudinaryHelper;
+using Microsoft.AspNetCore.Http;
+
+namespace IGamer.Web.Areas.Identity.Pages.Account
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -24,17 +28,23 @@
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ICloudinaryHelper cloudinaryHelper;
+        private readonly Cloudinary cloudinary;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ICloudinaryHelper cloudinaryHelper,
+            Cloudinary cloudinary)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            this.cloudinaryHelper = cloudinaryHelper;
+            this.cloudinary = cloudinary;
         }
 
         [BindProperty]
@@ -66,6 +76,8 @@
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            public IFormFile Image { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -80,7 +92,11 @@
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email };
+                var url = await cloudinaryHelper.UploadAsync(cloudinary, Input.Image);
+
+                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email, ImageUrl = url };
+
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

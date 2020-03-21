@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace IGamer.Services.Data.Posts
 {
@@ -32,6 +33,13 @@ namespace IGamer.Services.Data.Posts
             var postId = post.Id;
 
             return postId;
+        }
+
+        public async Task<T> Details<T>(string id)
+        {
+            var post = await this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefaultAsync();
+
+            return post;
         }
     }
 }

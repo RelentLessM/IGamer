@@ -8,7 +8,10 @@
     @if (this.SignInManager.IsSignedIn(this.User))
     {
         <li class="nav-item">
-            <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @(this.User.Identity.Name)!</a>
+            <div class="media align-items-center">
+                <img class="profileImage text-light" src="@this.UserManager.GetUserAsync(this.User).Result.ImageUrl" alt="user image" />
+                <a class="nav-link usernamePadding" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@(this.User.Identity.Name)</a>
+            </div>
         </li>
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {

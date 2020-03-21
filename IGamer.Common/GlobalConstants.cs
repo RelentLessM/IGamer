@@ -5,5 +5,8 @@
         public const string SystemName = "IGamer";
 
         public const string AdministratorRoleName = "Administrator";
+
+        public const string DefaultUserImage =
+            "https://res.cloudinary.com/dikczyh4n/image/upload/v1584818369/default-user-image_qx1w1q.png";
     }
 }
