@@ -9,8 +9,8 @@
         IEnumerable<T> GetAll<T>();
 
         // Task<string> Create(CreatePostServiceModel model);
-        Task<string> Create<T>(T model, string userId);
+        Task<string> CreateAsync<T>(T model, string userId);
 
-        Task<T> Details<T>(string id);
+        Task<T> DetailsAsync<T>(string id);
     }
 }

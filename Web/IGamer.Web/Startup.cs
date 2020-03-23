@@ -1,13 +1,8 @@
-﻿using CloudinaryDotNet;
-using IGamer.Services.Data.CategoryList;
-using IGamer.Services.Data.CloudinaryHelper;
-using IGamer.Services.Data.Posts;
-using Microsoft.AspNetCore.Mvc;
-
-namespace IGamer.Web
+﻿namespace IGamer.Web
 {
     using System.Reflection;
 
+    using CloudinaryDotNet;
     using IGamer.Data;
     using IGamer.Data.Common;
     using IGamer.Data.Common.Repositories;
@@ -15,13 +10,18 @@ namespace IGamer.Web
     using IGamer.Data.Repositories;
     using IGamer.Data.Seeding;
     using IGamer.Services.Data;
+    using IGamer.Services.Data.CategoryList;
+    using IGamer.Services.Data.CloudinaryHelper;
+    using IGamer.Services.Data.Comments;
+    using IGamer.Services.Data.Posts;
+    using IGamer.Services.Data.Votes;
     using IGamer.Services.Mapping;
     using IGamer.Services.Messaging;
     using IGamer.Web.ViewModels;
-
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -56,11 +56,15 @@ namespace IGamer.Web
                 {
                     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                 });
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
             services.AddRazorPages();
 
             services.AddSingleton(this.configuration);
 
-            //Cloudinary
+            // Cloudinary
             Account account = new Account(
                 this.configuration["Cloudinary:CloudName"],
                 this.configuration["Cloudinary:ApiKey"],
@@ -81,6 +85,8 @@ namespace IGamer.Web
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<ICategoryListService, CategoryListService>();
             services.AddTransient<ICloudinaryHelper, CloudinaryHelper>();
+            services.AddTransient<ICommentsService, CommentService>();
+            services.AddTransient<IVotesService, VotesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

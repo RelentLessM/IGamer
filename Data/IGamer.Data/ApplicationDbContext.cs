@@ -44,6 +44,10 @@
 
         public DbSet<VoteOnPost> VotesOnPosts { get; set; }
 
+        public DbSet<ReplyOnPostComment> ReplyOnPostComments { get; set; }
+
+        public DbSet<ReplyOnGuideComment> ReplyOnGuideComments { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

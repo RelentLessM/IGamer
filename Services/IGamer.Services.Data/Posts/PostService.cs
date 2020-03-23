@@ -23,7 +23,7 @@ namespace IGamer.Services.Data.Posts
         public IEnumerable<T> GetAll<T>()
             => this.repository.All().OrderByDescending(x => x.Title).To<T>().ToList();
 
-        public async Task<string> Create<T>(T model, string userId)
+        public async Task<string> CreateAsync<T>(T model, string userId)
         {
             var post = AutoMapperConfig.MapperInstance.Map<Post>(model);
             post.UserId = userId;
@@ -35,7 +35,7 @@ namespace IGamer.Services.Data.Posts
             return postId;
         }
 
-        public async Task<T> Details<T>(string id)
+        public async Task<T> DetailsAsync<T>(string id)
         {
             var post = await this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefaultAsync();
 

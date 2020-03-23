@@ -3,13 +3,14 @@
 
 // Write your JavaScript code.
 
+// Dropdown function on click.
 var blockDropdown = document.getElementById("blockDropdown");
 var blockMenu = document.getElementById("blockMenu");
 blockMenu.style.display = 'none';
 
 var pagesDropdown = document.getElementById("pagesDropdown");
 var pagesMenu = document.getElementById("pagesMenu");
-pagesMenu.style.display = 'none'
+pagesMenu.style.display = 'none';
 
 
 blockDropdown.addEventListener('click', function () {
@@ -50,4 +51,38 @@ window.onclick = function (event) {
             }
         }
     }
+};
+
+// Vote function on click - like.
+function like(postId) {
+    var json = { postId: postId, isUpVote: true };
+    var token = $("#votesForm input[name=__RequestVerificationToken]").val();
+    $.ajax({
+        url: "/api/votes",
+        type: "POST",
+        data: JSON.stringify(json),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: { "X-CSRF-TOKEN": token },
+        success: function (data) {
+            $("#votesCount").html(data.votesCount);
+
+        }
+    });
+}
+
+// Vote function on click - dislike.
+function dislike(postId) {
+    var json = { postId: postId, isUpVote: false };
+    $.ajax({
+        url: "/api/votes",
+        type: "POST",
+        data: JSON.stringify(json),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            $("#votesCount").html(data.votesCount);
+
+        }
+    });
 }

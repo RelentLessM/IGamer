@@ -1,0 +1,21 @@
+﻿@model IGamer.Web.ViewModels.Comments.AddCommentInputModel
+
+<div class="comment-form">
+    <h4>Leave a Reply</h4>
+    <form method="post" class="form-contact comment_form" id="commentForm">
+        <input type="hidden" asp-for="PostId" value="@Model.PostId" />
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <textarea class="form-control w-100" asp-for="Description" cols="30" rows="9"
+                              placeholder="Write Comment"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <button type="submit" class="button button-contactForm btn_1">
+                Send Message <i class="flaticon-right-arrow"></i>
+            </button>
+        </div>
+    </form>
+</div>

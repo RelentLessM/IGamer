@@ -5,13 +5,16 @@
 
     using IGamer.Data.Common.Models;
 
-    public class CommentOnPost : BaseDeletableModel<int>
+    public class ReplyOnPostComment : BaseDeletableModel<int>
     {
-        public CommentOnPost()
+        public ReplyOnPostComment()
         {
             this.Votes = new HashSet<VoteOnPostComment>();
-            this.Replies = new HashSet<ReplyOnPostComment>();
         }
+
+        public int CommentId { get; set; }
+
+        public CommentOnPost Comment { get; set; }
 
         [Required]
         public string Description { get; set; }
@@ -20,13 +23,6 @@
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
-
-        [Required]
-        public string PostId { get; set; }
-
-        public virtual Post Post { get; set; }
-
-        public virtual ICollection<ReplyOnPostComment> Replies { get; set; }
 
         public virtual ICollection<VoteOnPostComment> Votes { get; set; }
     }

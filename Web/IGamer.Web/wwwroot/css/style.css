@@ -276,6 +276,11 @@ img {
 margin-right: 30px
 }
 
+.userReply {
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
 /* line 132, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_common.scss */
 a:focus, .button:focus, button:focus, .btn:focus {
     text-decoration: none;
@@ -1660,6 +1665,7 @@ ul {
 /* line 1073, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_blog.scss */
 .single-post-area .blog_details {
     padding-top: 26px;
+    margin-bottom: 5px;
 }
 
     /* line 1076, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_blog.scss */
@@ -1988,6 +1994,7 @@ ul {
     /* line 1371, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_blog.scss */
     .comments-area .thumb img {
         width: 70px;
+        height: 70px;
         border-radius: 50%;
     }
 

@@ -1,0 +1,54 @@
+﻿@model IGamer.Web.ViewModels.ViewComponents.CommentSectionViewModel
+
+
+@foreach (var comment in Model.Comments)
+{
+    <div class="comment-list" style="border-style: outset">
+        <div class="single-comment justify-content-between d-flex">
+            <div class="user justify-content-between d-flex">
+                <div class="thumb">
+                    <img src="@comment.UserImageUrl" alt="author">
+                </div>
+                <div class="desc">
+                    <p class="comment">
+                        @comment.Description
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <h5>
+                                <a href="#">@comment.UserUserName</a>
+                            </h5>
+                            <p class="date">@comment.CreatedOn </p>
+                        </div>
+                        <div class="reply-btn">
+                            <a href="#" class="btn-reply text-uppercase">reply</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @foreach (var reply in comment.Replies)
+        {
+            <div class="single-comment userReply justify-content-between d-flex">
+                <div class="user justify-content-between d-flex">
+                    <div class="thumb">
+                        <img src="@reply.UserImageUrl" alt="author">
+                    </div>
+                    <div class="desc">
+                        <p class="comment">
+                            @reply.Description
+                        </p>
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <h5>
+                                    <a href="#">@reply.UserUserName</a>
+                                </h5>
+                                <p class="date">@reply.CreatedOn </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

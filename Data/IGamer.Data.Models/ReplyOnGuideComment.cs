@@ -5,13 +5,16 @@
 
     using IGamer.Data.Common.Models;
 
-    public class CommentOnGuide : BaseDeletableModel<int>
+    public class ReplyOnGuideComment: BaseDeletableModel<int>
     {
-        public CommentOnGuide()
+        public ReplyOnGuideComment()
         {
             this.Votes = new HashSet<VoteOnGuideComment>();
-            this.Replies = new HashSet<ReplyOnGuideComment>();
         }
+
+        public int CommentId { get; set; }
+
+        public CommentOnGuide Comment { get; set; }
 
         [Required]
         public string Description { get; set; }
@@ -21,13 +24,6 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        [Required]
-        public string GuideId { get; set; }
-
-        public virtual Guide Guide { get; set; }
-
         public virtual ICollection<VoteOnGuideComment> Votes { get; set; }
-
-        public virtual ICollection<ReplyOnGuideComment> Replies { get; set; }
     }
 }

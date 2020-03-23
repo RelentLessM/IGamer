@@ -52,18 +52,24 @@
                 return this.View(model);
             }
 
-            //var serviceModel = AutoMapperConfig.MapperInstance.Map<CreatePostServiceModel>(model);
+            // var serviceModel = AutoMapperConfig.MapperInstance.Map<CreatePostServiceModel>(model);
 
-            var userId = userManager.GetUserId(this.User);
+            var userId = this.userManager.GetUserId(this.User);
 
-            var postId = await this.postService.Create(model, userId);
+            var postId = await this.postService.CreateAsync(model, userId);
 
             return this.RedirectToAction("DetailedPost", new { id = postId });
         }
 
         public async Task<IActionResult> DetailedPost(string id)
         {
-            var post = await this.postService.Details<DetailedPostViewModel>(id);
+            var post = await this.postService.DetailsAsync<DetailedPostViewModel>(id);
+
+            if (post == null)
+            {
+                return this.NotFound();
+            }
+
             return this.View(post);
         }
     }
