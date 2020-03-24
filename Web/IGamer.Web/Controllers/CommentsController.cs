@@ -11,6 +11,8 @@ namespace IGamer.Web.Controllers
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [ApiController]
+    [Route("api/[controller]")]
     public class CommentsController : Controller
     {
         private readonly ICommentsService commentsService;
@@ -24,13 +26,13 @@ namespace IGamer.Web.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Add(AddCommentInputModel model)
+        public async Task<ActionResult<CommentResponseModel>> Add(AddCommentInputModel model)
         {
             var userId = this.userManager.GetUserId(this.User);
 
             model.UserId = userId;
 
-            if (!this.ModelState.IsValid)
+            if (!this.ModelState.IsValid || string.IsNullOrWhiteSpace(model.UserId))
             {
                 return this.RedirectToAction("DetailedPost", "Posts", new { id = model.PostId });
             }
@@ -39,7 +41,7 @@ namespace IGamer.Web.Controllers
 
             var response = await this.commentsService.GetCommentByIdAsync<CommentResponseModel>(commentId);
 
-            return this.RedirectToAction("DetailedPost", "Posts", new { id = model.PostId });
+            return response;
         }
     }
 }

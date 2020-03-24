@@ -3,22 +3,22 @@
 
 @foreach (var comment in Model.Comments)
 {
-    <div class="comment-list" style="border-style: outset">
+    <div class="comment-list border border-dark rounded" id="commentList">
         <div class="single-comment justify-content-between d-flex">
             <div class="user justify-content-between d-flex">
                 <div class="thumb">
-                    <img src="@comment.UserImageUrl" alt="author">
+                    <img src="@comment.UserImageUrl" alt="author" id="authorImage">
                 </div>
                 <div class="desc">
-                    <p class="comment">
+                    <p class="comment" id="commentContent">
                         @comment.Description
                     </p>
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center">
                             <h5>
-                                <a href="#">@comment.UserUserName</a>
+                                <a href="#" id="userName">@comment.UserUserName</a>
                             </h5>
-                            <p class="date">@comment.CreatedOn </p>
+                            <p class="date" id="date">@comment.CreatedOn </p>
                         </div>
                         <div class="reply-btn">
                             <a href="#" class="btn-reply text-uppercase">reply</a>
@@ -29,7 +29,7 @@
         </div>
         @foreach (var reply in comment.Replies)
         {
-            <div class="single-comment userReply justify-content-between d-flex">
+            <div class="single-comment userReply justify-content-between d-flex border border-dark rounded" >
                 <div class="user justify-content-between d-flex">
                     <div class="thumb">
                         <img src="@reply.UserImageUrl" alt="author">

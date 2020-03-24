@@ -27,6 +27,7 @@ namespace IGamer.Services.Data.Comments
             var comment = AutoMapperConfig.MapperInstance.Map<CommentOnPost>(model);
 
             await this.repository.AddAsync(comment);
+            await this.repository.SaveChangesAsync();
 
             return comment.Id;
         }

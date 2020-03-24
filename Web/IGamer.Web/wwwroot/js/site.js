@@ -86,3 +86,22 @@ function dislike(postId) {
         }
     });
 }
+
+// Add comment function
+
+function addComment(postId) {
+    var json = { postId: postId, description: $("#areaForComment").val() };
+    var token = $("#commentForm input[name=__RequestVerificationToken]").val();
+    $.ajax({
+        url: "/api/comments",
+        type: "POST",
+        data: JSON.stringify(json),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: { "X-CSRF-TOKEN": token },
+        success: function (data) {
+
+
+        }
+    });
+}
