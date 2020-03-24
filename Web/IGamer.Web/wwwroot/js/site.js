@@ -100,7 +100,27 @@ function addComment(postId) {
         dataType: "json",
         headers: { "X-CSRF-TOKEN": token },
         success: function (data) {
-
+            //var div = document.createElement('div');
+            //div.src = data.description;
+            //div.classList.add(...['single-comment', 'justify-content-between', 'd-flex']);
+            //div.appendChild();
+            //console.log(div);
+            document.querySelector('#areaForComment').value = '';
+            var date = new Date(data.createdOn);
+            $('#commentItem').append('<div class="comment-list border border-dark rounded" >' +
+                '<div class="single-comment justify-content-between d-flex"> <div class="user justify-content-between d-flex"> <div class="thumb"> <img src="' +
+                data.userImageUrl +
+                '" alt="author" id="authorImage"> </div><div class="desc"> <p class="comment" id="commentContent"> ' +
+                data.description +
+                ' </p><div class="d-flex justify-content-between"> <div class="d-flex align-items-center"> <h5> <a href="#" id="userName">' +
+                data.userUserName +
+                '</a> </h5> <p class="date" id="date">' +
+                (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() +
+                '</p></div><div class="reply-btn"> <a href="#" class="btn-reply text-uppercase">reply</a> </div></div></div></div></div></div>');
+            //document.querySelector('#authorImage').src = data.userImageUrl;
+            //document.querySelector('#commentContent').innerHTML = data.description;
+            //document.querySelector('#userName').innerHTML = data.userUserName;
+            //document.querySelector('#date').innerHTML = data.createdOn.toString();
 
         }
     });

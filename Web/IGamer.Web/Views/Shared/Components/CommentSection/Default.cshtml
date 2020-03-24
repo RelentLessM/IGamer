@@ -3,8 +3,8 @@
 
 @foreach (var comment in Model.Comments)
 {
-    <div class="comment-list border border-dark rounded" id="commentList">
-        <div class="single-comment justify-content-between d-flex">
+    <div class="comment-list border border-dark rounded" >
+        <div class="single-comment justify-content-between d-flex" >
             <div class="user justify-content-between d-flex">
                 <div class="thumb">
                     <img src="@comment.UserImageUrl" alt="author" id="authorImage">
