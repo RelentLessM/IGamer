@@ -3,8 +3,8 @@
 
 @foreach (var comment in Model.Comments)
 {
-    <div class="comment-list border border-dark rounded" >
-        <div class="single-comment justify-content-between d-flex" >
+    <div class="comment-list border border-dark rounded">
+        <div class="single-comment justify-content-between d-flex">
             <div class="user justify-content-between d-flex">
                 <div class="thumb">
                     <img src="@comment.UserImageUrl" alt="author" id="authorImage">
@@ -20,16 +20,22 @@
                             </h5>
                             <p class="date" id="date">@comment.CreatedOn </p>
                         </div>
-                        <div class="reply-btn">
-                            <a href="#" class="btn-reply text-uppercase">reply</a>
-                        </div>
                     </div>
                 </div>
             </div>
+            <div class="reply-btn" align="right">
+            <input type="button" onclick="showReply('@comment.Id')" class="button button-contactForm btn_1" value="reply">
+            </div>
+        </div>
+        <div class="hide" id="@comment.Id">
+            <textarea class="form-control form-control-bg-tr w-100" cols="60" rows="6" placeholder="Write Comment"></textarea>
+            <a role="button" onclick="" class="button button-contactForm btn_1">
+                Send Message <i class="flaticon-right-arrow"></i>
+            </a>
         </div>
         @foreach (var reply in comment.Replies)
         {
-            <div class="single-comment userReply justify-content-between d-flex border border-dark rounded" >
+            <div class="single-comment userReply justify-content-between d-flex border border-dark rounded">
                 <div class="user justify-content-between d-flex">
                     <div class="thumb">
                         <img src="@reply.UserImageUrl" alt="author">

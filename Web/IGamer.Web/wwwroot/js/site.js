@@ -88,7 +88,6 @@ function dislike(postId) {
 }
 
 // Add comment function
-
 function addComment(postId) {
     var json = { postId: postId, description: $("#areaForComment").val() };
     var token = $("#commentForm input[name=__RequestVerificationToken]").val();
@@ -116,7 +115,11 @@ function addComment(postId) {
                 data.userUserName +
                 '</a> </h5> <p class="date" id="date">' +
                 (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() +
-                '</p></div><div class="reply-btn"> <a href="#" class="btn-reply text-uppercase">reply</a> </div></div></div></div></div></div>');
+                '</p></div ></div ></div ></div ><div class="reply-btn" align="right">' +
+                '<input type="button" onclick="showReply(' + data.id + ')" class="button button-contactForm btn_1" value="reply">' +
+                '</div></div><div class="hide" id="' + data.id + '">' +
+                '<textarea class="form-control form-control-bg-tr w-100" cols="60" rows="6" placeholder="Write Comment"></textarea>' +
+                '< a role = "button" onclick = "" class= "button button-contactForm btn_1" >Send Message < i class= "flaticon-right-arrow" ></i ></a ></div>');
             //document.querySelector('#authorImage').src = data.userImageUrl;
             //document.querySelector('#commentContent').innerHTML = data.description;
             //document.querySelector('#userName').innerHTML = data.userUserName;
@@ -125,3 +128,17 @@ function addComment(postId) {
         }
     });
 }
+
+// Show reply area function
+function showReply(id) {
+    var reply = document.getElementById(id);
+    if (reply.className === "show") {
+        reply.className = "hide";
+    }
+    else {
+        reply.className = "show";
+    }
+}
+
+//  Add reply function
+// TODO:
