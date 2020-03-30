@@ -22,7 +22,7 @@ namespace IGamer.Services.Data.Comments
         public IEnumerable<T> GetAll<T>(string id)
             => this.repository.All().Where(x => x.PostId == id).To<T>().ToList();
 
-        public async Task<int> AddCommentAsync<T>(T model)
+        public async Task<int> AddCommentToPostAsync<T>(T model)
         {
             var comment = AutoMapperConfig.MapperInstance.Map<CommentOnPost>(model);
 

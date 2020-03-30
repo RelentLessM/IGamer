@@ -1,15 +1,12 @@
-﻿namespace IGamer.Web.ViewModels.ViewComponents
+﻿namespace IGamer.Web.ViewModels.Replies
 {
     using System;
-    using System.Collections.Generic;
 
     using IGamer.Data.Models;
     using IGamer.Services.Mapping;
 
-    public class CommentViewModel : IMapFrom<CommentOnPost>
+    public class ReplyResponseModel : IMapFrom<ReplyOnPostComment>
     {
-        public string PostId { get; set; }
-
         public int Id { get; set; }
 
         public string Description { get; set; }
@@ -19,7 +16,5 @@
         public string UserImageUrl { get; set; }
 
         public DateTime CreatedOn { get; set; }
-
-        public ICollection<ReplyViewModel> Replies { get; set; }
     }
 }

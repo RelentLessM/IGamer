@@ -1,4 +1,6 @@
-﻿namespace IGamer.Web
+﻿using IGamer.Services.Data.Replies;
+
+namespace IGamer.Web
 {
     using System.Reflection;
 
@@ -87,6 +89,7 @@
             services.AddTransient<ICloudinaryHelper, CloudinaryHelper>();
             services.AddTransient<ICommentsService, CommentService>();
             services.AddTransient<IVotesService, VotesService>();
+            services.AddTransient<IReplyService, ReplyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

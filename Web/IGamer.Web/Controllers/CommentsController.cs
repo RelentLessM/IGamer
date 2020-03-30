@@ -1,32 +1,37 @@
-﻿using IGamer.Data.Models;
-using IGamer.Services.Mapping;
-using Microsoft.AspNetCore.Identity;
+﻿using IGamer.Services.Data.Replies;
+using IGamer.Web.ViewModels.Replies;
 
 namespace IGamer.Web.Controllers
 {
     using System.Threading.Tasks;
 
+    using IGamer.Data.Models;
     using IGamer.Services.Data.Comments;
+    using IGamer.Services.Mapping;
     using IGamer.Web.ViewModels.Comments;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
-    [Route("api/[controller]")]
-    public class CommentsController : Controller
+
+    public class CommentsController : ControllerBase
     {
         private readonly ICommentsService commentsService;
+        private readonly IReplyService replyService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public CommentsController(ICommentsService commentsService, UserManager<ApplicationUser> userManager)
+        public CommentsController(ICommentsService commentsService, IReplyService replyService, UserManager<ApplicationUser> userManager)
         {
             this.commentsService = commentsService;
+            this.replyService = replyService;
             this.userManager = userManager;
         }
 
         [Authorize]
+        [Route("api/[controller]")]
         [HttpPost]
-        public async Task<ActionResult<CommentResponseModel>> Add(AddCommentInputModel model)
+        public async Task<ActionResult<CommentResponseModel>> AddComment(AddCommentInputModel model)
         {
             var userId = this.userManager.GetUserId(this.User);
 
@@ -37,9 +42,30 @@ namespace IGamer.Web.Controllers
                 return this.RedirectToAction("DetailedPost", "Posts", new { id = model.PostId });
             }
 
-            var commentId = await this.commentsService.AddCommentAsync(model);
+            var commentId = await this.commentsService.AddCommentToPostAsync(model);
 
             var response = await this.commentsService.GetCommentByIdAsync<CommentResponseModel>(commentId);
+
+            return response;
+        }
+
+        [Authorize]
+        [Route("api/reply")]
+        [HttpPost]
+        public async Task<ActionResult<ReplyResponseModel>> AddReply(AddReplyInputModel model)
+        {
+            var userId = this.userManager.GetUserId(this.User);
+
+            model.UserId = userId;
+
+            if (!this.ModelState.IsValid || string.IsNullOrWhiteSpace(model.UserId))
+            {
+                return this.RedirectToAction("DetailedPost", "Posts", new { id = model.PostId });
+            }
+
+            var replyId = await this.replyService.AddReplyToPostCommentAsync(model);
+
+            var response = await this.replyService.GetReplyByIdAsync<ReplyResponseModel>(replyId);
 
             return response;
         }

@@ -7,7 +7,7 @@
     {
         IEnumerable<T> GetAll<T>(string id);
 
-        Task<int> AddCommentAsync<T>(T model);
+        Task<int> AddCommentToPostAsync<T>(T model);
 
         Task<T> GetCommentByIdAsync<T>(int commentId);
     }

@@ -99,11 +99,6 @@ function addComment(postId) {
         dataType: "json",
         headers: { "X-CSRF-TOKEN": token },
         success: function (data) {
-            //var div = document.createElement('div');
-            //div.src = data.description;
-            //div.classList.add(...['single-comment', 'justify-content-between', 'd-flex']);
-            //div.appendChild();
-            //console.log(div);
             document.querySelector('#areaForComment').value = '';
             var date = new Date(data.createdOn);
             $('#commentItem').append('<div class="comment-list border border-dark rounded" >' +
@@ -118,13 +113,8 @@ function addComment(postId) {
                 '</p></div ></div ></div ></div ><div class="reply-btn" align="right">' +
                 '<input type="button" onclick="showReply(' + data.id + ')" class="button button-contactForm btn_1" value="reply">' +
                 '</div></div><div class="hide" id="' + data.id + '">' +
-                '<textarea class="form-control form-control-bg-tr w-100" cols="60" rows="6" placeholder="Write Comment"></textarea>' +
-                '< a role = "button" onclick = "" class= "button button-contactForm btn_1" >Send Message < i class= "flaticon-right-arrow" ></i ></a ></div>');
-            //document.querySelector('#authorImage').src = data.userImageUrl;
-            //document.querySelector('#commentContent').innerHTML = data.description;
-            //document.querySelector('#userName').innerHTML = data.userUserName;
-            //document.querySelector('#date').innerHTML = data.createdOn.toString();
-
+                '<textarea class="form-control form-control-bg-tr w-100" cols="60" rows="6" placeholder="Write Reply"></textarea>' +
+                '<a role="button" onclick ="" class="button button-contactForm btn_1">Send Message <i class="flaticon-right-arrow" ></i></a>');
         }
     });
 }
@@ -141,4 +131,25 @@ function showReply(id) {
 }
 
 //  Add reply function
-// TODO:
+function addReply(commentId, postId) {
+    var json = { postId: postId, commentId: commentId, description: $("#areaForReply" + commentId).val() };
+    var token = $("#commentForm input[name=__RequestVerificationToken]").val();
+    $.ajax({
+        url: "/api/reply",
+        type: "POST",
+        data: JSON.stringify(json),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: { "X-CSRF-TOKEN": token },
+        success: function (data) {
+            document.querySelector('#areaForReply' + commentId).value = '';
+            var date = new Date(data.createdOn);
+            $('#replyItem' + commentId).append('<div class="single-comment userReply justify-content-between d-flex border border-dark rounded">' +
+                '<div class="user justify-content-between d-flex"> <div class="thumb"> <img src="' + data.userImageUrl + '" alt="author"></div>' +
+                '<div class="desc"> <p class="comment">' + data.description + '</p><div class="d-flex justify-content-between">' +
+                '<div class="d-flex align-items-center"><h5><a href="#">' + data.userUserName + '</a></h5>' +
+                '<p class="date">' + (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + date.getHours()
+                + ':' + date.getMinutes() + ':' + date.getSeconds() + '</p></div></div></div></div></div>');
+        }
+    });
+}
