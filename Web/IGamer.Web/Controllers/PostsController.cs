@@ -25,6 +25,20 @@
             this.userManager = userManager;
         }
 
+        public IActionResult ByCategory(string name)
+        {
+
+            if (!Enum.TryParse(typeof(CategoryOfPost), name, out _))
+            {
+                return this.RedirectToAction("All");
+            }
+
+            var enumResult = Enum.Parse<CategoryOfPost>(name);
+            var posts = this.postService.GetByCategory<PostViewModel>(enumResult);
+            var result = new PostsAllViewModel() { Posts = posts };
+            return this.View(result);
+        }
+
         public IActionResult All()
         {
             var posts = this.postService.GetAll<PostViewModel>();
@@ -51,8 +65,6 @@
             {
                 return this.View(model);
             }
-
-            // var serviceModel = AutoMapperConfig.MapperInstance.Map<CreatePostServiceModel>(model);
 
             var userId = this.userManager.GetUserId(this.User);
 

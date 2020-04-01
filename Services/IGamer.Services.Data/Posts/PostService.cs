@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using IGamer.Data.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace IGamer.Services.Data.Posts
@@ -21,7 +22,10 @@ namespace IGamer.Services.Data.Posts
         }
 
         public IEnumerable<T> GetAll<T>()
-            => this.repository.All().OrderByDescending(x => x.Title).To<T>().ToList();
+            => this.repository.All().OrderByDescending(x => x.CreatedOn).To<T>().ToList();
+
+        public IEnumerable<T> GetByCategory<T>(CategoryOfPost categoryName)
+            => this.repository.All().Where(x => x.Category == categoryName).OrderByDescending(x => x.CreatedOn).To<T>().ToList();
 
         public async Task<string> CreateAsync<T>(T model, string userId)
         {

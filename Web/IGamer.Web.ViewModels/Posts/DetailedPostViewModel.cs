@@ -1,10 +1,13 @@
-﻿namespace IGamer.Web.ViewModels.Posts
+﻿using System.Linq;
+
+namespace IGamer.Web.ViewModels.Posts
 {
+    using AutoMapper;
     using Ganss.XSS;
     using IGamer.Data.Models;
     using IGamer.Services.Mapping;
 
-    public class DetailedPostViewModel : IMapFrom<Post>
+    public class DetailedPostViewModel : IMapFrom<Post>, IHaveCustomMappings
     {
         public string Id { get; set; }
 
@@ -24,5 +27,14 @@
         public int VotesCount { get; set; }
 
         public int CommentsCount { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<Post, DetailedPostViewModel>()
+                .ForMember(
+                    x => x.CommentsCount,
+                    s => s.MapFrom(x => x.Comments.Count + x.Comments.SelectMany(c => c.Replies).Count()));
+        }
     }
 }
+    

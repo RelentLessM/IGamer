@@ -5,7 +5,7 @@
         @foreach (var category in Model.Categories)
         {
             <li>
-                <a href="#" class="d-flex">
+                <a asp-area="" asp-action="ByCategory" asp-controller="Posts" asp-route-name="@category.CategoryName" class="d-flex">
                     <p>@category.CategoryName (@category.PostsCount)</p>
                 </a>
             </li>

@@ -153,3 +153,11 @@ function addReply(commentId, postId) {
         }
     });
 }
+
+// Show comments
+function showComments() {
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $("#commentItem").offset().top
+    }, 1000);
+    return false;
+}
