@@ -10,6 +10,7 @@
         IEnumerable<T> GetAll<T>();
 
         IEnumerable<T> GetByCategory<T>(CategoryOfPost categoryName);
+        IEnumerable<T> GetByUser<T>(string userId);
 
         Task<string> CreateAsync<T>(T model, string userId);
 

@@ -1,4 +1,6 @@
-﻿namespace IGamer.Web.Controllers
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace IGamer.Web.Controllers
 {
     using System;
     using System.Linq;
@@ -27,7 +29,6 @@
 
         public IActionResult ByCategory(string name)
         {
-
             if (!Enum.TryParse(typeof(CategoryOfPost), name, out _))
             {
                 return this.RedirectToAction("All");
@@ -35,6 +36,20 @@
 
             var enumResult = Enum.Parse<CategoryOfPost>(name);
             var posts = this.postService.GetByCategory<PostViewModel>(enumResult);
+            var result = new PostsAllViewModel() { Posts = posts };
+            return this.View(result);
+        }
+
+        public async Task<IActionResult> ByUser(string username)
+        {
+            var user = await this.userManager.Users.FirstOrDefaultAsync(x => x.UserName == username);
+
+            if (user == null)
+            {
+                return this.RedirectToAction("All");
+            }
+
+            var posts = this.postService.GetByUser<PostViewModel>(user.Id);
             var result = new PostsAllViewModel() { Posts = posts };
             return this.View(result);
         }

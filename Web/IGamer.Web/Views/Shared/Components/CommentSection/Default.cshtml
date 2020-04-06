@@ -17,15 +17,17 @@
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center">
                             <h5>
-                                <a href="#" id="userName">@comment.UserUserName</a>
+                                <a asp-area="" asp-action="ByUser" asp-controller="Posts" asp-route-username="@comment.UserUserName" id="userName">
+                                    @comment.UserUserName
+                                </a>
                             </h5>
-                            <p class="date" id="date">@comment.CreatedOn </p>
+                            <time datetime="@comment.CreatedOn.ToString("O")" class="date" id="date"></time>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="reply-btn" align="right">
-            <input type="button" onclick="showReply('@comment.Id')" class="button button-contactForm btn_1" value="reply">
+                <input type="button" onclick="showReply('@comment.Id')" class="button button-contactForm btn_1" value="reply">
             </div>
         </div>
         <div class="hide" id="@comment.Id">
@@ -45,9 +47,11 @@
                         <div class="d-flex justify-content-between">
                             <div class="d-flex align-items-center">
                                 <h5>
-                                    <a href="#">@reply.UserUserName</a>
+                                    <a asp-area="" asp-action="ByUser" asp-controller="Posts" asp-route-username="@reply.UserUserName" id="ReplyUserName">
+                                        @reply.UserUserName
+                                    </a>
                                 </h5>
-                                <p class="date">@reply.CreatedOn </p>
+                                <time datetime="@reply.CreatedOn.ToString("O")" class="date"></time>
                             </div>
                         </div>
                     </div>

@@ -1,13 +1,15 @@
 ﻿namespace IGamer.Web.ViewModels.Posts
 {
     using System;
+    using System.Linq;
     using System.Net;
     using System.Text.RegularExpressions;
 
+    using AutoMapper;
     using IGamer.Data.Models;
     using IGamer.Services.Mapping;
 
-    public class PostViewModel : /*IMapFrom<PostViewServiceModel>,*/ IMapFrom<Post>
+    public class PostViewModel : IMapFrom<Post>, IHaveCustomMappings
     {
         public string Id { get; set; }
 
@@ -33,5 +35,13 @@
         public DateTime CreatedOn { get; set; }
 
         public int CommentsCount { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<Post, PostViewModel>()
+                .ForMember(
+                    x => x.CommentsCount,
+                    s => s.MapFrom(x => x.Comments.Count + x.Comments.SelectMany(c => c.Replies).Count()));
+        }
     }
 }

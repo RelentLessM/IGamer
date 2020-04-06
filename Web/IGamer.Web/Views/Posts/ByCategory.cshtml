@@ -30,10 +30,10 @@
                         <article class="blog_item">
                             <div class="blog_item_img">
                                 <img class="card-img rounded-0" src="~/img/blog/single_blog_1.png" alt="">
-                                <a href="#" class="blog_item_date">
+                                <div class="blog_item_date">
                                     <h3>@post.CreatedOn.ToString("dd")</h3>
                                     <p>@post.CreatedOn.ToString("MMM")</p>
-                                </a>
+                                </div>
                             </div>
 
                             <div class="blog_details">
@@ -44,7 +44,7 @@
                                     @post.ShortDescription
                                 </p>
                                 <ul class="blog-info-link">
-                                    <li class="text-light"><a href="#"><i class="far fa-user"></i> @post.UserUserName</a></li>
+                                    <li class="text-light"><a asp-area="" asp-action="ByUser" asp-controller="Posts" asp-route-username="@post.UserUserName"><i class="far fa-user"></i> @post.UserUserName</a></li>
                                     <li class="text-light"><i class="far fa-comments"></i> @post.CommentsCount Comments</li>
                                     <li class="text-light"><i class="fa fa-stream"></i> @post.Category</li>
                                 </ul>

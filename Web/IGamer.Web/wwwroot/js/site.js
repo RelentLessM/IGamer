@@ -100,23 +100,31 @@ function addComment(postId) {
         headers: { "X-CSRF-TOKEN": token },
         success: function (data) {
             document.querySelector('#areaForComment').value = '';
-            var date = new Date(data.createdOn);
-            $('#commentItem').append('<div class="comment-list border border-dark rounded" >' +
-                '<div class="single-comment justify-content-between d-flex"> <div class="user justify-content-between d-flex"> <div class="thumb"> <img src="' +
-                data.userImageUrl +
-                '" alt="author" id="authorImage"> </div><div class="desc"> <p class="comment" id="commentContent"> ' +
-                data.description +
-                ' </p><div class="d-flex justify-content-between"> <div class="d-flex align-items-center"> <h5> <a href="#" id="userName">' +
-                data.userUserName +
-                '</a> </h5> <p class="date" id="date">' +
-                (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() +
-                '</p></div ></div ></div ></div ><div class="reply-btn" align="right">' +
-                '<input type="button" onclick="showReply(' + data.id + ')" class="button button-contactForm btn_1" value="reply">' +
-                '</div></div><div class="hide" id="' + data.id + '">' +
-                '<textarea class="form-control form-control-bg-tr w-100" cols="60" rows="6" placeholder="Write Reply"></textarea>' +
-                '<a role="button" onclick ="" class="button button-contactForm btn_1">Send Message <i class="flaticon-right-arrow" ></i></a>');
+
+            createComment(data);
         }
     });
+}
+
+function createComment(data) {
+    var clonedNode = document.querySelector('.comment-list').cloneNode(true);
+
+    var date = moment.utc(data.createdOn).local().format("llll");
+
+    clonedNode.setAttribute('id', 'replyItem' + data.id);
+    clonedNode.querySelector('.thumb img').src = data.userImageUrl;
+    clonedNode.querySelector('.comment').innerHTML = data.description;
+    clonedNode.querySelector('#userName').innerHTML = data.userUserName;
+    clonedNode.querySelector('.date').innerHTML = date;
+    clonedNode.querySelector('.date').dateTime = data.createdOn;
+    clonedNode.querySelector('.date').title = data.createdOn;
+    clonedNode.querySelector('.button').setAttribute("onClick", "showReply(" + data.id + ")");
+    clonedNode.querySelector('.hide').setAttribute('id', data.id);
+    clonedNode.querySelector('.form-control').setAttribute('id', 'areaForReply' + data.id);
+    clonedNode.querySelector('#buttonForReply').setAttribute("onClick", "addReply(" + data.id + "," + "'" + data.postId + "'" + ")");
+    clonedNode.querySelector('.userReply').remove();
+
+    $('#commentItem').append(clonedNode);
 }
 
 // Show reply area function
@@ -143,15 +151,27 @@ function addReply(commentId, postId) {
         headers: { "X-CSRF-TOKEN": token },
         success: function (data) {
             document.querySelector('#areaForReply' + commentId).value = '';
-            var date = new Date(data.createdOn);
-            $('#replyItem' + commentId).append('<div class="single-comment userReply justify-content-between d-flex border border-dark rounded">' +
-                '<div class="user justify-content-between d-flex"> <div class="thumb"> <img src="' + data.userImageUrl + '" alt="author"></div>' +
-                '<div class="desc"> <p class="comment">' + data.description + '</p><div class="d-flex justify-content-between">' +
-                '<div class="d-flex align-items-center"><h5><a href="#">' + data.userUserName + '</a></h5>' +
-                '<p class="date">' + (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + date.getHours()
-                + ':' + date.getMinutes() + ':' + date.getSeconds() + '</p></div></div></div></div></div>');
+
+            createReply(data, commentId);
         }
     });
+}
+
+function createReply(data, commentId) {
+    var clonedNode = document.querySelector('.userReply').cloneNode(true);
+
+    var date = moment.utc(data.createdOn).local().format("llll");
+
+    clonedNode.querySelector('.thumb img').src = data.userImageUrl;
+    clonedNode.querySelector('.comment').innerHTML = data.description;
+    clonedNode.querySelector('#ReplyUserName').innerHTML = data.userUserName;
+    clonedNode.querySelector('.date').innerHTML = date;
+    clonedNode.querySelector('.date').dateTime = data.createdOn;
+    clonedNode.querySelector('.date').title = data.createdOn;
+
+    console.log(clonedNode);
+
+    $('#replyItem' + commentId).append(clonedNode);
 }
 
 // Show comments
@@ -161,3 +181,17 @@ function showComments() {
     }, 1000);
     return false;
 }
+
+//Datetime format to current
+$(function () {
+    $("time").each(function (i, e) {
+        var dateTimeValue = $(e).attr("datetime");
+        if (!dateTimeValue) {
+            return;
+        }
+
+        var time = moment.utc(dateTimeValue).local();
+        $(e).html(time.format("llll"));
+        $(e).attr("title", $(e).attr("datetime"));
+    });
+});

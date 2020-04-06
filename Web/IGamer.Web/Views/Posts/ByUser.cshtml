@@ -44,7 +44,7 @@
                                     @post.ShortDescription
                                 </p>
                                 <ul class="blog-info-link">
-                                    <li class="text-light"><a asp-area="" asp-action="ByUser" asp-controller="Posts" asp-route-username="@post.UserUserName"><i class="far fa-user"></i> @post.UserUserName</a></li>
+                                    <li class="text-light"><i class="far fa-user"></i> @post.UserUserName</li>
                                     <li class="text-light"><i class="far fa-comments"></i> @post.CommentsCount Comments</li>
                                     <li class="text-light"><a asp-area="" asp-action="ByCategory" asp-controller="Posts" asp-route-name="@post.Category" class="d-flex"><i class="fa fa-stream"></i> @post.Category </a></li>
                                 </ul>
@@ -53,25 +53,25 @@
                     }
 
                     @*<nav class="blog-pagination justify-content-center d-flex">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a href="#" class="page-link" aria-label="Previous">
-                                    <i class="ti-angle-left"></i>
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link">1</a>
-                            </li>
-                            <li class="page-item active">
-                                <a href="#" class="page-link">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link" aria-label="Next">
-                                    <i class="ti-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>*@
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a href="#" class="page-link" aria-label="Previous">
+                                        <i class="ti-angle-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a href="#" class="page-link">1</a>
+                                </li>
+                                <li class="page-item active">
+                                    <a href="#" class="page-link">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a href="#" class="page-link" aria-label="Next">
+                                        <i class="ti-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>*@
 
                 </div>
             </div>

@@ -19,6 +19,8 @@
 
         public DateTime CreatedOn { get; set; }
 
+        public string PostId { get; set; }
+
         public ICollection<ReplyViewModel> Replies { get; set; }
     }
 }
