@@ -1,12 +1,11 @@
-﻿using IGamer.Common;
-
-namespace IGamer.Services.Data.CloudinaryHelper
+﻿namespace IGamer.Services.Data.CloudinaryHelper
 {
     using System.IO;
     using System.Threading.Tasks;
 
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
+    using IGamer.Common;
     using Microsoft.AspNetCore.Http;
 
     public class CloudinaryHelper : ICloudinaryHelper

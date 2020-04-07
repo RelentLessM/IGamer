@@ -1,5 +1,7 @@
 ﻿namespace IGamer.Web.ViewComponents
 {
+    using System.Threading.Tasks;
+
     using IGamer.Services.Data.Comments;
     using IGamer.Web.ViewModels.ViewComponents;
     using Microsoft.AspNetCore.Mvc;
@@ -14,9 +16,9 @@
             this.commentsService = commentsService;
         }
 
-        public IViewComponentResult Invoke(string id)
+        public async Task<IViewComponentResult> InvokeAsync(string id)
         {
-            var comments = this.commentsService.GetAll<CommentViewModel>(id);
+            var comments = await this.commentsService.GetAllAsync<CommentViewModel>(id);
             var commentArea = new CommentSectionViewModel() { Comments = comments };
 
             return this.View(commentArea);

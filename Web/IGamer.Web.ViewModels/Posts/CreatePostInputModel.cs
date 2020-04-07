@@ -8,7 +8,7 @@
     using IGamer.Data.Models.Enums;
     using IGamer.Services.Mapping;
 
-    public class CreatePostInputModel : /*IMapTo<CreatePostServiceModel>, */IMapTo<Post>, IHaveCustomMappings
+    public class CreatePostInputModel : IMapTo<Post>, IHaveCustomMappings
     {
         [Required]
         [StringLength(20, ErrorMessage = "The title must be between {2} and {1} characters.", MinimumLength = 6)]

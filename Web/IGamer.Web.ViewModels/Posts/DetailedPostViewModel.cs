@@ -1,7 +1,7 @@
-﻿using System.Linq;
-
-namespace IGamer.Web.ViewModels.Posts
+﻿namespace IGamer.Web.ViewModels.Posts
 {
+    using System.Linq;
+
     using AutoMapper;
     using Ganss.XSS;
     using IGamer.Data.Models;

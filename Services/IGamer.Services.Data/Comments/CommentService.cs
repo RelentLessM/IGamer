@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace IGamer.Services.Data.Comments
+﻿namespace IGamer.Services.Data.Comments
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -9,6 +7,7 @@ namespace IGamer.Services.Data.Comments
     using IGamer.Data.Common.Repositories;
     using IGamer.Data.Models;
     using IGamer.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
 
     public class CommentService : ICommentsService
     {
@@ -19,8 +18,8 @@ namespace IGamer.Services.Data.Comments
             this.repository = repository;
         }
 
-        public IEnumerable<T> GetAll<T>(string id)
-            => this.repository.All().Where(x => x.PostId == id).To<T>().ToList();
+        public async Task<IEnumerable<T>> GetAllAsync<T>(string id)
+            => await this.repository.All().Where(x => x.PostId == id).To<T>().ToListAsync();
 
         public async Task<int> AddCommentToPostAsync<T>(T model)
         {

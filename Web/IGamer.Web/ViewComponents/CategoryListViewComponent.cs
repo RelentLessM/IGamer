@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using IGamer.Services.Data.CategoryList;
-using IGamer.Web.ViewModels.ViewComponents;
-
-namespace IGamer.Web.ViewComponents
+﻿namespace IGamer.Web.ViewComponents
 {
+    using System.Threading.Tasks;
+
+    using IGamer.Services.Data.CategoryList;
+    using IGamer.Web.ViewModels.ViewComponents;
     using Microsoft.AspNetCore.Mvc;
 
     [ViewComponent(Name = "CategoryList")]

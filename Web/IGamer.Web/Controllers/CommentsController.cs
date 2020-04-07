@@ -1,14 +1,13 @@
-﻿using IGamer.Services.Data.Replies;
-using IGamer.Web.ViewModels.Replies;
-
-namespace IGamer.Web.Controllers
+﻿namespace IGamer.Web.Controllers
 {
     using System.Threading.Tasks;
 
     using IGamer.Data.Models;
     using IGamer.Services.Data.Comments;
+    using IGamer.Services.Data.Replies;
     using IGamer.Services.Mapping;
     using IGamer.Web.ViewModels.Comments;
+    using IGamer.Web.ViewModels.Replies;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;

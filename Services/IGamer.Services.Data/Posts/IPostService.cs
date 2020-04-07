@@ -7,10 +7,11 @@
 
     public interface IPostService
     {
-        IEnumerable<T> GetAll<T>();
+        Task<IEnumerable<T>> GetAllAsync<T>();
 
-        IEnumerable<T> GetByCategory<T>(CategoryOfPost categoryName);
-        IEnumerable<T> GetByUser<T>(string userId);
+        Task<IEnumerable<T>> GetByCategoryAsync<T>(CategoryOfPost categoryName);
+
+        Task<IEnumerable<T>> GetByUserAsync<T>(string userId);
 
         Task<string> CreateAsync<T>(T model, string userId);
 

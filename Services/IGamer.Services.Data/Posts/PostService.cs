@@ -1,16 +1,14 @@
-﻿using System.Collections.Generic;
-using IGamer.Data.Models.Enums;
-using Microsoft.EntityFrameworkCore;
-
-namespace IGamer.Services.Data.Posts
+﻿namespace IGamer.Services.Data.Posts
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using IGamer.Data.Common.Repositories;
     using IGamer.Data.Models;
-    using IGamer.Services.Data.ServiceModels;
+    using IGamer.Data.Models.Enums;
     using IGamer.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
 
     public class PostService : IPostService
     {
@@ -21,14 +19,14 @@ namespace IGamer.Services.Data.Posts
             this.repository = repository;
         }
 
-        public IEnumerable<T> GetAll<T>()
-            => this.repository.All().OrderByDescending(x => x.CreatedOn).To<T>().ToList();
+        public async Task<IEnumerable<T>> GetAllAsync<T>()
+            => await this.repository.All().OrderByDescending(x => x.CreatedOn).To<T>().ToListAsync();
 
-        public IEnumerable<T> GetByCategory<T>(CategoryOfPost categoryName)
-            => this.repository.All().Where(x => x.Category == categoryName).OrderByDescending(x => x.CreatedOn).To<T>().ToList();
+        public async Task<IEnumerable<T>> GetByCategoryAsync<T>(CategoryOfPost categoryName)
+            => await this.repository.All().Where(x => x.Category == categoryName).OrderByDescending(x => x.CreatedOn).To<T>().ToListAsync();
 
-        public IEnumerable<T> GetByUser<T>(string userId)
-        => this.repository.All().Where(x => x.UserId == userId).OrderByDescending(x => x.CreatedOn).To<T>().ToList();
+        public async Task<IEnumerable<T>> GetByUserAsync<T>(string userId)
+        => await this.repository.All().Where(x => x.UserId == userId).OrderByDescending(x => x.CreatedOn).To<T>().ToListAsync();
 
         public async Task<string> CreateAsync<T>(T model, string userId)
         {
@@ -43,10 +41,6 @@ namespace IGamer.Services.Data.Posts
         }
 
         public async Task<T> DetailsAsync<T>(string id)
-        {
-            var post = await this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefaultAsync();
-
-            return post;
-        }
+        => await this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefaultAsync();
     }
 }

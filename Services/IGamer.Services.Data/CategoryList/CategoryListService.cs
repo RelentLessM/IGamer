@@ -1,14 +1,14 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using IGamer.Data.Common.Repositories;
-using IGamer.Data.Models;
-using IGamer.Data.Models.Enums;
-using IGamer.Web.ViewModels.ViewComponents;
-using Microsoft.EntityFrameworkCore;
-
-namespace IGamer.Services.Data.CategoryList
+﻿namespace IGamer.Services.Data.CategoryList
 {
+    using System;
+    using System.Threading.Tasks;
+
+    using IGamer.Data.Common.Repositories;
+    using IGamer.Data.Models;
+    using IGamer.Data.Models.Enums;
+    using IGamer.Web.ViewModels.ViewComponents;
+    using Microsoft.EntityFrameworkCore;
+
     public class CategoryListService : ICategoryListService
     {
         private readonly IDeletableEntityRepository<Post> repository;

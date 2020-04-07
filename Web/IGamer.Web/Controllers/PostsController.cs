@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace IGamer.Web.Controllers
+﻿namespace IGamer.Web.Controllers
 {
     using System;
     using System.Linq;
@@ -9,12 +7,11 @@ namespace IGamer.Web.Controllers
     using IGamer.Data.Models;
     using IGamer.Data.Models.Enums;
     using IGamer.Services.Data.Posts;
-    using IGamer.Services.Data.ServiceModels;
-    using IGamer.Services.Mapping;
     using IGamer.Web.ViewModels.Posts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
 
     public class PostsController : Controller
     {
@@ -27,7 +24,7 @@ namespace IGamer.Web.Controllers
             this.userManager = userManager;
         }
 
-        public IActionResult ByCategory(string name)
+        public async Task<IActionResult> ByCategory(string name)
         {
             if (!Enum.TryParse(typeof(CategoryOfPost), name, out _))
             {
@@ -35,7 +32,7 @@ namespace IGamer.Web.Controllers
             }
 
             var enumResult = Enum.Parse<CategoryOfPost>(name);
-            var posts = this.postService.GetByCategory<PostViewModel>(enumResult);
+            var posts = await this.postService.GetByCategoryAsync<PostViewModel>(enumResult);
             var result = new PostsAllViewModel() { Posts = posts };
             return this.View(result);
         }
@@ -49,14 +46,14 @@ namespace IGamer.Web.Controllers
                 return this.RedirectToAction("All");
             }
 
-            var posts = this.postService.GetByUser<PostViewModel>(user.Id);
+            var posts = await this.postService.GetByUserAsync<PostViewModel>(user.Id);
             var result = new PostsAllViewModel() { Posts = posts };
             return this.View(result);
         }
 
-        public IActionResult All()
+        public async Task<IActionResult> All()
         {
-            var posts = this.postService.GetAll<PostViewModel>();
+            var posts = await this.postService.GetAllAsync<PostViewModel>();
             var result = new PostsAllViewModel() { Posts = posts };
             return this.View(result);
         }

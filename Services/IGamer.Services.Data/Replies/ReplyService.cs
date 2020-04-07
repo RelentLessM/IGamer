@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using IGamer.Data.Common.Repositories;
-using IGamer.Data.Models;
-using IGamer.Services.Mapping;
-using Microsoft.EntityFrameworkCore;
-
-namespace IGamer.Services.Data.Replies
+﻿namespace IGamer.Services.Data.Replies
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using IGamer.Data.Common.Repositories;
+    using IGamer.Data.Models;
+    using IGamer.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
+
     public class ReplyService : IReplyService
     {
         private readonly IDeletableEntityRepository<ReplyOnPostComment> repository;

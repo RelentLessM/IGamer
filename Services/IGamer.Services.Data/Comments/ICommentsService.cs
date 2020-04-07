@@ -5,7 +5,7 @@
 
     public interface ICommentsService
     {
-        IEnumerable<T> GetAll<T>(string id);
+        Task<IEnumerable<T>> GetAllAsync<T>(string id);
 
         Task<int> AddCommentToPostAsync<T>(T model);
 

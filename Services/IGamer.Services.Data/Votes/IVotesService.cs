@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-
-namespace IGamer.Services.Data.Votes
+﻿namespace IGamer.Services.Data.Votes
 {
+    using System.Threading.Tasks;
+
     public interface IVotesService
     {
         /// <summary>

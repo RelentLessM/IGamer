@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace IGamer.Web.ViewModels.ViewComponents
+﻿namespace IGamer.Web.ViewModels.ViewComponents
 {
+    using System.Collections.Generic;
+
     public class CategoryListViewModel
     {
         public CategoryListViewModel()

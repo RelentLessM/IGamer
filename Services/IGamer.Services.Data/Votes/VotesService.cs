@@ -1,7 +1,6 @@
-﻿using System.Linq;
-
-namespace IGamer.Services.Data.Votes
+﻿namespace IGamer.Services.Data.Votes
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using IGamer.Data.Common.Repositories;
