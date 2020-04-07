@@ -111,17 +111,17 @@ function createComment(data) {
 
     var date = moment.utc(data.createdOn).local().format("llll");
 
-    clonedNode.setAttribute('id', 'replyItem' + data.id);
+    clonedNode.setAttribute('id', `replyItem${data.id}`);
     clonedNode.querySelector('.thumb img').src = data.userImageUrl;
     clonedNode.querySelector('.comment').innerHTML = data.description;
     clonedNode.querySelector('#userName').innerHTML = data.userUserName;
     clonedNode.querySelector('.date').innerHTML = date;
     clonedNode.querySelector('.date').dateTime = data.createdOn;
     clonedNode.querySelector('.date').title = data.createdOn;
-    clonedNode.querySelector('.button').setAttribute("onClick", "showReply(" + data.id + ")");
+    clonedNode.querySelector('.button').setAttribute("onClick", `showReply(${data.id})`);
     clonedNode.querySelector('.hide').setAttribute('id', data.id);
-    clonedNode.querySelector('.form-control').setAttribute('id', 'areaForReply' + data.id);
-    clonedNode.querySelector('#buttonForReply').setAttribute("onClick", "addReply(" + data.id + "," + "'" + data.postId + "'" + ")");
+    clonedNode.querySelector('.form-control').setAttribute('id', `areaForReply${data.id}`);
+    clonedNode.querySelector('#buttonForReply').setAttribute("onClick", `addReply(${data.id},'${data.postId}')`);
     clonedNode.querySelector('.userReply').remove();
 
     $('#commentItem').append(clonedNode);
@@ -140,7 +140,7 @@ function showReply(id) {
 
 //  Add reply function
 function addReply(commentId, postId) {
-    var json = { postId: postId, commentId: commentId, description: $("#areaForReply" + commentId).val() };
+    var json = { postId: postId, commentId: commentId, description: $(`#areaForReply${commentId}`).val() };
     var token = $("#commentForm input[name=__RequestVerificationToken]").val();
     $.ajax({
         url: "/api/reply",

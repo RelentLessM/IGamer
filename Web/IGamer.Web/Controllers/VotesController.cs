@@ -26,7 +26,8 @@
         [HttpPost]
         public async Task<ActionResult<VotesResponseModel>> Vote(AddVoteInputModel model)
         {
-            var userId = this.userManager.GetUserId(this.User);
+            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = await this.userManager.GetUserIdAsync(user);
 
             await this.votesService.VoteOnPostAsync(model.PostId, userId, model.IsUpVote);
 

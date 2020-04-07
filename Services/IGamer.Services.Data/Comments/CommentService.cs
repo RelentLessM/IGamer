@@ -19,7 +19,7 @@
         }
 
         public async Task<IEnumerable<T>> GetAllAsync<T>(string id)
-            => await this.repository.All().Where(x => x.PostId == id).To<T>().ToListAsync();
+            => await this.repository.All().Where(x => x.PostId == id).OrderBy(x => x.CreatedOn).To<T>().ToListAsync();
 
         public async Task<int> AddCommentToPostAsync<T>(T model)
         {

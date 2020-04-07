@@ -6,7 +6,8 @@
 
         public const string AdministratorRoleName = "Administrator";
 
-        public const string DefaultUserImage =
-            "https://res.cloudinary.com/dikczyh4n/image/upload/v1584818369/default-user-image_qx1w1q.png";
+        public const string DefaultCloudinary = "https://res.cloudinary.com/dikczyh4n/image/upload/";
+
+        public const string DefaultUserImage = "v1584818369/default-user-image_qx1w1q.png";
     }
 }

@@ -18,9 +18,6 @@
             this.repository = repository;
         }
 
-        public IEnumerable<T> GetAll<T>(int id)
-            => this.repository.All().Where(x => x.CommentId == id).To<T>().ToList();
-
         public async Task<int> AddReplyToPostCommentAsync<T>(T model)
         {
             var reply = AutoMapperConfig.MapperInstance.Map<ReplyOnPostComment>(model);

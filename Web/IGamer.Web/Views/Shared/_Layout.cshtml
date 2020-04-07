@@ -37,6 +37,9 @@
 <body>
     <div class="body_bg">
         <header class="main_menu single_page_menu">
+            <div>
+                <partial name="_CookieConsentPartial" />
+            </div>
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-12">
@@ -50,18 +53,17 @@
 
                             <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                                 <ul class="navbar-nav">
-                                   <vc:nav-bar></vc:nav-bar>
+                                    <vc:nav-bar></vc:nav-bar>
                                 </ul>
-                                <partial name="_LoginPartial" />
+                                <partial name="_LoginPartial"/>
                             </div>
                         </nav>
                     </div>
                 </div>
             </div>
         </header>
-
+        
         <div @*class="container"*@>
-            <partial name="_CookieConsentPartial" />
             <main role="main" class="pb-3">
                 @this.RenderBody()
             </main>

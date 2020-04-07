@@ -32,7 +32,8 @@
         [HttpPost]
         public async Task<ActionResult<CommentResponseModel>> AddComment(AddCommentInputModel model)
         {
-            var userId = this.userManager.GetUserId(this.User);
+            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = await this.userManager.GetUserIdAsync(user);
 
             model.UserId = userId;
 
@@ -53,7 +54,8 @@
         [HttpPost]
         public async Task<ActionResult<ReplyResponseModel>> AddReply(AddReplyInputModel model)
         {
-            var userId = this.userManager.GetUserId(this.User);
+            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = await this.userManager.GetUserIdAsync(user);
 
             model.UserId = userId;
 

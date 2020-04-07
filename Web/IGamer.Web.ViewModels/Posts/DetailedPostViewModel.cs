@@ -4,6 +4,7 @@
 
     using AutoMapper;
     using Ganss.XSS;
+    using IGamer.Common;
     using IGamer.Data.Models;
     using IGamer.Services.Mapping;
 
@@ -15,7 +16,7 @@
 
         public string Description { get; set; }
 
-        public string SanitizedContent 
+        public string SanitizedContent
             => new HtmlSanitizer().Sanitize(this.Description);
 
         public string UserUserName { get; set; }
@@ -33,8 +34,10 @@
             configuration.CreateMap<Post, DetailedPostViewModel>()
                 .ForMember(
                     x => x.CommentsCount,
-                    s => s.MapFrom(x => x.Comments.Count + x.Comments.SelectMany(c => c.Replies).Count()));
-        }
+                    s => s.MapFrom(x => x.Comments.Count + x.Comments.SelectMany(c => c.Replies).Count()))
+                .ForMember(
+                        x => x.UserImageUrl,
+                        s => s.MapFrom(x => GlobalConstants.DefaultCloudinary + x.User.ImageUrl));
+            }
     }
 }
-    

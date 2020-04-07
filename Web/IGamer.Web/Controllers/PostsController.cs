@@ -40,13 +40,23 @@
         public async Task<IActionResult> ByUser(string username)
         {
             var user = await this.userManager.Users.FirstOrDefaultAsync(x => x.UserName == username);
-
             if (user == null)
             {
                 return this.RedirectToAction("All");
             }
 
-            var posts = await this.postService.GetByUserAsync<PostViewModel>(user.Id);
+            var userId = await this.userManager.GetUserIdAsync(user);
+            var posts = await this.postService.GetByUserAsync<PostViewModel>(userId);
+            var result = new PostsAllViewModel() { Posts = posts };
+            return this.View(result);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> MyPosts()
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = await this.userManager.GetUserIdAsync(user);
+            var posts = await this.postService.GetByUserAsync<PostViewModel>(userId);
             var result = new PostsAllViewModel() { Posts = posts };
             return this.View(result);
         }
@@ -78,7 +88,8 @@
                 return this.View(model);
             }
 
-            var userId = this.userManager.GetUserId(this.User);
+            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = await this.userManager.GetUserIdAsync(user);
 
             var postId = await this.postService.CreateAsync(model, userId);
 

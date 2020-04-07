@@ -9,7 +9,7 @@
     {
         <li class="nav-item">
             <div class="media align-items-center">
-                <img class="profileImage text-light" src="@this.UserManager.GetUserAsync(this.User).Result.ImageUrl" alt="user image" />
+                <img class="profileImage text-light" src="@(GlobalConstants.DefaultCloudinary + this.UserManager.GetUserAsync(this.User).GetAwaiter().GetResult().ImageUrl)" alt="user image" />
                 <a class="nav-link usernamePadding" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@(this.User.Identity.Name)</a>
             </div>
         </li>
