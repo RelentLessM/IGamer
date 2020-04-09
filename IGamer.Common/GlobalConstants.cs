@@ -9,5 +9,7 @@
         public const string DefaultCloudinary = "https://res.cloudinary.com/dikczyh4n/image/upload/";
 
         public const string DefaultUserImage = "v1584818369/default-user-image_qx1w1q.png";
+
+        public const int ItemsPerPage = 5;
     }
 }

@@ -23,7 +23,7 @@ blockDropdown.addEventListener('click', function () {
     }
     else {
         blockMenu.style.display = 'block';
-        
+
     }
 });
 
@@ -107,11 +107,19 @@ function addComment(postId) {
 }
 
 function createComment(data) {
-    var clonedNode = document.querySelector('.comment-list').cloneNode(true);
+    var clonedNode = document.createElement('div');
+    if (document.querySelector('.comment-list') == null)
+    {
+        clonedNode.innerHTML = createNode();
+    }
+    else
+    {
+        clonedNode = document.querySelector('.comment-list').cloneNode(true);
+    }
 
     var date = moment.utc(data.createdOn).local().format("llll");
 
-    clonedNode.setAttribute('id', `replyItem${data.id}`);
+
     clonedNode.querySelector('.thumb img').src = data.userImageUrl;
     clonedNode.querySelector('.comment').innerHTML = data.description;
     clonedNode.querySelector('#userName').innerHTML = data.userUserName;
@@ -119,22 +127,41 @@ function createComment(data) {
     clonedNode.querySelector('.date').dateTime = data.createdOn;
     clonedNode.querySelector('.date').title = data.createdOn;
     clonedNode.querySelector('.button').setAttribute("onClick", `showReply(${data.id})`);
-    clonedNode.querySelector('.hide').setAttribute('id', data.id);
+    clonedNode.querySelector('.replyForm').setAttribute('id', data.id);
     clonedNode.querySelector('.form-control').setAttribute('id', `areaForReply${data.id}`);
     clonedNode.querySelector('#buttonForReply').setAttribute("onClick", `addReply(${data.id},'${data.postId}')`);
-    clonedNode.querySelector('.userReply').remove();
+    clonedNode.querySelector('.userRepliesList').innerHTML = '';
+    clonedNode.querySelector('.userRepliesList').setAttribute('id', `replyItem${data.id}`);
+
 
     $('#commentItem').append(clonedNode);
+}
+
+//if first comment
+function createNode() {
+    return `<div class="comment-list border border-dark rounded" id="replyItem@(comment.Id)">
+<div class="single-comment justify-content-between d-flex">
+<div class="user justify-content-between d-flex">
+<div class="thumb"><img src="@comment.UserImageUrl" alt="author" id="authorImage"></div>
+<div class="desc"><p class="comment" id="commentContent">@comment.Description</p><div class="d-flex justify-content-between">
+<div class="d-flex align-items-center"><h5><a asp-area="" asp-action="ByUser" asp-controller="Posts" asp-route-username="@comment.UserUserName" id="userName">
+@comment.UserUserName</a></h5><time datetime="@comment.CreatedOn.ToString("O")" class="date" id="date">
+</time></div></div></div></div><div class="reply-btn" align="right">
+<input type="button" onclick="showReply('@comment.Id')" class="button button-contactForm btn_1" value="reply">
+</div></div><div class="hide replyForm" id="@comment.Id">
+<textarea class="form-control form-control-bg-tr w-100" cols="60" rows="6" placeholder="Write Reply" id="areaForReply@(Model.CommentId)">
+</textarea><a role="button" onclick="addReply(@Model.CommentId, '@Model.PostId')" class="button button-contactForm btn_1" 
+id="buttonForReply">Send Message <i class="flaticon-right-arrow"></i></a></div><div class="userRepliesList" id="replyItem@(comment.Id)"></div>`;
 }
 
 // Show reply area function
 function showReply(id) {
     var reply = document.getElementById(id);
-    if (reply.className === "show") {
-        reply.className = "hide";
+    if (reply.classList.contains("show")) {
+        reply.classList.replace("show", "hide");
     }
     else {
-        reply.className = "show";
+        reply.classList.replace("hide", "show");
     }
 }
 
@@ -158,7 +185,12 @@ function addReply(commentId, postId) {
 }
 
 function createReply(data, commentId) {
-    var clonedNode = document.querySelector('.userReply').cloneNode(true);
+    var clonedNode = document.createElement('div');
+    if (document.querySelector('.userReply') == null) {
+        clonedNode.innerHTML = createReplyNode();
+    } else {
+        clonedNode = document.querySelector('.userReply').cloneNode(true);
+    }
 
     var date = moment.utc(data.createdOn).local().format("llll");
 
@@ -169,10 +201,19 @@ function createReply(data, commentId) {
     clonedNode.querySelector('.date').dateTime = data.createdOn;
     clonedNode.querySelector('.date').title = data.createdOn;
 
-    console.log(clonedNode);
-
     $('#replyItem' + commentId).append(clonedNode);
 }
+
+// Create node if first reply
+function createReplyNode() {
+    return `<div class="single-comment userReply justify-content-between d-flex border border-dark rounded">
+<div class="user justify-content-between d-flex"><div class="thumb"><img src="@reply.UserImageUrl" alt="author">
+</div><div class="desc"><p class="comment">@reply.Description</p><div class="d-flex justify-content-between">
+<div class="d-flex align-items-center"><h5>
+<a asp-area="" asp-action="ByUser" asp-controller="Posts" asp-route-username="@reply.UserUserName" id="ReplyUserName">
+@reply.UserUserName</a></h5><time datetime="@reply.CreatedOn.ToString("O")" class="date"></time></div></div></div></div></div>`;
+}
+
 
 // Show comments
 function showComments() {

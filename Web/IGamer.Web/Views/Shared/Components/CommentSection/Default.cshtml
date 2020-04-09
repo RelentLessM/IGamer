@@ -4,7 +4,7 @@
 
 @foreach (var comment in Model.Comments)
 {
-    <div class="comment-list border border-dark rounded" id="replyItem@(comment.Id)">
+    <div class="comment-list border border-dark rounded">
         <div class="single-comment justify-content-between d-flex">
             <div class="user justify-content-between d-flex">
                 <div class="thumb">
@@ -30,33 +30,35 @@
                 <input type="button" onclick="showReply('@comment.Id')" class="button button-contactForm btn_1" value="reply">
             </div>
         </div>
-        <div class="hide" id="@comment.Id">
+        <div class="hide replyForm" id="@comment.Id">
             <partial name="_ReplyFormPartial" model="@(new AddReplyInputModel() {PostId = comment.PostId, CommentId = comment.Id})" />
         </div>
-        @foreach (var reply in comment.Replies)
-        {
-            <div class="single-comment userReply justify-content-between d-flex border border-dark rounded">
-                <div class="user justify-content-between d-flex">
-                    <div class="thumb">
-                        <img src="@reply.UserImageUrl" alt="author">
-                    </div>
-                    <div class="desc">
-                        <p class="comment">
-                            @reply.Description
-                        </p>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <h5>
-                                    <a asp-area="" asp-action="ByUser" asp-controller="Posts" asp-route-username="@reply.UserUserName" id="ReplyUserName">
-                                        @reply.UserUserName
-                                    </a>
-                                </h5>
-                                <time datetime="@reply.CreatedOn.ToString("O")" class="date"></time>
+        <div class="userRepliesList" id="replyItem@(comment.Id)">
+            @foreach (var reply in comment.Replies)
+            {
+                <div class="single-comment userReply justify-content-between d-flex border border-dark rounded">
+                    <div class="user justify-content-between d-flex">
+                        <div class="thumb">
+                            <img src="@reply.UserImageUrl" alt="author">
+                        </div>
+                        <div class="desc">
+                            <p class="comment">
+                                @reply.Description
+                            </p>
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <h5>
+                                        <a asp-area="" asp-action="ByUser" asp-controller="Posts" asp-route-username="@reply.UserUserName" id="ReplyUserName">
+                                            @reply.UserUserName
+                                        </a>
+                                    </h5>
+                                    <time datetime="@reply.CreatedOn.ToString("O")" class="date"></time>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 }

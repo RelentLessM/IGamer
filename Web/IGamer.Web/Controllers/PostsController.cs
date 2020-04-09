@@ -1,4 +1,6 @@
-﻿namespace IGamer.Web.Controllers
+﻿using IGamer.Common;
+
+namespace IGamer.Web.Controllers
 {
     using System;
     using System.Linq;
@@ -24,7 +26,7 @@
             this.userManager = userManager;
         }
 
-        public async Task<IActionResult> ByCategory(string name)
+        public async Task<IActionResult> ByCategory(string name, int page = 1)
         {
             if (!Enum.TryParse(typeof(CategoryOfPost), name, out _))
             {
@@ -32,12 +34,22 @@
             }
 
             var enumResult = Enum.Parse<CategoryOfPost>(name);
-            var posts = await this.postService.GetByCategoryAsync<PostViewModel>(enumResult);
+            var posts = await this.postService
+                .GetByCategoryAsync<PostViewModel>(enumResult, GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
             var result = new PostsAllViewModel() { Posts = posts };
+
+            var postsCount = await this.postService.GetCountByCategoryAsync(enumResult);
+            result.PagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
+            if (result.PagesCount == 0)
+            {
+                result.PagesCount = 1;
+            }
+
+            result.CurrentPage = page;
             return this.View(result);
         }
 
-        public async Task<IActionResult> ByUser(string username)
+        public async Task<IActionResult> ByUser(string username, int page = 1)
         {
             var user = await this.userManager.Users.FirstOrDefaultAsync(x => x.UserName == username);
             if (user == null)
@@ -46,25 +58,58 @@
             }
 
             var userId = await this.userManager.GetUserIdAsync(user);
-            var posts = await this.postService.GetByUserAsync<PostViewModel>(userId);
+
+            var posts = await this.postService
+                .GetByUserAsync<PostViewModel>(userId, GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
+
             var result = new PostsAllViewModel() { Posts = posts };
+
+            var postsCount = await this.postService.GetCountByUserAsync(userId);
+            result.PagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
+            if (result.PagesCount == 0)
+            {
+                result.PagesCount = 1;
+            }
+
+            result.CurrentPage = page;
             return this.View(result);
         }
 
         [Authorize]
-        public async Task<IActionResult> MyPosts()
+        public async Task<IActionResult> MyPosts(int page = 1)
         {
             var user = await this.userManager.GetUserAsync(this.User);
             var userId = await this.userManager.GetUserIdAsync(user);
-            var posts = await this.postService.GetByUserAsync<PostViewModel>(userId);
+            var posts = await this.postService
+                .GetByUserAsync<PostViewModel>(userId, GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
             var result = new PostsAllViewModel() { Posts = posts };
+
+            var postsCount = await this.postService.GetCountByUserAsync(userId);
+            result.PagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
+            if (result.PagesCount == 0)
+            {
+                result.PagesCount = 1;
+            }
+
+            result.CurrentPage = page;
             return this.View(result);
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int page = 1)
         {
-            var posts = await this.postService.GetAllAsync<PostViewModel>();
+            var posts = await this.postService
+                .GetAllAsync<PostViewModel>(GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
             var result = new PostsAllViewModel() { Posts = posts };
+
+            var postsCount = await this.postService.GetAllCountAsync();
+            result.PagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
+            if (result.PagesCount == 0)
+            {
+                result.PagesCount = 1;
+            }
+
+            result.CurrentPage = page;
+
             return this.View(result);
         }
 

@@ -12,6 +12,14 @@
     display: none;
 }
 
+.replyForm {
+
+}
+
+.userRepliesList {
+
+}
+
 .show {
     display: block;
 }
@@ -1625,9 +1633,9 @@ ul {
         line-height: 45px;
         width: 45px;
         height: 45px;
-        border-radius: 0 !important;
-        color: #8a8a8a;
-        border: 1px solid #f0e9ff;
+        border-radius: 50% !important;
+        color: black;
+        border: 2px solid purple;
         margin-right: 10px;
     }
 
@@ -1640,8 +1648,8 @@ ul {
     /* line 1016, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_blog.scss */
     .blog-pagination .page-item.active .page-link {
         background-color: #fbf9ff;
-        border-color: #f0e9ff;
-        color: #888888;
+        border-color: darkred;
+        color: red;
     }
 
     /* line 1023, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_blog.scss */

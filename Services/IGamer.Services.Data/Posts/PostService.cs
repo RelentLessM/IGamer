@@ -19,14 +19,45 @@
             this.repository = repository;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync<T>()
-            => await this.repository.All().OrderByDescending(x => x.CreatedOn).To<T>().ToListAsync();
+        public async Task<IEnumerable<T>> GetAllAsync<T>(int take, int skip = 0)
+            => await this.repository.All()
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip(skip)
+                .Take(take)
+                .To<T>()
+                .ToListAsync();
 
-        public async Task<IEnumerable<T>> GetByCategoryAsync<T>(CategoryOfPost categoryName)
-            => await this.repository.All().Where(x => x.Category == categoryName).OrderByDescending(x => x.CreatedOn).To<T>().ToListAsync();
+        public async Task<int> GetAllCountAsync()
+            => await this.repository.All()
+                .CountAsync();
 
-        public async Task<IEnumerable<T>> GetByUserAsync<T>(string userId)
-        => await this.repository.All().Where(x => x.UserId == userId).OrderByDescending(x => x.CreatedOn).To<T>().ToListAsync();
+        public async Task<IEnumerable<T>> GetByCategoryAsync<T>(CategoryOfPost categoryName, int take, int skip = 0)
+            => await this.repository.All()
+                .Where(x => x.Category == categoryName)
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip(skip)
+                .Take(take)
+                .To<T>()
+                .ToListAsync();
+
+        public async Task<int> GetCountByCategoryAsync(CategoryOfPost categoryName)
+            => await this.repository.All()
+                .Where(x => x.Category == categoryName)
+                .CountAsync();
+
+        public async Task<IEnumerable<T>> GetByUserAsync<T>(string userId, int take, int skip = 0)
+            => await this.repository.All()
+                .Where(x => x.UserId == userId)
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip(skip)
+                .Take(take)
+                .To<T>()
+                .ToListAsync();
+
+        public async Task<int> GetCountByUserAsync(string userId)
+       => await this.repository.All()
+           .Where(x => x.UserId == userId)
+           .CountAsync();
 
         public async Task<string> CreateAsync<T>(T model, string userId)
         {
@@ -41,6 +72,8 @@
         }
 
         public async Task<T> DetailsAsync<T>(string id)
-        => await this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefaultAsync();
+            => await this.repository.All()
+                .Where(x => x.Id == id).To<T>()
+                .FirstOrDefaultAsync();
     }
 }
