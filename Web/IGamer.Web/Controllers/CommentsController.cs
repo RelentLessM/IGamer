@@ -1,4 +1,6 @@
-﻿namespace IGamer.Web.Controllers
+﻿using Ganss.XSS;
+
+namespace IGamer.Web.Controllers
 {
     using System.Threading.Tasks;
 
@@ -36,8 +38,9 @@
             var userId = await this.userManager.GetUserIdAsync(user);
 
             model.UserId = userId;
+            model.Description = new HtmlSanitizer().Sanitize(model.Description);
 
-            if (!this.ModelState.IsValid || string.IsNullOrWhiteSpace(model.UserId))
+            if (!this.ModelState.IsValid || string.IsNullOrWhiteSpace(model.UserId) || string.IsNullOrWhiteSpace(model.Description))
             {
                 return this.RedirectToAction("DetailedPost", "Posts", new { id = model.PostId });
             }
@@ -58,8 +61,9 @@
             var userId = await this.userManager.GetUserIdAsync(user);
 
             model.UserId = userId;
+            model.Description = new HtmlSanitizer().Sanitize(model.Description);
 
-            if (!this.ModelState.IsValid || string.IsNullOrWhiteSpace(model.UserId))
+            if (!this.ModelState.IsValid || string.IsNullOrWhiteSpace(model.UserId) || string.IsNullOrWhiteSpace(model.Description))
             {
                 return this.RedirectToAction("DetailedPost", "Posts", new { id = model.PostId });
             }

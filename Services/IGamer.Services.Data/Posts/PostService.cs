@@ -75,5 +75,8 @@
             => await this.repository.All()
                 .Where(x => x.Id == id).To<T>()
                 .FirstOrDefaultAsync();
+
+        public async Task<IEnumerable<T>> GetRecentAsync<T>()
+            => await this.repository.All().OrderByDescending(x => x.CreatedOn).Take(5).To<T>().ToListAsync();
     }
 }

@@ -22,5 +22,7 @@
         Task<string> CreateAsync<T>(T model, string userId);
 
         Task<T> DetailsAsync<T>(string id);
+
+        Task<IEnumerable<T>> GetRecentAsync<T>();
     }
 }

@@ -146,7 +146,7 @@ function createNode() {
 <div class="desc"><p class="comment" id="commentContent">@comment.Description</p><div class="d-flex justify-content-between">
 <div class="d-flex align-items-center"><h5><a asp-area="" asp-action="ByUser" asp-controller="Posts" asp-route-username="@comment.UserUserName" id="userName">
 @comment.UserUserName</a></h5><time datetime="@comment.CreatedOn.ToString("O")" class="date" id="date">
-</time></div></div></div></div><div class="reply-btn" align="right">
+</time></div></div></div></div><div class="btn-reply" align="right">
 <input type="button" onclick="showReply('@comment.Id')" class="button button-contactForm btn_1" value="reply">
 </div></div><div class="hide replyForm" id="@comment.Id">
 <textarea class="form-control form-control-bg-tr w-100" cols="60" rows="6" placeholder="Write Reply" id="areaForReply@(Model.CommentId)">
