@@ -10,7 +10,7 @@
 
     public class CloudinaryHelper : ICloudinaryHelper
     {
-        public async Task<string> UploadAsync(Cloudinary cloudinary, IFormFile file)
+        public async Task<string> UploadUserImageAsync(Cloudinary cloudinary, IFormFile file)
         {
             if (file == null)
             {
@@ -19,6 +19,26 @@
                 return defaultUrl;
             }
 
+
+            var url = await this.UploadAsync(cloudinary, file);
+            return url;
+        }
+
+        public async Task<string> UploadPostImageAsync(Cloudinary cloudinary, IFormFile file)
+        {
+            if (file == null)
+            {
+                var defaultUrl = GlobalConstants.DefaultPostImage;
+
+                return defaultUrl;
+            }
+
+            var url = await this.UploadAsync(cloudinary, file);
+            return url;
+        }
+
+        private async Task<string> UploadAsync(Cloudinary cloudinary, IFormFile file)
+        {
             byte[] image;
 
             await using (var stream = new MemoryStream())
@@ -33,8 +53,8 @@
                 File = new FileDescription(file.FileName, uploadStream),
             };
             var uploadResult = await cloudinary.UploadAsync(uploadParams);
-            var url = uploadResult.Uri.AbsoluteUri;
-            return url;
+            var urlResult = uploadResult.SecureUri.AbsoluteUri.Replace(GlobalConstants.DefaultCloudinary, string.Empty);
+            return urlResult;
         }
     }
 }

@@ -29,6 +29,8 @@
 
         public int CommentsCount { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Post, DetailedPostViewModel>()
@@ -37,7 +39,10 @@
                     s => s.MapFrom(x => x.Comments.Count + x.Comments.SelectMany(c => c.Replies).Count()))
                 .ForMember(
                         x => x.UserImageUrl,
-                        s => s.MapFrom(x => GlobalConstants.DefaultCloudinary + x.User.ImageUrl));
+                        s => s.MapFrom(x => GlobalConstants.DefaultCloudinary + x.User.ImageUrl))
+                .ForMember(
+                    x => x.ImageUrl,
+                    s => s.MapFrom(x => GlobalConstants.DefaultCloudinary + x.ImageUrl));
             }
     }
 }

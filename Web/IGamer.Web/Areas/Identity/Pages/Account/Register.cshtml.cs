@@ -92,7 +92,7 @@ namespace IGamer.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var url = await cloudinaryHelper.UploadAsync(cloudinary, Input.Image);
+                var url = await this.cloudinaryHelper.UploadUserImageAsync(this.cloudinary, this.Input.Image);
 
                 var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email, ImageUrl = url };
 

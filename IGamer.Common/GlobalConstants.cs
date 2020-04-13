@@ -10,6 +10,8 @@
 
         public const string DefaultUserImage = "v1584818369/default-user-image_qx1w1q.png";
 
+        public const string DefaultPostImage = "v1586783709/default-post-image_gxkjit.png";
+
         public const int ItemsPerPage = 5;
     }
 }

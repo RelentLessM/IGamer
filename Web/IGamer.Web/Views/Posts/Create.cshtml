@@ -17,11 +17,11 @@
                         <hr />
                         <div class="live_stareams_text">
                             <div class="col-md-12" align="center">
-                                <form method="post" asp-action="Create">
-                                    
+                                <form method="post" asp-action="Create" enctype="multipart/form-data">
+
                                     <div class="form-group">
                                         <label asp-for="Title" class="control-label text-light"></label>
-                                        <input asp-for="Title" class="form-control"/>
+                                        <input asp-for="Title" class="form-control" />
                                         <span asp-validation-for="Title" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
@@ -40,8 +40,13 @@
                                         </div>
                                     </div>
                                     <hr/>
+                                    <label class="text-light">Post image (optional / there is a default one)</label>
                                     <div class="form-group">
-                                        <input type="submit" value="Create" class="genric-btn success circle large"/>
+                                        <input type="file" name="file" class="text-light" />
+                                    </div>
+                                    <hr />
+                                    <div class="form-group">
+                                        <input type="submit" value="Create" class="genric-btn success circle large" />
                                     </div>
                                 </form>
                             </div>

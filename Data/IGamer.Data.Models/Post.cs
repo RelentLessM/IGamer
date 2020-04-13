@@ -17,12 +17,14 @@
         }
 
         [Required]
-        [StringLength(20, ErrorMessage = "The title must be between {2} and {1} characters.", MinimumLength = 6)]
+        [StringLength(50, ErrorMessage = "The title must be between {2} and {1} characters.", MinimumLength = 6)]
         public string Title { get; set; }
 
         [Required]
         [MinLength(20, ErrorMessage = "Content must be more than 20 characters.")]
         public string Description { get; set; }
+
+        public string ImageUrl { get; set; }
 
         [Required]
         public string UserId { get; set; }

@@ -11,7 +11,7 @@
     public class CreatePostInputModel : IMapTo<Post>, IHaveCustomMappings
     {
         [Required]
-        [StringLength(20, ErrorMessage = "The title must be between {2} and {1} characters.", MinimumLength = 6)]
+        [StringLength(50, ErrorMessage = "The title must be between {2} and {1} characters.", MinimumLength = 6)]
         public string Title { get; set; }
 
         [Required]
@@ -20,6 +20,8 @@
 
         [Required]
         public virtual string Category { get; set; }
+
+        public string ImageUrl { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

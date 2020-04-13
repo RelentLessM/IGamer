@@ -1,4 +1,6 @@
-﻿namespace IGamer.Web.ViewModels.Posts
+﻿using IGamer.Common;
+
+namespace IGamer.Web.ViewModels.Posts
 {
     using System;
     using System.Linq;
@@ -36,12 +38,17 @@
 
         public int CommentsCount { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Post, PostViewModel>()
                 .ForMember(
                     x => x.CommentsCount,
-                    s => s.MapFrom(x => x.Comments.Count + x.Comments.SelectMany(c => c.Replies).Count()));
+                    s => s.MapFrom(x => x.Comments.Count + x.Comments.SelectMany(c => c.Replies).Count()))
+                .ForMember(
+                    x => x.ImageUrl,
+                    s => s.MapFrom(x => GlobalConstants.DefaultCloudinary + x.ImageUrl)); ;
         }
     }
 }

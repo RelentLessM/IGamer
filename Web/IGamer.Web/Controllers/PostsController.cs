@@ -1,4 +1,7 @@
-﻿using IGamer.Common;
+﻿using CloudinaryDotNet;
+using IGamer.Common;
+using IGamer.Services.Data.CloudinaryHelper;
+using Microsoft.AspNetCore.Http;
 
 namespace IGamer.Web.Controllers
 {
@@ -19,11 +22,19 @@ namespace IGamer.Web.Controllers
     {
         private readonly IPostService postService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ICloudinaryHelper cloudinaryHelper;
+        private readonly Cloudinary cloudinary;
 
-        public PostsController(IPostService postService, UserManager<ApplicationUser> userManager)
+        public PostsController(
+            IPostService postService,
+            UserManager<ApplicationUser> userManager,
+            ICloudinaryHelper cloudinaryHelper,
+            Cloudinary cloudinary)
         {
             this.postService = postService;
             this.userManager = userManager;
+            this.cloudinaryHelper = cloudinaryHelper;
+            this.cloudinary = cloudinary;
         }
 
         public async Task<IActionResult> ByCategory(string name, int page = 1)
@@ -121,7 +132,7 @@ namespace IGamer.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(CreatePostInputModel model)
+        public async Task<IActionResult> Create(CreatePostInputModel model, IFormFile file)
         {
             if (!this.ModelState.IsValid)
             {
@@ -135,7 +146,9 @@ namespace IGamer.Web.Controllers
 
             var user = await this.userManager.GetUserAsync(this.User);
             var userId = await this.userManager.GetUserIdAsync(user);
+            var imageUrl = await this.cloudinaryHelper.UploadPostImageAsync(this.cloudinary, file);
 
+            model.ImageUrl = imageUrl;
             var postId = await this.postService.CreateAsync(model, userId);
 
             return this.RedirectToAction("DetailedPost", new { id = postId });
