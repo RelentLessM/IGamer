@@ -1,0 +1,12 @@
+﻿namespace IGamer.Web.Controllers
+{
+    using Microsoft.AspNetCore.Mvc;
+
+    public class GuidesController : Controller
+    {
+        public IActionResult All()
+        {
+            return this.View();
+        }
+    }
+}

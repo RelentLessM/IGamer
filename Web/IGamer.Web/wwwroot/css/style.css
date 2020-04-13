@@ -12,6 +12,21 @@
     display: none;
 }
 
+.bg-tr-blog {
+    background: rgba(0,0,0,.5)
+}
+
+.bg-mrg {
+    margin-top: 150px
+}
+
+.guides_bg {
+    background-image: url("../img/guides.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .replyForm {
 
 }
@@ -791,6 +806,10 @@ ul {
     color: #2f2d4e;
 }
 
+h1.t-clr, h2.t-clr, h3.t-clr, h4.t-clr, h5.t-clr, h6.t-clr{
+    color: navajowhite
+}
+
 /* line 26, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_blog.scss */
 .single-blog {
     overflow: hidden;
@@ -1272,7 +1291,7 @@ ul {
 /* line 531, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_blog.scss */
 .blog_details {
     padding: 30px 0 20px 10px;
-    box-shadow: 0px 10px 20px 0px rgba(221, 221, 221, 0.3);
+    box-shadow: 0px 0px 20px 15px rgba(221, 221, 221, 0.3);
 }
 
 @media (min-width: 768px) {

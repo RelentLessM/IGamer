@@ -1,0 +1,125 @@
+﻿@{
+    this.ViewData["Title"] = "Tips 'n tricks";
+}
+
+    <section class="guides_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner text-center bg-mrg">
+                        <div class="breadcrumb_iner_item">
+                            <h1>@this.ViewData["Title"]</h1>
+                            <h2>You should not miss!!</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container blog_area section_padding">
+            <div>
+                <a type="button" asp-area="" asp-action="Create" asp-controller="Posts" class="swiper-button-black primary text-white btn_1 circle large mb-5">New Post</a>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="blog_left_sidebar">
+                        @*@foreach (var post in Model.Posts)
+                        {*@
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                <img class="card-img rounded-0" src="post.ImageUrl" alt="">
+                                <div class="blog_item_date">
+                                    <h3>post.CreatedOn.ToString("dd")</h3>
+                                    <p>post.CreatedOn.ToString("MMM")</p>
+                                </div>
+                            </div>
+
+                            <div class="blog_details bg-tr-blog">
+                                <a class="d-inline-block" asp-area="" asp-controller="Posts" asp-action="DetailedPost" asp-route-id="post.Id">
+                                    <h2 class="t-clr">post.Title</h2>
+                                </a>
+                                <p class="text-light">
+                                    post.ShortDescription
+                                </p>
+                                <ul class="blog-info-link">
+                                    x
+                                    <li class="text-light"><a class="text-light" asp-area="" asp-action="ByUser" asp-controller="Posts" asp-route-username="post.UserUserName"><i class="far fa-user"></i> post.UserUserName</a></li>
+                                    <li class="text-light"><i class="far fa-comments"></i> post.CommentsCount Comments</li>
+                                    <li class="text-light"><a asp-area="" asp-action="ByCategory" asp-controller="Posts" asp-route-name="post.Category" class="d-flex text-light"><i class="fa fa-stream"></i> post.Category </a></li>
+                                </ul>
+                            </div>
+                        </article>
+                        @*}*@
+
+                        <nav class="blog-pagination justify-content-center d-flex">
+                            <ul class="pagination">
+                                if (this.Model.CurrentPage == 1)
+                                {
+                                <li class="page-item disabled">
+                                    <a href="#" class="page-link" aria-label="Previous">
+                                        <i class="ti-angle-left"></i>
+                                    </a>
+                                </li>
+                                }
+                                else
+                                {
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       asp-area=""
+                                       asp-controller="Posts"
+                                       asp-action="All"
+                                       asp-route-page="(this.Model.CurrentPage - 1)" aria-label="Previous">
+                                        <i class="ti-angle-left"></i>
+                                    </a>
+                                </li>
+                                }
+                                for (int i = 1; i <= this.Model.PagesCount; i++)
+                                {
+                                var active = i == this.Model.CurrentPage ? "active" : string.Empty;
+                                <li class="page-item active">
+                                    <a class="page-link"
+                                       asp-area=""
+                                       asp-controller="Posts"
+                                       asp-action="All"
+                                       asp-route-page="i">i</a>
+                                </li>
+                                }
+
+                                if (this.Model.CurrentPage == this.Model.PagesCount)
+                                {
+                                <li class="page-item disabled">
+                                    <a href="#" class="page-link" aria-label="Next">
+                                        <i class="ti-angle-right"></i>
+                                    </a>
+                                </li>
+                                }
+                                else
+                                {
+                                <li class="page-item">
+                                    <a class="page-link" aria-label="Next"
+                                       asp-area=""
+                                       asp-controller="Posts"
+                                       asp-action="All"
+                                       asp-route-page="(this.Model.CurrentPage + 1)">
+                                        <i class="ti-angle-right"></i>
+                                    </a>
+                                </li>
+                                }
+                            </ul>
+                        </nav>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        <vc:search-bar></vc:search-bar>
+                        <vc:category-list></vc:category-list>
+                        <vc:recent-posts></vc:recent-posts>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
