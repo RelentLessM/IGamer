@@ -1,0 +1,94 @@
+﻿@model IGamer.Web.ViewModels.Guides.DetailedGuideViewModel
+@{
+    ViewData["Title"] = "Guide Details";
+}
+
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2>@ViewData["Title"]</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="blog_area single-post-area section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 posts-list">
+                <div class="single-post">
+                    <div class="feature-img">
+                        <img class="img-fluid" src="@Model.ImageUrl" alt="guide image">
+                    </div>
+                    <div class="blog_details border border-dark rounded">
+                        <h2>
+                            @Model.Title
+                        </h2>
+                        <ul class="blog-info-link mt-3 mb-4">
+                            <li><a asp-area="" asp-action="ByCategory" asp-controller="Posts" asp-route-name="@Model.Category"><i class="fa fa-stream"></i>@Model.Category</a></li>
+                            <li><a href="#" onclick="showComments()"><i class="far fa-comments"></i> 0 Comments.</a></li>
+                        </ul>
+                        <div class="single-blog-content text-secondary">
+                            @Html.Raw(Model.SanitizedContent)
+                        </div>
+                        @*<div class="quote-wrapper">
+                                <div class="quotes">
+                                    MCSE boot camps have its supporters and its detractors. Some people do not understand why you
+                                    should have to spend money on boot camp when you can get the MCSE study materials yourself at
+                                    a fraction of the camp price. However, who has the willpower to actually sit through a
+                                    self-imposed MCSE training.
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+                <div class="navigation-top">
+                    <div class="d-sm-flex justify-content-between text-center">
+                        <div class="like-info text-light">
+                            <form id="votesForm" method="post">
+                                <span class="align-middle">
+                                    <a role="button" onclick="like('@Model.Id')">
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                </span>
+                                <span id="votesCount">
+                                    @Model.VotesCount
+                                </span>
+                                people like this.
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-author bg-transparent">
+                    <div class="media align-items-center">
+                        <img src="@Model.UserImageUrl" alt="author">
+                        <div class="media-body">
+                            <a asp-area="" asp-action="ByUser" asp-controller="Posts" asp-route-username="@Model.UserUserName">
+                                <h4>@Model.UserUserName</h4>
+                            </a>
+                            <p>
+                                @Model.Title
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="comments-area">
+                    <h4>0 comments.</h4>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <vc:search-bar></vc:search-bar>
+                    <vc:category-list></vc:category-list>
+                    <vc:recent-posts></vc:recent-posts>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

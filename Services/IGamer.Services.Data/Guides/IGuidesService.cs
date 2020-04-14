@@ -9,5 +9,7 @@ namespace IGamer.Services.Data.Guides
         Task<IEnumerable<T>> GetAllAsync<T>();
 
         Task<string> CreateAsync<T>(T model, string userId);
+
+        Task<T> GetByIdAsync<T>(string id);
     }
 }

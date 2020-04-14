@@ -81,14 +81,21 @@ namespace IGamer.Web.Controllers
             {
                 return this.View(model);
             }
+
             var guideId = await this.guidesService.CreateAsync(model, userId);
 
             return this.RedirectToAction("Details", new { id = guideId });
         }
 
-        public IActionResult Details(string id)
+        public async Task<IActionResult> Details(string id)
         {
-            return this.Ok("post created");
+            var guide = await this.guidesService.GetByIdAsync<DetailedGuideViewModel>(id);
+            if (guide == null)
+            {
+                return this.RedirectToAction("All");
+            }
+
+            return this.View(guide);
         }
     }
 }

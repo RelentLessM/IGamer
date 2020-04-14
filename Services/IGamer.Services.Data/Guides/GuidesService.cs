@@ -35,5 +35,8 @@
 
             return guideId;
         }
+
+        public async Task<T> GetByIdAsync<T>(string id)
+            => await this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefaultAsync();
     }
 }

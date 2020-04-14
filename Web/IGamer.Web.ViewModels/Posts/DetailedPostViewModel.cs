@@ -43,6 +43,6 @@
                 .ForMember(
                     x => x.ImageUrl,
                     s => s.MapFrom(x => GlobalConstants.DefaultCloudinary + x.ImageUrl));
-            }
+        }
     }
 }
