@@ -1,0 +1,84 @@
+﻿@using IGamer.Data.Models.Enums
+@model IGamer.Web.ViewModels.Guides.CreateGuideInputModel
+@{
+    ViewData["Title"] = "Create";
+    var games = Model.Games.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
+}
+
+
+<section class="live_stareams">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h1>Create</h1>
+                        <h4>Post</h4>
+                        <hr />
+                        <div class="live_stareams_text">
+                            <div class="col-md-12" align="center">
+                                <form method="post" asp-action="Create" enctype="multipart/form-data">
+
+                                    <div class="form-group">
+                                        <label asp-for="Title" class="control-label text-light"></label>
+                                        <input asp-for="Title" class="form-control" />
+                                        <span asp-validation-for="Title" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label text-light">Content</label>
+                                        <textarea asp-for="Description" class="form-control"></textarea>
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+                                    <label asp-for="Category" class="text-light"></label>
+                                    <div class="input-group-icon mt-10">
+                                        <div class="form-select">
+                                            <div class="icon">
+                                                <i class="fa fa-stream" aria-hidden="true"></i>
+                                            </div>
+                                            <select asp-for="Category" asp-items="@Html.GetEnumSelectList(typeof(CategoryOfGuide))" class="nice-select"></select>
+                                            <span asp-validation-for="Category" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <label asp-for="GameId" class="text-light"></label>
+                                    <div class="input-group-icon mt-10">
+                                        <div class="form-select">
+                                            <div class="icon">
+                                                <i class="fas fa-dice-d20" aria-hidden="true"></i>
+                                            </div>
+                                            <select asp-for="GameId" asp-items="games" class="nice-select"></select>
+                                            <span asp-validation-for="GameId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <label class="text-light">Image</label>
+                                    <div class="form-group">
+                                        <input type="file" name="file" class="text-light" />
+                                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                                    </div>
+                                    <hr />
+                                    <div class="form-group">
+                                        <input type="submit" value="Create" class="genric-btn success circle large" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div>
+                            <a asp-action="All" class="genric-btn info circle large">Back to All</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: "textarea",
+        plugins: [
+            "image paste table link code media"
+        ]
+    });
+</script>

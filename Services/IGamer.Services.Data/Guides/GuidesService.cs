@@ -18,10 +18,22 @@
             this.repository = repository;
         }
 
-        public async Task<IEnumerable<T>> GetAll<T>()
+        public async Task<IEnumerable<T>> GetAllAsync<T>()
             => await this.repository.All()
                 .OrderByDescending(x => x.CreatedOn)
                 .To<T>()
                 .ToListAsync();
+
+        public async Task<string> CreateAsync<T>(T model, string userId)
+        {
+            var guide = AutoMapperConfig.MapperInstance.Map<Guide>(model);
+            guide.UserId = userId;
+            await this.repository.AddAsync(guide);
+            await this.repository.SaveChangesAsync();
+
+            var guideId = guide.Id;
+
+            return guideId;
+        }
     }
 }

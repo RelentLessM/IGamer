@@ -18,6 +18,7 @@
         [MinLength(20, ErrorMessage = "Content must be more than 20 characters.")]
         public string Content { get; set; }
 
+        [Range(1, int.MaxValue)]
         [Required]
         public virtual string Category { get; set; }
 

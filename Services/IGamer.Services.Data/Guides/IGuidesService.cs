@@ -6,6 +6,8 @@ namespace IGamer.Services.Data.Guides
 
     public interface IGuidesService
     {
-        Task<IEnumerable<T>> GetAll<T>();
+        Task<IEnumerable<T>> GetAllAsync<T>();
+
+        Task<string> CreateAsync<T>(T model, string userId);
     }
 }
