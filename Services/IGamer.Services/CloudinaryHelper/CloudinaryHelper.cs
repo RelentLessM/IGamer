@@ -1,4 +1,4 @@
-﻿namespace IGamer.Services.Data.CloudinaryHelper
+﻿namespace IGamer.Services.CloudinaryHelper
 {
     using System.IO;
     using System.Threading.Tasks;
@@ -41,13 +41,13 @@
         {
             byte[] image;
 
-            await using (var stream = new MemoryStream())
+            using (var stream = new MemoryStream())
             {
                 await file.CopyToAsync(stream);
                 image = stream.ToArray();
             }
 
-            await using var uploadStream = new MemoryStream(image);
+            using var uploadStream = new MemoryStream(image);
             var uploadParams = new ImageUploadParams()
             {
                 File = new FileDescription(file.FileName, uploadStream),

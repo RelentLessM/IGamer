@@ -1,4 +1,4 @@
-﻿namespace IGamer.Web.ViewModels.Posts
+﻿namespace IGamer.Web.ViewModels.Guides
 {
     using System;
     using System.Linq;
@@ -9,8 +9,9 @@
     using IGamer.Common;
     using IGamer.Data.Models;
     using IGamer.Services.Mapping;
+    using IGamer.Web.ViewModels.Posts;
 
-    public class PostViewModel : IMapFrom<Post>, IHaveCustomMappings
+    public class GuideViewModel : IMapFrom<Guide>, IHaveCustomMappings
     {
         public string Id { get; set; }
 
@@ -35,16 +36,17 @@
 
         public DateTime CreatedOn { get; set; }
 
-        public int CommentsCount { get; set; }
+        public string GameTitle { get; set; }
 
         public string ImageUrl { get; set; }
 
+        // public string GameDescription { get; set; }
+
+        // public string GameImageUrl { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Post, PostViewModel>()
-                .ForMember(
-                    x => x.CommentsCount,
-                    s => s.MapFrom(x => x.Comments.Count + x.Comments.SelectMany(c => c.Replies).Count()))
+            configuration.CreateMap<Guide, GuideViewModel>()
                 .ForMember(
                     x => x.ImageUrl,
                     s => s.MapFrom(x => GlobalConstants.DefaultCloudinary + x.ImageUrl)); ;

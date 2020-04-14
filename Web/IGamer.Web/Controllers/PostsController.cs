@@ -1,19 +1,19 @@
-﻿using CloudinaryDotNet;
-using IGamer.Common;
-using IGamer.Services.Data.CloudinaryHelper;
-using Microsoft.AspNetCore.Http;
-
-namespace IGamer.Web.Controllers
+﻿namespace IGamer.Web.Controllers
 {
     using System;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using CloudinaryDotNet;
+    using IGamer.Common;
     using IGamer.Data.Models;
     using IGamer.Data.Models.Enums;
+    using IGamer.Services;
+    using IGamer.Services.CloudinaryHelper;
     using IGamer.Services.Data.Posts;
     using IGamer.Web.ViewModels.Posts;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;

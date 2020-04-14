@@ -1,6 +1,4 @@
-﻿using IGamer.Services.Data.Replies;
-
-namespace IGamer.Web
+﻿namespace IGamer.Web
 {
     using System.Reflection;
 
@@ -11,11 +9,14 @@ namespace IGamer.Web
     using IGamer.Data.Models;
     using IGamer.Data.Repositories;
     using IGamer.Data.Seeding;
+    using IGamer.Services;
+    using IGamer.Services.CloudinaryHelper;
     using IGamer.Services.Data;
     using IGamer.Services.Data.CategoryList;
-    using IGamer.Services.Data.CloudinaryHelper;
     using IGamer.Services.Data.Comments;
+    using IGamer.Services.Data.Guides;
     using IGamer.Services.Data.Posts;
+    using IGamer.Services.Data.Replies;
     using IGamer.Services.Data.Votes;
     using IGamer.Services.Mapping;
     using IGamer.Services.Messaging;
@@ -84,7 +85,7 @@ namespace IGamer.Web
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddTransient<IEmailSender>(x => new SendGridEmailSender("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"));
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]));
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<ICategoryListService, CategoryListService>();
@@ -92,6 +93,7 @@ namespace IGamer.Web
             services.AddTransient<ICommentsService, CommentService>();
             services.AddTransient<IVotesService, VotesService>();
             services.AddTransient<IReplyService, ReplyService>();
+            services.AddTransient<IGuidesService, GuidesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

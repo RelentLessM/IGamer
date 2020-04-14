@@ -1,8 +1,4 @@
-﻿using CloudinaryDotNet;
-using IGamer.Services.Data.CloudinaryHelper;
-using Microsoft.AspNetCore.Http;
-
-namespace IGamer.Web.Areas.Identity.Pages.Account
+﻿namespace IGamer.Web.Areas.Identity.Pages.Account
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -11,9 +7,13 @@ namespace IGamer.Web.Areas.Identity.Pages.Account
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
+    using CloudinaryDotNet;
     using IGamer.Data.Models;
+    using IGamer.Services;
+    using IGamer.Services.CloudinaryHelper;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;

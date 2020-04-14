@@ -1,4 +1,4 @@
-﻿namespace IGamer.Services.Data.CloudinaryHelper
+﻿namespace IGamer.Services.CloudinaryHelper
 {
     using System.Threading.Tasks;
 
