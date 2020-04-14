@@ -2,7 +2,7 @@
 @model IGamer.Web.ViewModels.Guides.CreateGuideInputModel
 @{
     ViewData["Title"] = "Create";
-    var games = Model.Games.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
+    var games = Model.Games.Select(x => new SelectListItem(x.Title, x.Id.ToString()));
 }
 
 

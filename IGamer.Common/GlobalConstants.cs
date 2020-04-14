@@ -12,6 +12,8 @@
 
         public const string DefaultPostImage = "v1586783709/default-post-image_gxkjit.png";
 
+        public const string DefaultGuideImage = "v1586871173/default-guide-image_fhwpqw.webp";
+
         public const int ItemsPerPage = 5;
     }
 }

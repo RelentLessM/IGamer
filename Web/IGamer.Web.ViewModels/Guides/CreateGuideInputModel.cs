@@ -19,11 +19,8 @@
         [MinLength(400, ErrorMessage = "Content must be at least 400 symbols.")]
         public string Description { get; set; }
 
-        [Required]
         public string UserId { get; set; }
 
-
-        [Required]
         public string ImageUrl { get; set; }
 
         [Required]
