@@ -19,11 +19,10 @@ namespace IGamer.Data.Models
             this.Posts = new HashSet<Post>();
             this.Guides = new HashSet<Guide>();
             this.CommentsOnPosts = new HashSet<CommentOnPost>();
-            this.CommentsOnGuide = new HashSet<CommentOnGuide>();
+            this.Reports = new HashSet<Report>();
             this.Suggestions = new HashSet<SuggestionGame>();
             this.VotesForGuides = new HashSet<VoteOnGuide>();
             this.VotesForPosts = new HashSet<VoteOnPost>();
-            this.VotesOnGuideComments = new HashSet<VoteOnGuideComment>();
             this.VotesOnPostComments = new HashSet<VoteOnPostComment>();
         }
 
@@ -47,7 +46,7 @@ namespace IGamer.Data.Models
 
         public virtual ICollection<CommentOnPost> CommentsOnPosts { get; set; }
 
-        public virtual ICollection<CommentOnGuide> CommentsOnGuide { get; set; }
+        public virtual ICollection<Report> Reports { get; set; }
 
         public virtual ICollection<Guide> Guides { get; set; }
 
@@ -56,8 +55,6 @@ namespace IGamer.Data.Models
         public virtual ICollection<VoteOnGuide> VotesForGuides { get; set; }
 
         public virtual ICollection<VoteOnPost> VotesForPosts { get; set; }
-
-        public virtual ICollection<VoteOnGuideComment> VotesOnGuideComments { get; set; }
 
         public virtual ICollection<VoteOnPostComment> VotesOnPostComments { get; set; }
 

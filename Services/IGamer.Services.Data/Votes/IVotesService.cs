@@ -13,6 +13,10 @@
         /// <returns></returns>
         Task VoteOnPostAsync(string postId, string userId, bool isUpVote);
 
-        Task<int> GetVotesAsync(string postId);
+        Task VoteOnGuideAsync(string guideId, string userId, bool isUpVote);
+
+        Task<int> GetVotesOnPostAsync(string postId);
+
+        Task<int> GetVotesOnGuideAsync(string guideId);
     }
 }

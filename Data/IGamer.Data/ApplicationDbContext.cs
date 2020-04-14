@@ -28,7 +28,7 @@
 
         public DbSet<CommentOnPost> CommentOnPosts { get; set; }
 
-        public DbSet<CommentOnGuide> CommentOnGuides { get; set; }
+        public DbSet<Report> Reports { get; set; }
 
         public DbSet<Game> Games { get; set; }
 
@@ -38,15 +38,11 @@
 
         public DbSet<VoteOnPostComment> VotesOnPostComments { get; set; }
 
-        public DbSet<VoteOnGuideComment> VotesOnGuideComments { get; set; }
-
         public DbSet<VoteOnGuide> VotesOnGuides { get; set; }
 
         public DbSet<VoteOnPost> VotesOnPosts { get; set; }
 
         public DbSet<ReplyOnPostComment> ReplyOnPostComments { get; set; }
-
-        public DbSet<ReplyOnGuideComment> ReplyOnGuideComments { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

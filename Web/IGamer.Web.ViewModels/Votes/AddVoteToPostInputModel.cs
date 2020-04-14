@@ -1,6 +1,6 @@
 ﻿namespace IGamer.Web.ViewModels.Votes
 {
-    public class AddVoteInputModel
+    public class AddVoteToPostInputModel
     {
         public string PostId { get; set; }
 

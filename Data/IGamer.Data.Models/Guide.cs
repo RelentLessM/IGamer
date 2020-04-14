@@ -12,7 +12,7 @@
         public Guide()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Comments = new HashSet<CommentOnGuide>();
+            this.Reports = new HashSet<Report>();
             this.Votes = new HashSet<VoteOnGuide>();
         }
 
@@ -29,7 +29,6 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<CommentOnGuide> Comments { get; set; }
 
         [Required]
         public string ImageUrl { get; set; }
@@ -43,5 +42,7 @@
         public virtual Game Game { get; set; }
 
         public virtual ICollection<VoteOnGuide> Votes { get; set; }
+
+        public virtual ICollection<Report> Reports { get; set; }
     }
 }

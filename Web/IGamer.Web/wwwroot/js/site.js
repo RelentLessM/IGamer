@@ -53,7 +53,7 @@ window.onclick = function (event) {
     }
 };
 
-// Vote function on click - like.
+// Vote on post function on click - like.
 function like(postId) {
     var json = { postId: postId, isUpVote: true };
     var token = $("#votesForm input[name=__RequestVerificationToken]").val();
@@ -71,7 +71,7 @@ function like(postId) {
     });
 }
 
-// Vote function on click - dislike.
+// Vote on post function on click - dislike.
 function dislike(postId) {
     var json = { postId: postId, isUpVote: false };
     $.ajax({
@@ -80,6 +80,24 @@ function dislike(postId) {
         data: JSON.stringify(json),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        success: function (data) {
+            $("#votesCount").html(data.votesCount);
+
+        }
+    });
+}
+
+// Vote on guide function on click - like.
+function likeGuide(guideId) {
+    var json = { guideId: guideId, isUpVote: true };
+    var token = $("#votesForm input[name=__RequestVerificationToken]").val();
+    $.ajax({
+        url: "/api/votes/guides",
+        type: "POST",
+        data: JSON.stringify(json),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: { "X-CSRF-TOKEN": token },
         success: function (data) {
             $("#votesCount").html(data.votesCount);
 

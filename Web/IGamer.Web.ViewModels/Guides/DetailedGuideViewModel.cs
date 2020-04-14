@@ -34,6 +34,10 @@ namespace IGamer.Web.ViewModels.Guides
 
         public string GameDescription { get; set; }
 
+        public string ShortGameDescription => this.GameDescription.Length > 30
+            ? ShortGameDescription.Substring(0, 30) + "..."
+            : ShortGameDescription;
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Guide, DetailedGuideViewModel>()
@@ -42,7 +46,10 @@ namespace IGamer.Web.ViewModels.Guides
                     s => s.MapFrom(x => GlobalConstants.DefaultCloudinary + x.User.ImageUrl))
                 .ForMember(
                     x => x.ImageUrl,
-                    s => s.MapFrom(x => GlobalConstants.DefaultCloudinary + x.ImageUrl));
+                    s => s.MapFrom(x => GlobalConstants.DefaultCloudinary + x.ImageUrl))
+                .ForMember(
+                x => x.GameImageUrl,
+                s => s.MapFrom(x => GlobalConstants.DefaultCloudinary + x.Game.ImageUrl));
         }
     }
 }
