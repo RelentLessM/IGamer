@@ -1,4 +1,6 @@
-﻿namespace IGamer.Web
+﻿using IGamer.Services.Data.Reports;
+
+namespace IGamer.Web
 {
     using System.Reflection;
 
@@ -96,6 +98,7 @@
             services.AddTransient<IReplyService, ReplyService>();
             services.AddTransient<IGuidesService, GuidesService>();
             services.AddTransient<IGamesService, GamesService>();
+            services.AddTransient<IReportsService, ReportsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

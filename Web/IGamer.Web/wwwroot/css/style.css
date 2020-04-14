@@ -12,6 +12,10 @@
     display: none;
 }
 
+.text-black {
+    color: black !important
+
+}
 .guide-game-img {
     width: 400px;
     height: 200px;

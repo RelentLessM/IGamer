@@ -105,6 +105,17 @@ function likeGuide(guideId) {
     });
 }
 
+// Show report area
+function showReport() {
+    var reply = document.getElementById('report');
+    if (reply.className === "show") {
+        reply.className = "hide";
+    }
+    else {
+        reply.className = "show";
+    }
+}
+
 // Add comment function
 function addComment(postId) {
     var json = { postId: postId, description: $("#areaForComment").val() };

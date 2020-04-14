@@ -10,7 +10,6 @@
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
-    
     public class VotesController : ControllerBase
     {
         private readonly IVotesService votesService;

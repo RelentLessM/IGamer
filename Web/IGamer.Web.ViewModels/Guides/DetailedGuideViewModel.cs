@@ -24,6 +24,8 @@ namespace IGamer.Web.ViewModels.Guides
 
         public int VotesCount { get; set; }
 
+        public int ReportsCount { get; set; }
+
         public string UserUserName { get; set; }
 
         public string UserImageUrl { get; set; }
@@ -35,8 +37,8 @@ namespace IGamer.Web.ViewModels.Guides
         public string GameDescription { get; set; }
 
         public string ShortGameDescription => this.GameDescription.Length > 30
-            ? ShortGameDescription.Substring(0, 30) + "..."
-            : ShortGameDescription;
+            ? this.GameDescription.Substring(0, 30) + "..."
+            : this.GameDescription;
 
         public void CreateMappings(IProfileExpression configuration)
         {

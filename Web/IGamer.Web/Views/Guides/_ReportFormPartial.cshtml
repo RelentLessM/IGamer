@@ -1,0 +1,10 @@
+﻿@model IGamer.Web.ViewModels.Reports.AddReportToGuideInputModel
+
+<form asp-controller="Reports" asp-action="SendReport" method="post">
+    <input type="hidden" asp-for="GuideId" value="@Model.GuideId"/>
+    <span class="text-danger" asp-validation-for="Reason"></span>
+    <textarea asp-for="Reason" class="form-control form-control-bg-tr w-100" cols="60" rows="6" placeholder="Tell us why..."></textarea>
+    <button type="submit" class="button button-contactForm btn_1 text-black" id="buttonForReport">
+        Send Report <i class="flaticon-right-arrow"></i>
+    </button>
+</form>

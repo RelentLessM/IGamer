@@ -83,7 +83,7 @@
                     <h4>@Model.CommentsCount comments.</h4>
                     <vc:comment-section id="@Model.Id"></vc:comment-section>
                 </div>
-                <partial name="_CommetFormPartial" model="@(new AddCommentInputModel() {PostId = Model.Id})" />
+                <partial name="_CommentFormPartial" model="@(new AddCommentInputModel() {PostId = Model.Id})" />
             </div>
             <div class="col-lg-4">
                 <div class="blog_right_sidebar">
