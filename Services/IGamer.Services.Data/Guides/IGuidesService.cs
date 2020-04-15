@@ -8,7 +8,7 @@ namespace IGamer.Services.Data.Guides
 
     public interface IGuidesService
     {
-        Task<IEnumerable<T>> GetAllAsync<T>();
+        Task<IEnumerable<T>> GetAllAsync<T>(int take, int skip = 0);
 
         Task<int> GetAllCountAsync();
 

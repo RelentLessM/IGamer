@@ -44,16 +44,35 @@
                 return this.RedirectToAction("All");
             }
 
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
             var enumResult = Enum.Parse<CategoryOfPost>(name);
+            var postsCount = await this.postService.GetCountByCategoryAsync(enumResult);
+            var pagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
+            if (page > pagesCount)
+            {
+                page = pagesCount;
+            }
+
             var posts = await this.postService
                 .GetByCategoryAsync<PostViewModel>(enumResult, GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
-            var result = new PostsAllViewModel() { Posts = posts };
+            var result = new PostsAllViewModel
+            {
+                Posts = posts,
+                PagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage),
+            };
 
-            var postsCount = await this.postService.GetCountByCategoryAsync(enumResult);
-            result.PagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
             if (result.PagesCount == 0)
             {
                 result.PagesCount = 1;
+            }
+
+            if (page > result.PagesCount)
+            {
+                page = result.PagesCount;
             }
 
             result.CurrentPage = page;
@@ -68,18 +87,36 @@
                 return this.RedirectToAction("All");
             }
 
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
             var userId = await this.userManager.GetUserIdAsync(user);
+            var postsCount = await this.postService.GetCountByUserAsync(userId);
+            var pagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
+            if (page > pagesCount)
+            {
+                page = pagesCount;
+            }
 
             var posts = await this.postService
                 .GetByUserAsync<PostViewModel>(userId, GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
 
-            var result = new PostsAllViewModel() { Posts = posts };
+            var result = new PostsAllViewModel
+            {
+                Posts = posts,
+                PagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage),
+            };
 
-            var postsCount = await this.postService.GetCountByUserAsync(userId);
-            result.PagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
             if (result.PagesCount == 0)
             {
                 result.PagesCount = 1;
+            }
+
+            if (page > result.PagesCount)
+            {
+                page = result.PagesCount;
             }
 
             result.CurrentPage = page;
@@ -91,15 +128,34 @@
         {
             var user = await this.userManager.GetUserAsync(this.User);
             var userId = await this.userManager.GetUserIdAsync(user);
-            var posts = await this.postService
-                .GetByUserAsync<PostViewModel>(userId, GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
-            var result = new PostsAllViewModel() { Posts = posts };
+            if (page <= 0)
+            {
+                page = 1;
+            }
 
             var postsCount = await this.postService.GetCountByUserAsync(userId);
-            result.PagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
+            var pagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
+            if (page > pagesCount)
+            {
+                page = pagesCount;
+            }
+
+            var posts = await this.postService
+                .GetByUserAsync<PostViewModel>(userId, GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
+            var result = new PostsAllViewModel
+            {
+                Posts = posts,
+                PagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage),
+            };
+
             if (result.PagesCount == 0)
             {
                 result.PagesCount = 1;
+            }
+
+            if (page > result.PagesCount)
+            {
+                page = result.PagesCount;
             }
 
             result.CurrentPage = page;
@@ -108,15 +164,34 @@
 
         public async Task<IActionResult> All(int page = 1)
         {
-            var posts = await this.postService
-                .GetAllAsync<PostViewModel>(GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
-            var result = new PostsAllViewModel() { Posts = posts };
+            if (page <= 0)
+            {
+                page = 1;
+            }
 
             var postsCount = await this.postService.GetAllCountAsync();
-            result.PagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
+            var pagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
+            if (page > pagesCount)
+            {
+                page = pagesCount;
+            }
+
+            var posts = await this.postService
+                .GetAllAsync<PostViewModel>(GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
+            var result = new PostsAllViewModel()
+            {
+                Posts = posts,
+                PagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage),
+            };
+
             if (result.PagesCount == 0)
             {
                 result.PagesCount = 1;
+            }
+
+            if (page > result.PagesCount)
+            {
+                page = result.PagesCount;
             }
 
             result.CurrentPage = page;

@@ -19,9 +19,11 @@
             this.repository = repository;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync<T>()
+        public async Task<IEnumerable<T>> GetAllAsync<T>(int take, int skip = 0)
             => await this.repository.All()
                 .OrderByDescending(x => x.CreatedOn)
+                .Skip(skip)
+                .Take(take)
                 .To<T>()
                 .ToListAsync();
 

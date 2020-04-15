@@ -19,6 +19,7 @@ namespace IGamer.Web.Controllers
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class GuidesController : Controller
     {
         private readonly IGuidesService guidesService;
@@ -43,11 +44,25 @@ namespace IGamer.Web.Controllers
 
         public async Task<IActionResult> All(int page = 1)
         {
-            var guides = await this.guidesService.GetAllAsync<GuideViewModel>();
-            var model = new AllGuidesViewModel() { Guides = guides };
+            if (page <= 0)
+            {
+                page = 1;
+            }
 
             var guidesCount = await this.guidesService.GetAllCountAsync();
-            model.PagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage);
+            var pagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage);
+            if (page > pagesCount)
+            {
+                page = pagesCount;
+            }
+
+            var guides = await this.guidesService.GetAllAsync<GuideViewModel>(GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage); ;
+            var model = new AllGuidesViewModel()
+            {
+                Guides = guides,
+                PagesCount = pagesCount,
+            };
+
             if (model.PagesCount == 0)
             {
                 model.PagesCount = 1;
@@ -65,16 +80,35 @@ namespace IGamer.Web.Controllers
                 return this.RedirectToAction("All");
             }
 
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
             var enumResult = Enum.Parse<CategoryOfGuide>(name);
+            var guidesCount = await this.guidesService.GetCountByCategoryAsync(enumResult);
+            var pagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage);
+            if (page > pagesCount)
+            {
+                page = pagesCount;
+            }
+
             var guides = await this.guidesService
                 .GetByCategoryAsync<GuideViewModel>(enumResult, GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
-            var result = new AllGuidesViewModel() { Guides = guides };
+            var result = new AllGuidesViewModel
+            {
+                Guides = guides,
+                PagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage),
+            };
 
-            var guidesCount = await this.guidesService.GetCountByCategoryAsync(enumResult);
-            result.PagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage);
             if (result.PagesCount == 0)
             {
                 result.PagesCount = 1;
+            }
+
+            if (page > result.PagesCount)
+            {
+                page = result.PagesCount;
             }
 
             result.CurrentPage = page;
@@ -89,25 +123,81 @@ namespace IGamer.Web.Controllers
                 return this.RedirectToAction("All");
             }
 
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
             var userId = await this.userManager.GetUserIdAsync(user);
+            var guidesCount = await this.guidesService.GetCountByUserAsync(userId);
+            var pagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage);
+            if (page > pagesCount)
+            {
+                page = pagesCount;
+            }
 
             var guides = await this.guidesService
                 .GetByUserAsync<GuideViewModel>(userId, GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
 
-            var result = new AllGuidesViewModel() { Guides = guides };
+            var result = new AllGuidesViewModel()
+            {
+                Guides = guides,
+                PagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage),
+            };
 
-            var guidesCount = await this.guidesService.GetCountByUserAsync(userId);
-            result.PagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage);
             if (result.PagesCount == 0)
             {
                 result.PagesCount = 1;
+            }
+
+            if (page > result.PagesCount)
+            {
+                page = result.PagesCount;
             }
 
             result.CurrentPage = page;
             return this.View(result);
         }
 
-        [Authorize]
+        public async Task<IActionResult> MyGuides(int page = 1)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = await this.userManager.GetUserIdAsync(user);
+
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
+            var guidesCount = await this.guidesService.GetCountByUserAsync(userId);
+            var pagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage);
+            if (page > pagesCount)
+            {
+                page = pagesCount;
+            }
+
+            var guides = await this.guidesService
+                .GetByUserAsync<GuideViewModel>(userId, GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
+            var result = new AllGuidesViewModel()
+            {
+                Guides = guides,
+                PagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage),
+            };
+
+            if (result.PagesCount == 0)
+            {
+                result.PagesCount = 1;
+            }
+
+            if (page > result.PagesCount)
+            {
+                page = result.PagesCount;
+            }
+
+            result.CurrentPage = page;
+            return this.View(result);
+        }
+
         public async Task<IActionResult> Create()
         {
             var games = await this.gamesService.GetAll<GamesDropDownViewModel>();
@@ -116,7 +206,6 @@ namespace IGamer.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Create(CreateGuideInputModel model, IFormFile file)
         {
             var games = await this.gamesService.GetAll<GamesDropDownViewModel>();
