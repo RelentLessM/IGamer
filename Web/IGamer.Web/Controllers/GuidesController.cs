@@ -1,4 +1,5 @@
 ﻿using IGamer.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace IGamer.Web.Controllers
 {
@@ -69,8 +70,34 @@ namespace IGamer.Web.Controllers
                 .GetByCategoryAsync<GuideViewModel>(enumResult, GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
             var result = new AllGuidesViewModel() { Guides = guides };
 
-            var postsCount = await this.guidesService.GetCountByCategoryAsync(enumResult);
-            result.PagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
+            var guidesCount = await this.guidesService.GetCountByCategoryAsync(enumResult);
+            result.PagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage);
+            if (result.PagesCount == 0)
+            {
+                result.PagesCount = 1;
+            }
+
+            result.CurrentPage = page;
+            return this.View(result);
+        }
+
+        public async Task<IActionResult> ByUser(string username, int page = 1)
+        {
+            var user = await this.userManager.Users.FirstOrDefaultAsync(x => x.UserName == username);
+            if (user == null)
+            {
+                return this.RedirectToAction("All");
+            }
+
+            var userId = await this.userManager.GetUserIdAsync(user);
+
+            var guides = await this.guidesService
+                .GetByUserAsync<GuideViewModel>(userId, GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
+
+            var result = new AllGuidesViewModel() { Guides = guides };
+
+            var guidesCount = await this.guidesService.GetCountByUserAsync(userId);
+            result.PagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage);
             if (result.PagesCount == 0)
             {
                 result.PagesCount = 1;

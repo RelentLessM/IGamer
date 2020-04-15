@@ -64,5 +64,19 @@
                 .Take(5)
                 .To<T>()
                 .ToListAsync();
+
+        public async Task<IEnumerable<T>> GetByUserAsync<T>(string userId, int take, int skip = 0)
+            => await this.repository.All()
+                .Where(x => x.UserId == userId)
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip(skip)
+                .Take(take)
+                .To<T>()
+                .ToListAsync();
+
+        public async Task<int> GetCountByUserAsync(string userId)
+            => await this.repository.All()
+                .Where(x => x.UserId == userId)
+                .CountAsync();
     }
 }

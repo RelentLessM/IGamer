@@ -21,5 +21,9 @@ namespace IGamer.Services.Data.Guides
         Task<int> GetCountByCategoryAsync(CategoryOfGuide categoryName);
 
         Task<IEnumerable<T>> GetRecentAsync<T>();
+
+        Task<IEnumerable<T>> GetByUserAsync<T>(string userId, int take, int skip = 0);
+
+        Task<int> GetCountByUserAsync(string userId);
     }
 }
