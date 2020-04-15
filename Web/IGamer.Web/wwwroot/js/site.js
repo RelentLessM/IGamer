@@ -261,7 +261,7 @@ $(function () {
         }
 
         var time = moment.utc(dateTimeValue).local();
-        $(e).html(time.format("llll"));
+        $(e).html(time.format("lll"));
         $(e).attr("title", $(e).attr("datetime"));
     });
 });

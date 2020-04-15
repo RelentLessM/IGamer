@@ -1,6 +1,4 @@
-﻿using IGamer.Services.Data.Reports;
-
-namespace IGamer.Web
+﻿namespace IGamer.Web
 {
     using System.Reflection;
 
@@ -20,6 +18,7 @@ namespace IGamer.Web
     using IGamer.Services.Data.Guides;
     using IGamer.Services.Data.Posts;
     using IGamer.Services.Data.Replies;
+    using IGamer.Services.Data.Reports;
     using IGamer.Services.Data.Votes;
     using IGamer.Services.Mapping;
     using IGamer.Services.Messaging;

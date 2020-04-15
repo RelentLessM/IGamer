@@ -12,10 +12,15 @@
     display: none;
 }
 
+img.recent-post-img {
+    max-width: 25% !important
+}
+
 .text-black {
     color: black !important
 
 }
+
 .guide-game-img {
     width: 400px;
     height: 200px;

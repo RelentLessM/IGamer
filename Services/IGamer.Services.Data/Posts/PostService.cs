@@ -77,6 +77,10 @@
                 .FirstOrDefaultAsync();
 
         public async Task<IEnumerable<T>> GetRecentAsync<T>()
-            => await this.repository.All().OrderByDescending(x => x.CreatedOn).Take(5).To<T>().ToListAsync();
+            => await this.repository.All()
+                .OrderByDescending(x => x.CreatedOn)
+                .Take(5)
+                .To<T>()
+                .ToListAsync();
     }
 }

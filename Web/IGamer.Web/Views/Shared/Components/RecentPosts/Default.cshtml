@@ -2,11 +2,11 @@
 @model RecentPostsListViewModel
 
 <aside class="single_sidebar_widget popular_post_widget">
-    <h3 class="widget_title">Recent Post</h3>
+    <h3 class="widget_title">Recent Posts</h3>
     @foreach(var post in Model.Posts)
     {
         <div class="media post_item">
-            <img src="~/img/post/post_1.png" alt="post">
+            <img class="recent-post-img" src="@post.ImageUrl" alt="post">
             <div class="media-body">
                 <a asp-area="" asp-controller="Posts" asp-action="DetailedPost" asp-route-id="@post.Id">
                     <h3>@post.ShortTitle</h3>

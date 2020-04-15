@@ -11,22 +11,40 @@
 
     public class CategoryListService : ICategoryListService
     {
-        private readonly IDeletableEntityRepository<Post> repository;
+        private readonly IDeletableEntityRepository<Post> postsRepository;
+        private readonly IDeletableEntityRepository<Guide> guideRepository;
 
-        public CategoryListService(IDeletableEntityRepository<Post> repository)
+        public CategoryListService(IDeletableEntityRepository<Post> postsRepository, IDeletableEntityRepository<Guide> guideRepository)
         {
-            this.repository = repository;
+            this.postsRepository = postsRepository;
+            this.guideRepository = guideRepository;
         }
 
         public async Task<CategoryListViewModel> TakeCategoryAsync(CategoryListViewModel model)
         {
             foreach (var category in (CategoryOfPost[])Enum.GetValues(typeof(CategoryOfPost)))
             {
-                var postsCount = await this.repository.All().CountAsync(x => x.Category == category);
+                var postsCount = await this.postsRepository.All().CountAsync(x => x.Category == category);
                 var categoryToAdd = new CategoryViewModel()
                 {
                     CategoryName = category.ToString(),
                     PostsCount = postsCount,
+                };
+                model.Categories.Add(categoryToAdd);
+            }
+
+            return model;
+        }
+
+        public async Task<GuideCategoryListViewModel> TakeGuideCategoryAsync(GuideCategoryListViewModel model)
+        {
+            foreach (var category in (CategoryOfGuide[])Enum.GetValues(typeof(CategoryOfGuide)))
+            {
+                var guidesCount = await this.guideRepository.All().CountAsync(x => x.Category == category);
+                var categoryToAdd = new GuideCategoryViewModel()
+                {
+                    CategoryName = category.ToString(),
+                    GuidesCount = guidesCount,
                 };
                 model.Categories.Add(categoryToAdd);
             }

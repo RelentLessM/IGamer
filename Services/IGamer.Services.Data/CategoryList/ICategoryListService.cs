@@ -7,5 +7,7 @@
     public interface ICategoryListService
     {
         Task<CategoryListViewModel> TakeCategoryAsync(CategoryListViewModel model);
+
+        Task<GuideCategoryListViewModel> TakeGuideCategoryAsync(GuideCategoryListViewModel model);
     }
 }

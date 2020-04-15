@@ -7,7 +7,7 @@
     using IGamer.Data.Models;
     using IGamer.Services.Mapping;
 
-    public class RecentPostsViewModel : IMapFrom<Post>, IHaveCustomMappings
+    public class RecentGuidesViewModel : IMapFrom<Guide>, IHaveCustomMappings
     {
         public string Id { get; set; }
 
@@ -23,7 +23,7 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Post, RecentPostsViewModel>()
+            configuration.CreateMap<Guide, RecentGuidesViewModel>()
                 .ForMember(x => x.ImageUrl, s => s.MapFrom(x => GlobalConstants.DefaultCloudinary + x.ImageUrl));
         }
     }

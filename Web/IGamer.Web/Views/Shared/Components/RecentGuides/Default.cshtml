@@ -1,0 +1,18 @@
+﻿@using IGamer.Web.ViewModels.ViewComponents;
+@model RecentGuidesListViewModel
+
+<aside class="single_sidebar_widget popular_post_widget">
+    <h3 class="widget_title">Recent Guides</h3>
+    @foreach (var guide in Model.Guides)
+    {
+        <div class="media post_item">
+            <img class="recent-post-img" src="@guide.ImageUrl" alt="post">
+            <div class="media-body">
+                <a asp-area="" asp-controller="Guides" asp-action="Details" asp-route-id="@guide.Id">
+                    <h3>@guide.ShortTitle</h3>
+                </a>
+                <time datetime="@guide.CreatedOn.ToString("O")" class="date"></time>
+            </div>
+        </div>
+    }
+</aside>

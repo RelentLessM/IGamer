@@ -1,0 +1,14 @@
+﻿@model IGamer.Web.ViewModels.ViewComponents.GuideCategoryListViewModel
+<aside class="single_sidebar_widget post_category_widget">
+    <h4 class="widget_title">Category</h4>
+    <ul class="list cat-list">
+        @foreach (var category in Model.Categories)
+        {
+            <li>
+                <a asp-area="" asp-action="ByCategory" asp-controller="Guides" asp-route-name="@category.CategoryName" class="d-flex">
+                    <p>@category.CategoryName (@category.GuidesCount)</p>
+                </a>
+            </li>
+        }
+    </ul>
+</aside>
