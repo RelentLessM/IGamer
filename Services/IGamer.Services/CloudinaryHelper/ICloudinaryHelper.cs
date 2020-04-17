@@ -12,5 +12,7 @@
         Task<string> UploadPostImageAsync(Cloudinary cloudinary, IFormFile file);
 
         Task<string> UploadGuideImageAsync(Cloudinary cloudinary, IFormFile file);
+
+        Task<string> UploadSuggestionImageAsync(Cloudinary cloudinary, IFormFile file);
     }
 }

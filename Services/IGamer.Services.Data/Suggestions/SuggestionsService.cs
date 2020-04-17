@@ -37,6 +37,7 @@
         public async Task CreateSuggestionAsync<T>(T model)
         {
             var suggestion = AutoMapperConfig.MapperInstance.Map<SuggestionGame>(model);
+            suggestion.Votes = 1;
 
             await this.repository.AddAsync(suggestion);
             await this.repository.SaveChangesAsync();

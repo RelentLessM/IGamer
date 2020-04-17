@@ -50,6 +50,12 @@
             return url;
         }
 
+        public async Task<string> UploadSuggestionImageAsync(Cloudinary cloudinary, IFormFile file)
+        {
+            var url = await this.UploadAsync(cloudinary, file);
+            return url;
+        }
+
         private async Task<string> UploadAsync(Cloudinary cloudinary, IFormFile file)
         {
             byte[] image;

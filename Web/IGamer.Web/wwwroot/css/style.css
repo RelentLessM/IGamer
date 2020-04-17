@@ -12,6 +12,10 @@
     display: none;
 }
 
+img.suggested-game {
+    max-width: 40% !important
+}
+
 img.recent-post-img {
     max-width: 25% !important
 }

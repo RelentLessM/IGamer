@@ -1,0 +1,52 @@
+﻿@model IGamer.Web.ViewModels.Suggestions.CreateSuggestionInputModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<section class="live_stareams">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h1>Make</h1>
+                        <h4>Suggestion</h4>
+                        <hr />
+                        <div class="live_stareams_text">
+                            <div class="col-md-12" align="center">
+                                <form method="post" asp-action="Create" enctype="multipart/form-data">
+
+                                    <div class="form-group">
+                                        <label asp-for="Title" class="control-label text-light"></label>
+                                        <input asp-for="Title" class="form-control" />
+                                        <span asp-validation-for="Title" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label text-light">Content</label>
+                                        <textarea asp-for="Description" class="form-control"></textarea>
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+                                    <hr />
+                                    <label class="text-light">Game image</label>
+                                    <div class="form-group">
+                                        <input type="file" name="file" class="text-light" />
+                                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                                    </div>
+                                    <hr />
+                                    <div class="form-group">
+                                        <input type="submit" value="Create" class="genric-btn success circle large" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div>
+                            <a asp-action="All" class="genric-btn info circle large">Back to All</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
