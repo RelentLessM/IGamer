@@ -8,6 +8,11 @@
     background-image: linear-gradient(to left, #ff0000 0%, #c6019a 51%, #ff0000 100%);
 }
 
+a.vote-clr {
+    color: red;
+    margin-left: 15px;
+}
+
 .hide {
     display: none;
 }
@@ -4859,6 +4864,7 @@ h1, h2, h3, h4, h5, h6 {
     /* line 368, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_elements.scss */
     .progress-table .visit {
         width: 19.74%;
+        margin-left: 10px;
     }
 
     /* line 371, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_elements.scss */

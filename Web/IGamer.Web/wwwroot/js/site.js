@@ -116,6 +116,17 @@ function showReport() {
     }
 }
 
+// Show vote on suggestion area
+function showSuggestionVote() {
+    var reply = document.getElementById('suggestionVote');
+    if (reply.className === "show") {
+        reply.className = "hide";
+    }
+    else {
+        reply.className = "show";
+    }
+}
+
 // Add comment function
 function addComment(postId) {
     var json = { postId: postId, description: $("#areaForComment").val() };

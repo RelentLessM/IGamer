@@ -24,6 +24,7 @@ namespace IGamer.Data.Models
             this.VotesForGuides = new HashSet<VoteOnGuide>();
             this.VotesForPosts = new HashSet<VoteOnPost>();
             this.VotesOnPostComments = new HashSet<VoteOnPostComment>();
+            this.VotesOnSuggestionGames = new HashSet<VoteOnSuggestionGame>();
         }
 
         // Audit info
@@ -57,6 +58,8 @@ namespace IGamer.Data.Models
         public virtual ICollection<VoteOnPost> VotesForPosts { get; set; }
 
         public virtual ICollection<VoteOnPostComment> VotesOnPostComments { get; set; }
+
+        public virtual ICollection<VoteOnSuggestionGame> VotesOnSuggestionGames { get; set; }
 
         public string ImageUrl { get; set; }
     }

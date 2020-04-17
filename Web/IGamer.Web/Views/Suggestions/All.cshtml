@@ -1,4 +1,6 @@
-﻿@model IGamer.Web.ViewModels.Suggestions.AllSuggestionsViewModel
+﻿@using IGamer.Web.ViewModels.Suggestions;
+@using IGamer.Web.ViewModels.Votes
+@model AllSuggestionsViewModel
 @{
     ViewData["Title"] = "Game Suggestions";
 }
@@ -17,6 +19,12 @@
 </section>
 
 <div class="container">
+    @if (this.TempData["ReturnMessage"] != null)
+    {
+        <div class="alert alert-info">
+            @this.TempData["ReturnMessage"]
+        </div>
+    }
     <div class="section_padding">
         <h3 class="mb-30">
             <a type="button" asp-area="" asp-action="Create" asp-controller="Suggestions" class="swiper-button-black primary text-white btn_1 circle large mb-5">Add suggestion</a>
@@ -34,7 +42,9 @@
                     <div class="table-row">
                         <div class="serial">@suggestion.Id</div>
                         <div class="country"> <img class="suggested-game" src="@suggestion.ImageUrl" alt="flag">@suggestion.Title</div>
-                        <div class="visit">@suggestion.Votes</div>
+                        <div class="visit">
+                            @suggestion.VotesCount
+                        </div>
                         <div class="percentage">
                             <div class="progress">
                                 <div class="progress-bar color-1" role="progressbar" style="width: @(suggestion.Percentage)%"
@@ -43,6 +53,12 @@
                         </div>
                     </div>
                 }
+            </div>
+        </div>
+        <div class="mt-10">
+            <a type="button" class="swiper-button-black primary text-white btn_1 circle large mb-5" onclick="showSuggestionVote()">Wanna vote?</a>
+            <div class="hide" id="suggestionVote">
+                <partial name="_VoteFormPartial" model="@(new AddVoteToSuggestionGameInputModel() {SuggestionGames = Model.SuggestionsForDropDown})"/>
             </div>
         </div>
     </div>

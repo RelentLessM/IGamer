@@ -16,7 +16,7 @@ namespace IGamer.Web.ViewModels.Suggestions
 
         public string ImageUrl { get; set; }
 
-        public int Votes { get; set; }
+        public int VotesCount { get; set; }
 
         public decimal Percentage { get; set; }
 

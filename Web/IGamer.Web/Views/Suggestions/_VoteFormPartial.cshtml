@@ -1,0 +1,21 @@
+﻿@model IGamer.Web.ViewModels.Votes.AddVoteToSuggestionGameInputModel
+@{
+    var games = Model.SuggestionGames.Select(x => new SelectListItem(x.Title, x.Id.ToString()));
+
+}
+    <form method="post" asp-action="Vote" asp-controller="Suggestions">
+        <label asp-for="SuggestionGameId" class="text-light"></label>
+        <div class="input-group-icon mt-10">
+            <div class="form-select">
+                <div class="icon">
+                    <i class="fas fa-dice-d20" aria-hidden="true"></i>
+                </div>
+                <select asp-for="SuggestionGameId" asp-items="games" class="nice-select"></select>
+                <span asp-validation-for="SuggestionGameId" class="text-danger"></span>
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <input type="submit" value="Vote" class="genric-btn success circle large" />
+        </div>
+    </form>

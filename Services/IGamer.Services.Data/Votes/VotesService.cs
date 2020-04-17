@@ -12,11 +12,16 @@
     {
         private readonly IRepository<VoteOnPost> postRepository;
         private readonly IRepository<VoteOnGuide> guideRepository;
+        private readonly IRepository<VoteOnSuggestionGame> suggestionGameRepository;
 
-        public VotesService(IRepository<VoteOnPost> postRepository, IRepository<VoteOnGuide> guideRepository)
+        public VotesService(
+            IRepository<VoteOnPost> postRepository,
+            IRepository<VoteOnGuide> guideRepository,
+            IRepository<VoteOnSuggestionGame> suggestionGameRepository)
         {
             this.postRepository = postRepository;
             this.guideRepository = guideRepository;
+            this.suggestionGameRepository = suggestionGameRepository;
         }
 
         public async Task VoteOnPostAsync(string postId, string userId, bool isUpVote)
@@ -76,5 +81,29 @@
             => await this.guideRepository.All()
                 .Where(x => x.GuideId == guideId)
                 .SumAsync(x => (int)x.VoteType);
+
+        public async Task<string> VoteOnSuggestionGameAsync(int suggestionGameId, string userId)
+        {
+            var vote = await this.suggestionGameRepository.All()
+                .FirstOrDefaultAsync(x => x.SuggestionGameId == suggestionGameId && x.UserId == userId);
+
+            if (vote != null)
+            {
+                return "You have already voted for this game!";
+            }
+            else
+            {
+                vote = new VoteOnSuggestionGame()
+                {
+                    SuggestionGameId = suggestionGameId,
+                    UserId = userId,
+                };
+
+                await this.suggestionGameRepository.AddAsync(vote);
+            }
+
+            await this.suggestionGameRepository.SaveChangesAsync();
+            return null;
+        }
     }
 }

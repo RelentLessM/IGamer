@@ -26,25 +26,42 @@
             .To<SuggestionViewModel>()
             .ToListAsync();
             var votesSum = await this.GetSuggestionsVotesSum();
+            if (votesSum == 0)
+            {
+                votesSum = 1;
+            }
+
             foreach (var suggestion in suggestions)
             {
-                suggestion.Percentage = (suggestion.Votes * 100.0m) / votesSum;
+                suggestion.Percentage = (suggestion.VotesCount * 100.0m) / votesSum;
             }
 
             return suggestions;
         }
 
-        public async Task CreateSuggestionAsync<T>(T model)
+        public async Task<IEnumerable<SuggestionForDropDownViewModel>> GetAllForDropDownAsync()
+        => await this.repository.All()
+            .OrderByDescending(x => x.Id)
+            .To<SuggestionForDropDownViewModel>()
+            .ToListAsync();
+
+        public async Task<int> CreateSuggestionAsync<T>(T model)
         {
             var suggestion = AutoMapperConfig.MapperInstance.Map<SuggestionGame>(model);
-            suggestion.Votes = 1;
 
             await this.repository.AddAsync(suggestion);
             await this.repository.SaveChangesAsync();
+
+            return suggestion.Id;
         }
+
+        public async Task<bool> DoesSuggestionExist(string name)
+        => await this.repository.All()
+            .AnyAsync(x => x.Title.ToLower() == name.ToLower());
 
         private async Task<int> GetSuggestionsVotesSum()
             => await this.repository.All()
-                .SumAsync(x => x.Votes);
+                .SelectMany(x => x.Votes)
+                .CountAsync();
     }
 }

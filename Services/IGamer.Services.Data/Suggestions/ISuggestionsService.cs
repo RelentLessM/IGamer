@@ -9,6 +9,10 @@
     {
         Task<IEnumerable<SuggestionViewModel>> GetAllAsync();
 
-        Task CreateSuggestionAsync<T>(T model);
+        Task<IEnumerable<SuggestionForDropDownViewModel>> GetAllForDropDownAsync();
+
+        Task<int> CreateSuggestionAsync<T>(T model);
+
+        Task<bool> DoesSuggestionExist(string name);
     }
 }

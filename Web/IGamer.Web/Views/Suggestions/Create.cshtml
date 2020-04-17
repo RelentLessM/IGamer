@@ -13,6 +13,12 @@
                         <h1>Make</h1>
                         <h4>Suggestion</h4>
                         <hr />
+                        @if (this.TempData["SuggestionExist"] != null)
+                        {
+                            <div class="alert alert-info">
+                                @this.TempData["SuggestionExist"]
+                            </div>
+                        }
                         <div class="live_stareams_text">
                             <div class="col-md-12" align="center">
                                 <form method="post" asp-action="Create" enctype="multipart/form-data">

@@ -18,5 +18,7 @@
         Task<int> GetVotesOnPostAsync(string postId);
 
         Task<int> GetVotesOnGuideAsync(string guideId);
+
+        Task<string> VoteOnSuggestionGameAsync(int suggestionGameId, string userId);
     }
 }
