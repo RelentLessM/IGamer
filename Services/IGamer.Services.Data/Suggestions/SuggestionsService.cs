@@ -22,9 +22,8 @@
         public async Task<IEnumerable<SuggestionViewModel>> GetAllAsync()
         {
             var suggestions = await this.repository.All()
-            .OrderByDescending(x => x.Id)
-            .To<SuggestionViewModel>()
-            .ToListAsync();
+                .To<SuggestionViewModel>()
+                .ToListAsync();
             var votesSum = await this.GetSuggestionsVotesSum();
             if (votesSum == 0)
             {
@@ -36,12 +35,12 @@
                 suggestion.Percentage = (suggestion.VotesCount * 100.0m) / votesSum;
             }
 
-            return suggestions;
+            return suggestions.OrderByDescending(x => x.Percentage);
         }
 
         public async Task<IEnumerable<SuggestionForDropDownViewModel>> GetAllForDropDownAsync()
         => await this.repository.All()
-            .OrderByDescending(x => x.Id)
+            .OrderBy(x => x.Id)
             .To<SuggestionForDropDownViewModel>()
             .ToListAsync();
 
