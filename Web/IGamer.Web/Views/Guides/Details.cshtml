@@ -37,8 +37,8 @@
                             @Model.Title
                         </h2>
                         <ul class="blog-info-link mt-3 mb-4">
-                            <li><a asp-area="" asp-action="ByCategory" asp-controller="Posts" asp-route-name="@Model.Category"><i class="fa fa-stream"></i>@Model.Category</a></li>
-                            <li><a href="#" onclick="showComments()"><i class="far fa-comments"></i> 0 Comments.</a></li>
+                            <li><a asp-area="" asp-action="ByCategory" asp-controller="Guides" asp-route-name="@Model.Category"><i class="fa fa-stream"></i>@Model.Category</a></li>
+                            <li class="text-light"><i class="fas fa-heart-broken"></i> @Model.ReportsCount Reports.</li>
                         </ul>
                         <div class="single-blog-content text-secondary">
                             @Html.Raw(Model.SanitizedContent)
@@ -82,7 +82,7 @@
                     <div class="media align-items-center">
                         <img src="@Model.UserImageUrl" alt="author">
                         <div class="media-body">
-                            <a asp-area="" asp-action="ByUser" asp-controller="Posts" asp-route-username="@Model.UserUserName">
+                            <a asp-area="" asp-action="ByUser" asp-controller="Guides" asp-route-username="@Model.UserUserName">
                                 <h4>@Model.UserUserName</h4>
                             </a>
                             <p>
@@ -95,7 +95,7 @@
                     <div class="align-items-center border-bottom">
                         <img src="@Model.GameImageUrl" alt="author">
                         <div class="media-body">
-                            <a asp-area="" asp-action="ByUser" asp-controller="Posts" asp-route-username="@Model.GameTitle">
+                            <a asp-area="" asp-action="ByUser" asp-controller="Guides" asp-route-username="@Model.GameTitle">
                                 <h4>@Model.GameTitle</h4>
                             </a>
                         </div>
@@ -105,8 +105,8 @@
             <div class="col-lg-4">
                 <div class="blog_right_sidebar">
                     <vc:search-bar></vc:search-bar>
-                    <vc:category-list></vc:category-list>
-                    <vc:recent-posts></vc:recent-posts>
+                    <vc:guide-category-list></vc:guide-category-list>
+                    <vc:recent-guides></vc:recent-guides>
                 </div>
             </div>
         </div>

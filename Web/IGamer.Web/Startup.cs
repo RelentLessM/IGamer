@@ -19,6 +19,7 @@
     using IGamer.Services.Data.Posts;
     using IGamer.Services.Data.Replies;
     using IGamer.Services.Data.Reports;
+    using IGamer.Services.Data.Suggestions;
     using IGamer.Services.Data.Votes;
     using IGamer.Services.Mapping;
     using IGamer.Services.Messaging;
@@ -98,6 +99,7 @@
             services.AddTransient<IGuidesService, GuidesService>();
             services.AddTransient<IGamesService, GamesService>();
             services.AddTransient<IReportsService, ReportsService>();
+            services.AddTransient<ISuggestionsService, SuggestionsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

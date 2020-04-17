@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Ganss.XSS;
 using IGamer.Data.Models;
 using IGamer.Services.Data.Reports;
 using IGamer.Web.ViewModels.Reports;
@@ -27,6 +28,8 @@ namespace IGamer.Web.Controllers
             var user = await this.userManager.GetUserAsync(this.User);
             var userId = await this.userManager.GetUserIdAsync(user);
             model.UserId = userId;
+            model.Reason = new HtmlSanitizer().Sanitize(model.Reason);
+
             if (!this.ModelState.IsValid || userId == null)
             {
                 this.TempData["InfoMessage"] = "Something went wrong! Try again. :)";
