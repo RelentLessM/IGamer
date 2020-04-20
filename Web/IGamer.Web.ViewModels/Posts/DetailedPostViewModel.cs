@@ -19,6 +19,8 @@
         public string SanitizedContent
             => new HtmlSanitizer().Sanitize(this.Description);
 
+        public string UserId { get; set; }
+
         public string UserUserName { get; set; }
 
         public string UserImageUrl { get; set; }

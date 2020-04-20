@@ -19,6 +19,12 @@
 
 <section class="blog_area section_padding">
     <div class="container">
+        @if (this.TempData["InfoMessage"] != null)
+        {
+            <div class="alert alert-info">
+                @this.TempData["InfoMessage"]
+            </div>
+        }
         <div>
             <a type="button" asp-area="" asp-action="Create" asp-controller="Posts" class="swiper-button-black primary text-white btn_1 circle large mb-5">New Post</a>
         </div>

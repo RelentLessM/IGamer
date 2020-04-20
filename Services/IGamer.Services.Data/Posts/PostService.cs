@@ -82,5 +82,19 @@
                 .Take(5)
                 .To<T>()
                 .ToListAsync();
+
+        public async Task<T> GetPostByIdAsync<T>(string id)
+            => await this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefaultAsync();
+
+        public async Task DeletePostAsync(string id)
+        {
+            var post = await this.repository.All().Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            this.repository.Delete(post);
+            await this.repository.SaveChangesAsync();
+        }
+
+        public async Task<bool> DoesPostBelongToUserAsync(string userId, string postId)
+            => await this.repository.All().AnyAsync(x => x.UserId == userId && x.Id == postId);
     }
 }

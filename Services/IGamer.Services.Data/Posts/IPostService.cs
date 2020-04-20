@@ -24,5 +24,11 @@
         Task<T> DetailsAsync<T>(string id);
 
         Task<IEnumerable<T>> GetRecentAsync<T>();
+
+        Task<T> GetPostByIdAsync<T>(string id);
+
+        Task DeletePostAsync(string id);
+
+        Task<bool> DoesPostBelongToUserAsync(string userId, string postId);
     }
 }

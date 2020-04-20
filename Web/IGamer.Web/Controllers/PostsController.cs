@@ -240,5 +240,40 @@
 
             return this.View(post);
         }
+
+        [Authorize]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = await this.userManager.GetUserIdAsync(user);
+            var doesPostBelongToUser = await this.postService.DoesPostBelongToUserAsync(userId, id);
+            if (!this.User.IsInRole("Administrator") && !doesPostBelongToUser)
+            {
+                return this.RedirectToAction("All", "Posts");
+            }
+
+            var postForDelete = await this.postService.GetPostByIdAsync<DeletePostViewModel>(id);
+            if (postForDelete == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(postForDelete);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Delete(DeletePostViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.TempData["InfoMessage"] = "Something went wrong!";
+                return this.View(model);
+            }
+
+            await this.postService.DeletePostAsync(model.Id);
+            this.TempData["InfoMessage"] = "Post successfully deleted!";
+            return this.RedirectToAction("All", "Posts");
+        }
     }
 }

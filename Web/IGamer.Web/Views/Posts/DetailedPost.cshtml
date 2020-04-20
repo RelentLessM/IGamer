@@ -1,4 +1,5 @@
-﻿@using IGamer.Web.ViewModels.Comments;
+﻿@using System.Security.Claims
+@using IGamer.Web.ViewModels.Comments;
 @model IGamer.Web.ViewModels.Posts.DetailedPostViewModel
 @{
     ViewData["Title"] = "Post Details";
@@ -20,12 +21,18 @@
 
 <section class="blog_area single-post-area section_padding">
     <div class="container">
+        @if (this.User.IsInRole("Administrator") || this.User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
+        {
+            <div>
+                <a type="button" asp-area="" asp-action="Delete" asp-controller="Posts" asp-route-id="@Model.Id" class="swiper-button-black primary text-white btn_1 circle large mb-5">Delete Post</a>
+            </div>
+        }
         <div class="row">
             <div class="col-lg-8 posts-list">
                 <div class="single-post">
                     <div class="feature-img">
-                            <img class="img-fluid" src="@Model.ImageUrl" alt="post image">
-                        </div>
+                        <img class="img-fluid" src="@Model.ImageUrl" alt="post image">
+                    </div>
                     <div class="blog_details border border-dark rounded">
                         <h2>
                             @Model.Title
@@ -83,7 +90,7 @@
                     <h4>@Model.CommentsCount comments.</h4>
                     <vc:comment-section id="@Model.Id"></vc:comment-section>
                 </div>
-                <partial name="_CommentFormPartial" model="@(new AddCommentInputModel() {PostId = Model.Id})" />
+                <partial name="_CommentFormPartial" model="@(new AddCommentInputModel() {PostId = Model.Id})"/>
             </div>
             <div class="col-lg-4">
                 <div class="blog_right_sidebar">
