@@ -1,4 +1,6 @@
-﻿namespace IGamer.Services.Data.Suggestions
+﻿using IGamer.Web.ViewModels.Administration.Suggestions;
+
+namespace IGamer.Services.Data.Suggestions
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -14,5 +16,7 @@
         Task<int> CreateSuggestionAsync<T>(T model);
 
         Task<bool> DoesSuggestionExist(string name);
+
+        Task<IEnumerable<SuggestionForAdminViewModel>> GetAllForAdminAsync();
     }
 }

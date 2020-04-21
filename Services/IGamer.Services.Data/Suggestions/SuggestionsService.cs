@@ -1,4 +1,6 @@
-﻿namespace IGamer.Services.Data.Suggestions
+﻿using IGamer.Web.ViewModels.Administration.Suggestions;
+
+namespace IGamer.Services.Data.Suggestions
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -57,6 +59,12 @@
         public async Task<bool> DoesSuggestionExist(string name)
         => await this.repository.All()
             .AnyAsync(x => x.Title.ToLower() == name.ToLower());
+
+        public async Task<IEnumerable<SuggestionForAdminViewModel>> GetAllForAdminAsync()
+        => await this.repository.All()
+            .OrderByDescending(x => x.Votes.Count)
+            .To<SuggestionForAdminViewModel>()
+            .ToListAsync();
 
         private async Task<int> GetSuggestionsVotesSum()
             => await this.repository.All()
