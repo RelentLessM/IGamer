@@ -18,5 +18,9 @@ namespace IGamer.Services.Data.Suggestions
         Task<bool> DoesSuggestionExist(string name);
 
         Task<IEnumerable<SuggestionForAdminViewModel>> GetAllForAdminAsync();
+
+        Task<T> GetById<T>(int id);
+
+        Task DeleteSuggestionAsync(int id);
     }
 }

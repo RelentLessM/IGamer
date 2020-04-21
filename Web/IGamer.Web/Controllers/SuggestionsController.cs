@@ -1,6 +1,7 @@
 ﻿using CloudinaryDotNet;
 using IGamer.Data.Models;
 using IGamer.Services.CloudinaryHelper;
+using IGamer.Services.Data.Games;
 using IGamer.Services.Data.Votes;
 using IGamer.Web.ViewModels.Votes;
 using Microsoft.AspNetCore.Authorization;
@@ -22,19 +23,22 @@ namespace IGamer.Web.Controllers
         private readonly ICloudinaryHelper cloudinaryHelper;
         private readonly Cloudinary cloudinary;
         private readonly IVotesService votesService;
+        private readonly IGamesService gamesService;
 
         public SuggestionsController(
             ISuggestionsService suggestionsService,
             UserManager<ApplicationUser> userManager,
             ICloudinaryHelper cloudinaryHelper,
             Cloudinary cloudinary,
-            IVotesService votesService)
+            IVotesService votesService,
+            IGamesService gamesService)
         {
             this.suggestionsService = suggestionsService;
             this.userManager = userManager;
             this.cloudinaryHelper = cloudinaryHelper;
             this.cloudinary = cloudinary;
             this.votesService = votesService;
+            this.gamesService = gamesService;
         }
 
         public async Task<IActionResult> All()
@@ -72,6 +76,13 @@ namespace IGamer.Web.Controllers
             if (doesItExist)
             {
                 this.TempData["SuggestionExist"] = "This game is already suggested! :)";
+                return this.View(model);
+            }
+
+            var doesGameExist = await this.gamesService.DoesGameExist(model.Title);
+            if (doesGameExist)
+            {
+                this.TempData["GameExist"] = "This game is already added!";
                 return this.View(model);
             }
 

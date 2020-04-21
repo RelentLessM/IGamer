@@ -19,6 +19,12 @@
 </section>
 
 <div class="container">
+    @if (this.TempData["AddInfo"] != null)
+    {
+        <div class="alert alert-info">
+            @this.TempData["AddInfo"]
+        </div>
+    }
     <div class="section_padding">
         <div>
             <div class="progress-table">
@@ -28,18 +34,20 @@
                     <div class="visit"></div>
                     <div class="percentage">Add</div>
                 </div>
-                @foreach(var suggestion in Model.Suggestions)
+                @foreach (var suggestion in Model.Suggestions)
                 {
-            <div class="table-row">
-                <div class="country ml-5"> <img class="suggested-game" src="@suggestion.ImageUrl" alt="flag">@suggestion.Title</div>
-                <div class="visit">
-                    @suggestion.VotesCount
-                </div>
-                <div class="visit"></div>
-                <div class="percentage">
-                    <a type="button" class="swiper-button-black primary text-white btn_1 circle large mb-5 mr-5" asp-area="Administration" asp-controller="Games" asp-action="Add" asp-route-id="@suggestion.Id">Add to games</a>
-                </div>
-            </div>
+                    <div class="table-row">
+                        <div class="country ml-5"> <img class="suggested-game" src="@suggestion.ImageUrl" alt="flag">@suggestion.Title</div>
+                        <div class="visit">
+                            @suggestion.VotesCount
+                        </div>
+                        <div class="visit"></div>
+                        <div class="percentage">
+                            <form method="post" asp-area="Administration" asp-controller="Games" asp-action="Add" asp-route-id="@suggestion.Id">
+                                <button type="submit" class="swiper-button-black primary text-white btn_1 circle large mb-5 mr-5">Add to games</button>
+                            </form>
+                        </div>
+                    </div>
                 }
             </div>
         </div>

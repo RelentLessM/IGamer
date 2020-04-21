@@ -66,6 +66,19 @@ namespace IGamer.Services.Data.Suggestions
             .To<SuggestionForAdminViewModel>()
             .ToListAsync();
 
+        public async Task<T> GetById<T>(int id)
+            => await this.repository.All().Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefaultAsync();
+
+        public async Task DeleteSuggestionAsync(int id)
+        {
+            var suggestion = await this.repository.All().Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            this.repository.Delete(suggestion);
+            await this.repository.SaveChangesAsync();
+        }
+
         private async Task<int> GetSuggestionsVotesSum()
             => await this.repository.All()
                 .SelectMany(x => x.Votes)

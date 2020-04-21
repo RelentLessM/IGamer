@@ -6,5 +6,9 @@
     public interface IGamesService
     {
         Task<IEnumerable<T>> GetAll<T>();
+
+        Task AddAsync<T>(T model);
+
+        Task<bool> DoesGameExist(string name);
     }
 }
