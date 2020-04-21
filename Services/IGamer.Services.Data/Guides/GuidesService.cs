@@ -80,5 +80,19 @@
             => await this.repository.All()
                 .Where(x => x.UserId == userId)
                 .CountAsync();
+
+        public async Task<bool> DoesGuideBelongToUserAsync(string userId, string id)
+            => await this.repository.All().AnyAsync(x => x.UserId == userId && x.Id == id);
+
+        public async Task<T> GetGuideByIdAsync<T>(string id)
+            => await this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefaultAsync();
+
+        public async Task DeleteGuideAsync(string id)
+        {
+            var guide = await this.repository.All().Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            this.repository.Delete(guide);
+            await this.repository.SaveChangesAsync();
+        }
     }
 }

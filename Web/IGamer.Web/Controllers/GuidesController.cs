@@ -246,5 +246,40 @@ namespace IGamer.Web.Controllers
 
             return this.View(guide);
         }
+
+        [Authorize]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = await this.userManager.GetUserIdAsync(user);
+            var doesPostBelongToUser = await this.guidesService.DoesGuideBelongToUserAsync(userId, id);
+            if (!this.User.IsInRole("Administrator") && !doesPostBelongToUser)
+            {
+                return this.RedirectToAction("All", "Guides");
+            }
+
+            var guideForDelete = await this.guidesService.GetGuideByIdAsync<DeleteGuideViewModel>(id);
+            if (guideForDelete == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(guideForDelete);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Delete(DeleteGuideViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.TempData["InfoMessage"] = "Something went wrong!";
+                return this.View(model);
+            }
+
+            await this.guidesService.DeleteGuideAsync(model.Id);
+            this.TempData["InfoMessage"] = "Guide successfully deleted!";
+            return this.RedirectToAction("All", "Guides");
+        }
     }
 }

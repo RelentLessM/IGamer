@@ -13,6 +13,10 @@ a.vote-clr {
     margin-left: 15px;
 }
 
+.text-wrp {
+    word-wrap: break-word
+}
+
 .hide {
     display: none;
 }

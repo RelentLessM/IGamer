@@ -41,7 +41,7 @@
                             <li><a asp-area="" asp-action="ByCategory" asp-controller="Posts" asp-route-name="@Model.Category"><i class="fa fa-stream"></i>@Model.Category</a></li>
                             <li><a href="#" onclick="showComments()"><i class="far fa-comments"></i> @Model.CommentsCount Comments.</a></li>
                         </ul>
-                        <div class="single-blog-content text-secondary">
+                        <div class="single-blog-content text-secondary text-wrp">
                             @Html.Raw(Model.SanitizedContent)
                         </div>
                         @*<div class="quote-wrapper">

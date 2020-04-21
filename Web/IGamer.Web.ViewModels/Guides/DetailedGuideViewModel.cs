@@ -30,6 +30,8 @@ namespace IGamer.Web.ViewModels.Guides
 
         public string UserImageUrl { get; set; }
 
+        public string UserId { get; set; }
+
         public string GameTitle { get; set; }
 
         public string GameImageUrl { get; set; }

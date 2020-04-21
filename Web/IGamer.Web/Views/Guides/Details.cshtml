@@ -1,4 +1,5 @@
-﻿@using IGamer.Web.ViewModels.Reports;
+﻿@using System.Security.Claims
+@using IGamer.Web.ViewModels.Reports;
 @model IGamer.Web.ViewModels.Guides.DetailedGuideViewModel
 @{
     ViewData["Title"] = "Guide Details";
@@ -20,6 +21,12 @@
 
 <section class="blog_area single-post-area section_padding">
     <div class="container">
+        @if (this.User.IsInRole("Administrator") || this.User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
+        {
+            <div>
+                <a type="button" asp-area="" asp-action="Delete" asp-controller="Guides" asp-route-id="@Model.Id" class="swiper-button-black primary text-white btn_1 circle large mb-5">Delete Guide</a>
+            </div>
+        }
         <div class="row">
             <div class="col-lg-8 posts-list">
                 <div class="single-post">
@@ -40,7 +47,7 @@
                             <li><a asp-area="" asp-action="ByCategory" asp-controller="Guides" asp-route-name="@Model.Category"><i class="fa fa-stream"></i>@Model.Category</a></li>
                             <li class="text-light"><i class="fas fa-heart-broken"></i> @Model.ReportsCount Reports.</li>
                         </ul>
-                        <div class="single-blog-content text-secondary">
+                        <div class="single-blog-content text-secondary text-wrp" >
                             @Html.Raw(Model.SanitizedContent)
                         </div>
                     </div>
@@ -75,7 +82,7 @@
                         </div>
                     </div>
                     <div id="report" class="hide">
-                        <partial name="_ReportFormPartial" model="@(new AddReportToGuideInputModel(){GuideId = Model.Id})"/>
+                        <partial name="_ReportFormPartial" model="@(new AddReportToGuideInputModel() {GuideId = Model.Id})" />
                     </div>
                 </div>
                 <div class="blog-author bg-transparent">
@@ -95,9 +102,7 @@
                     <div class="align-items-center border-bottom">
                         <img src="@Model.GameImageUrl" alt="author">
                         <div class="media-body">
-                            <a asp-area="" asp-action="ByUser" asp-controller="Guides" asp-route-username="@Model.GameTitle">
-                                <h4>@Model.GameTitle</h4>
-                            </a>
+                            <h4>@Model.GameTitle</h4>
                         </div>
                     </div>
                 </div>

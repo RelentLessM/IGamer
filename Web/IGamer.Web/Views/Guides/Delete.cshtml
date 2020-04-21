@@ -1,0 +1,58 @@
+﻿@using IGamer.Data.Models.Enums
+@model IGamer.Web.ViewModels.Guides.DeleteGuideViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<section class="live_stareams">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h1>Delete</h1>
+                        <h4>Guide</h4>
+                        <hr />
+                        <div class="live_stareams_text">
+                            <div class="col-md-12" align="center">
+                                @if (this.TempData["InfoMessage"] != null)
+                                {
+                                    <div class="alert alert-info">
+                                        @this.TempData["InfoMessage"]
+                                    </div>
+                                }
+                                <form method="post" asp-action="Delete">
+
+                                    <div class="form-group">
+                                        <label asp-for="Title" class="control-label text-light"></label>
+                                        <input asp-for="Title" class="form-control" disabled="disabled" />
+                                    </div>
+                                    <label asp-for="Category" class="text-light"></label>
+                                    <div class="input-group-icon mt-10">
+                                        <div class="form-select">
+                                            <div class="icon">
+                                                <i class="fa fa-stream" aria-hidden="true"></i>
+                                            </div>
+                                            <select asp-for="Category" asp-items="@Html.GetEnumSelectList(typeof(CategoryOfGuide))" class="nice-select" disabled="disabled"></select>
+                                            <span asp-validation-for="Category" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="form-group">
+                                        <input type="submit" value="Delete" class="genric-btn danger circle large" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div>
+                            <a asp-area="" asp-action="Details" asp-controller="Guides" asp-route-id="@Model.Id" class="genric-btn info circle large">Back to Guide</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

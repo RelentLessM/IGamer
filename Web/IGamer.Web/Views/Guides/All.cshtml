@@ -19,6 +19,12 @@
 
 
         <div class="container blog_area section_padding">
+            @if (this.TempData["InfoMessage"] != null)
+            {
+                <div class="alert alert-info">
+                    @this.TempData["InfoMessage"]
+                </div>
+            }
             <div>
                 <a type="button" asp-area="" asp-action="Create" asp-controller="Guides" class="swiper-button-black primary text-white btn_1 circle large mb-5">New Guide</a>
             </div>
@@ -27,84 +33,84 @@
                     <div class="blog_left_sidebar">
                         @foreach (var guide in Model.Guides)
                         {
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="@guide.ImageUrl" alt="">
-                                <div class="blog_item_date">
-                                    <h3>@guide.CreatedOn.ToString("dd")</h3>
-                                    <p>@guide.CreatedOn.ToString("MMM")</p>
+                            <article class="blog_item">
+                                <div class="blog_item_img">
+                                    <img class="card-img rounded-0" src="@guide.ImageUrl" alt="">
+                                    <div class="blog_item_date">
+                                        <h3>@guide.CreatedOn.ToString("dd")</h3>
+                                        <p>@guide.CreatedOn.ToString("MMM")</p>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="blog_details bg-tr-blog">
-                                <a class="d-inline-block" asp-area="" asp-controller="Guides" asp-action="Details" asp-route-id="@guide.Id">
-                                    <h2 class="t-clr">@guide.Title</h2>
-                                </a>
-                                <p class="text-light">
-                                    @guide.ShortDescription
-                                </p>
-                                <ul class="blog-info-link">
-                                    <li class="text-light"><a class="text-light" asp-area="" asp-action="ByUser" asp-controller="Guides" asp-route-username="@guide.UserUserName"><i class="far fa-user"></i> @guide.UserUserName</a></li>
-                                    <li class="text-light"><i class="fas fa-dice-d20"></i> @guide.GameTitle</li>
-                                    <li class="text-light"><a asp-area="" asp-action="ByCategory" asp-controller="Guides" asp-route-name="@guide.Category" class="d-flex text-light"><i class="fa fa-stream"></i> @guide.Category </a></li>
-                                </ul>
-                            </div>
-                        </article>
+                                <div class="blog_details bg-tr-blog">
+                                    <a class="d-inline-block" asp-area="" asp-controller="Guides" asp-action="Details" asp-route-id="@guide.Id">
+                                        <h2 class="t-clr">@guide.Title</h2>
+                                    </a>
+                                    <p class="text-light text-wrp">
+                                        @guide.ShortDescription
+                                    </p>
+                                    <ul class="blog-info-link">
+                                        <li class="text-light"><a class="text-light" asp-area="" asp-action="ByUser" asp-controller="Guides" asp-route-username="@guide.UserUserName"><i class="far fa-user"></i> @guide.UserUserName</a></li>
+                                        <li class="text-light"><i class="fas fa-dice-d20"></i> @guide.GameTitle</li>
+                                        <li class="text-light"><a asp-area="" asp-action="ByCategory" asp-controller="Guides" asp-route-name="@guide.Category" class="d-flex text-light"><i class="fa fa-stream"></i> @guide.Category </a></li>
+                                    </ul>
+                                </div>
+                            </article>
                         }
 
                         <nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
                                 @if (this.Model.CurrentPage == 1)
                                 {
-                                <li class="page-item disabled">
-                                    <a href="#" class="page-link" aria-label="Previous">
-                                        <i class="ti-angle-left"></i>
-                                    </a>
-                                </li>
+                                    <li class="page-item disabled">
+                                        <a href="#" class="page-link" aria-label="Previous">
+                                            <i class="ti-angle-left"></i>
+                                        </a>
+                                    </li>
                                 }
                                 else
                                 {
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       asp-area=""
-                                       asp-controller="Guides"
-                                       asp-action="All"
-                                       asp-route-page="(@this.Model.CurrentPage - 1)" aria-label="Previous">
-                                        <i class="ti-angle-left"></i>
-                                    </a>
-                                </li>
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                           asp-area=""
+                                           asp-controller="Guides"
+                                           asp-action="All"
+                                           asp-route-page="(@this.Model.CurrentPage - 1)" aria-label="Previous">
+                                            <i class="ti-angle-left"></i>
+                                        </a>
+                                    </li>
                                 }
                                 @for (int i = 1; i <= this.Model.PagesCount; i++)
                                 {
-                                var active = i == this.Model.CurrentPage ? "active" : string.Empty;
-                                <li class="page-item active">
-                                    <a class="page-link"
-                                       asp-area=""
-                                       asp-controller="Guides"
-                                       asp-action="All"
-                                       asp-route-page="@i">@i</a>
-                                </li>
+                                    var active = i == this.Model.CurrentPage ? "active" : string.Empty;
+                                    <li class="page-item active">
+                                        <a class="page-link"
+                                           asp-area=""
+                                           asp-controller="Guides"
+                                           asp-action="All"
+                                           asp-route-page="@i">@i</a>
+                                    </li>
                                 }
 
                                 @if (this.Model.CurrentPage == this.Model.PagesCount)
                                 {
-                                <li class="page-item disabled">
-                                    <a href="#" class="page-link" aria-label="Next">
-                                        <i class="ti-angle-right"></i>
-                                    </a>
-                                </li>
+                                    <li class="page-item disabled">
+                                        <a href="#" class="page-link" aria-label="Next">
+                                            <i class="ti-angle-right"></i>
+                                        </a>
+                                    </li>
                                 }
                                 else
                                 {
-                                <li class="page-item">
-                                    <a class="page-link" aria-label="Next"
-                                       asp-area=""
-                                       asp-controller="Guides"
-                                       asp-action="All"
-                                       asp-route-page="@(this.Model.CurrentPage + 1)">
-                                        <i class="ti-angle-right"></i>
-                                    </a>
-                                </li>
+                                    <li class="page-item">
+                                        <a class="page-link" aria-label="Next"
+                                           asp-area=""
+                                           asp-controller="Guides"
+                                           asp-action="All"
+                                           asp-route-page="@(this.Model.CurrentPage + 1)">
+                                            <i class="ti-angle-right"></i>
+                                        </a>
+                                    </li>
                                 }
                             </ul>
                         </nav>

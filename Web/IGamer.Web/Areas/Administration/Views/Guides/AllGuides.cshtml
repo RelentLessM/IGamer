@@ -1,0 +1,100 @@
+﻿@model IGamer.Web.ViewModels.Administration.Guides.AllGuidesForAdminViewModel
+@{
+    ViewData["Title"] = "Guides";
+}
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2>@ViewData["Title"]</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="section_padding">
+        <div>
+            <div class="progress-table">
+                <div class="table-head">
+                    <div class="country ml-5">Title</div>
+                    <div class="country "></div>
+                    <div class="percentage">What you want to do?</div>
+                </div>
+                @foreach (var guide in Model.Guides)
+                {
+                    <div class="table-row">
+                        <div class="country ml-5">@guide.Title</div>
+                        <div class="country "></div>
+                        <div class="visit">
+                            <a type="button" class="swiper-button-black primary text-white btn_1 circle large mb-5 mr-5" asp-area="" asp-controller="Guides" asp-action="Details" asp-route-id="@guide.Id">See Details</a>
+                            <a type="button" class="swiper-button-black primary text-white btn_1 circle large mb-5 mr-5" asp-area="" asp-controller="Guides" asp-action="Delete" asp-route-id="@guide.Id">Delete Guide</a>
+                        </div>
+                    </div>
+                }
+
+                <nav class="blog-pagination justify-content-center d-flex">
+                    <ul class="pagination">
+                        @if (this.Model.CurrentPage == 1)
+                        {
+                            <li class="page-item disabled">
+                                <a href="#" class="page-link" aria-label="Previous">
+                                    <i class="ti-angle-left"></i>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link"
+                                   asp-area="Administration"
+                                   asp-controller="Guides"
+                                   asp-action="AllGuides"
+                                   asp-route-page="@(this.Model.CurrentPage - 1)" aria-label="Previous">
+                                    <i class="ti-angle-left"></i>
+                                </a>
+                            </li>
+                        }
+                        @for (int i = 1; i <= this.Model.PagesCount; i++)
+                        {
+                            var active = i == this.Model.CurrentPage ? "active" : string.Empty;
+                            <li class="page-item @active">
+                                <a class="page-link"
+                                   asp-area="Administration"
+                                   asp-controller="Guides"
+                                   asp-action="AllGuides"
+                                   asp-route-page="@i">@i</a>
+                            </li>
+                        }
+
+                        @if (this.Model.CurrentPage == this.Model.PagesCount)
+                        {
+                            <li class="page-item disabled">
+                                <a href="#" class="page-link" aria-label="Next">
+                                    <i class="ti-angle-right"></i>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link" aria-label="Next"
+                                   asp-area="Administration"
+                                   asp-controller="Guides"
+                                   asp-action="AllGuides"
+                                   asp-route-page="@(this.Model.CurrentPage + 1)">
+                                    <i class="ti-angle-right"></i>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</div>
