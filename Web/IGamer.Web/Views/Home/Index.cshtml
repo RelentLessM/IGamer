@@ -9,13 +9,19 @@
             <div class="col-lg-6 col-md-8">
                 <div class="banner_text">
                     <div class="banner_text_iner">
+                        @if (this.TempData["SendMessage"] != null)
+                        {
+                            <div class="alert alert-info">
+                                @this.TempData["SendMessage"]
+                            </div>
+                        }
                         <h1>
                             Welcome to @GlobalConstants.SystemName!
                         </h1>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua. Quis ipsum
+                            We are strong community of gamers! We want to become better,
+                            we want to become stronger, we want to be the best. That's why
+                            we help each other!
                         </p>
                         <a type="button" asp-area="Identity" asp-page="/Account/Login" class="btn_1">Join us</a>
                     </div>

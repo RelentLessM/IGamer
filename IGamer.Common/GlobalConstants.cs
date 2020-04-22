@@ -17,5 +17,7 @@
         public const string DefaultGuideImage = "v1586871173/default-guide-image_fhwpqw.webp";
 
         public const int ItemsPerPage = 5;
+
+        public const string ContactEmail = "ceci9905@abv.bg";
     }
 }
