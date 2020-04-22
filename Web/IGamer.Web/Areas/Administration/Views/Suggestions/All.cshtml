@@ -19,14 +19,14 @@
 </section>
 
 <div class="container">
-    @if (this.TempData["AddInfo"] != null)
-    {
-        <div class="alert alert-info">
-            @this.TempData["AddInfo"]
-        </div>
-    }
     <div class="section_padding">
         <div>
+            @if (this.TempData["AddInfo"] != null)
+            {
+                <div class="alert alert-info">
+                    @this.TempData["AddInfo"]
+                </div>
+            }
             <div class="progress-table">
                 <div class="table-head">
                     <div class="country ml-5">Game</div>

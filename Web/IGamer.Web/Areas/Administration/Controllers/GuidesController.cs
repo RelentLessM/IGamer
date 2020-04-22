@@ -32,7 +32,7 @@ namespace IGamer.Web.Areas.Administration.Controllers
             }
 
             var guides = await this.guidesService
-                .GetAllAsync<GuideForAdminViewModel>(GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
+                .GetAllForAdminAsync<GuideForAdminViewModel>(GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
             var result = new AllGuidesForAdminViewModel()
             {
                 Guides = guides,

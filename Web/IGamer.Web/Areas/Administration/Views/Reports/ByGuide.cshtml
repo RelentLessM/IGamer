@@ -1,0 +1,38 @@
+﻿@model IGamer.Web.ViewModels.Administration.Reports.AllReportsForGuideViewModel
+@{
+    ViewData["Title"] = "Reports";
+}
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2>@ViewData["Title"]</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="section_padding">
+        <div>
+            <div class="progress-table">
+                <div class="table-head">
+                    <div class="country ml-5">Guide</div>
+                    <div class="serial ">Reason</div>
+                </div>
+                @foreach (var report in Model.Reports)
+                {
+                    <div class="table-row">
+                        <div class="country ml-5">@report.GuideTitle</div>
+                        <div class="serial">@report.Reason</div>
+                    </div>
+                }
+            </div>
+            <a type="button" class="swiper-button-black primary text-white btn_1 circle large mt-5 mr-5" asp-area="Administration" asp-controller="Guides" asp-action="AllGuides">Back to all guides</a>
+        </div>
+    </div>
+</div>

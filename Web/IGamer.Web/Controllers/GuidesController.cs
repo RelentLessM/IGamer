@@ -253,7 +253,7 @@ namespace IGamer.Web.Controllers
             var user = await this.userManager.GetUserAsync(this.User);
             var userId = await this.userManager.GetUserIdAsync(user);
             var doesPostBelongToUser = await this.guidesService.DoesGuideBelongToUserAsync(userId, id);
-            if (!this.User.IsInRole("Administrator") && !doesPostBelongToUser)
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName) && !doesPostBelongToUser)
             {
                 return this.RedirectToAction("All", "Guides");
             }

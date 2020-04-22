@@ -94,5 +94,13 @@
             this.repository.Delete(guide);
             await this.repository.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<T>> GetAllForAdminAsync<T>(int take, int skip)
+            => await this.repository.All()
+                .OrderByDescending(x => x.Reports.Count)
+                .Skip(skip)
+                .Take(take)
+                .To<T>()
+                .ToListAsync();
     }
 }

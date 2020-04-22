@@ -8,7 +8,6 @@
     using IGamer.Common;
     using IGamer.Data.Models;
     using IGamer.Data.Models.Enums;
-    using IGamer.Services;
     using IGamer.Services.CloudinaryHelper;
     using IGamer.Services.Data.Posts;
     using IGamer.Web.ViewModels.Posts;
@@ -247,7 +246,7 @@
             var user = await this.userManager.GetUserAsync(this.User);
             var userId = await this.userManager.GetUserIdAsync(user);
             var doesPostBelongToUser = await this.postService.DoesPostBelongToUserAsync(userId, id);
-            if (!this.User.IsInRole("Administrator") && !doesPostBelongToUser)
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName) && !doesPostBelongToUser)
             {
                 return this.RedirectToAction("All", "Posts");
             }

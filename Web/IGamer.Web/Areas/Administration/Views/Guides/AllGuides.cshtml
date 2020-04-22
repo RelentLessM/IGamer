@@ -22,17 +22,18 @@
             <div class="progress-table">
                 <div class="table-head">
                     <div class="country ml-5">Title</div>
-                    <div class="country "></div>
+                    <div class="serial ">Reports</div>
                     <div class="percentage">What you want to do?</div>
                 </div>
                 @foreach (var guide in Model.Guides)
                 {
                     <div class="table-row">
-                        <div class="country ml-5">@guide.Title</div>
-                        <div class="country "></div>
+                        <div class="country ml-5"><img class="suggested-game" src="@guide.ImageUrl" alt="guide img"/>@guide.Title</div>
+                        <div class="serial">@guide.ReportsCount</div>
                         <div class="visit">
-                            <a type="button" class="swiper-button-black primary text-white btn_1 circle large mb-5 mr-5" asp-area="" asp-controller="Guides" asp-action="Details" asp-route-id="@guide.Id">See Details</a>
-                            <a type="button" class="swiper-button-black primary text-white btn_1 circle large mb-5 mr-5" asp-area="" asp-controller="Guides" asp-action="Delete" asp-route-id="@guide.Id">Delete Guide</a>
+                            <a type="button" class="swiper-button-black primary text-white btn_1 circle large mr-5" asp-area="" asp-controller="Guides" asp-action="Details" asp-route-id="@guide.Id">See Details</a>
+                            <a type="button" class="swiper-button-black primary text-white btn_1 circle large mr-5" asp-area="" asp-controller="Guides" asp-action="Delete" asp-route-id="@guide.Id">Delete Guide</a>
+                            <a type="button" class="swiper-button-black primary text-white btn_1 circle large mr-5" asp-area="Administration" asp-controller="Reports" asp-action="ByGuide" asp-route-id="@guide.Id">See Reports</a>
                         </div>
                     </div>
                 }

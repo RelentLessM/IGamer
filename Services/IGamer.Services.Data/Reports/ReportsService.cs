@@ -1,4 +1,7 @@
-﻿namespace IGamer.Services.Data.Reports
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace IGamer.Services.Data.Reports
 {
     using System.Threading.Tasks;
 
@@ -28,5 +31,8 @@
             await this.repository.SaveChangesAsync();
             return report.Id;
         }
+
+        public async Task<IEnumerable<T>> GetByGuideAsync<T>(string id)
+            => await this.repository.All().Where(x => x.GuideId == id).To<T>().ToListAsync();
     }
 }
