@@ -1,4 +1,6 @@
-﻿namespace IGamer.Services.Data.Games
+﻿using System.Linq;
+
+namespace IGamer.Services.Data.Games
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -18,7 +20,9 @@
         }
 
         public async Task<IEnumerable<T>> GetAll<T>()
-            => await this.repository.All().To<T>().ToListAsync();
+            => await this.repository.All()
+                .To<T>()
+                .ToListAsync();
 
         public async Task AddAsync<T>(T model)
         {
@@ -29,6 +33,13 @@
         }
 
         public Task<bool> DoesGameExist(string name)
-            => this.repository.All().AnyAsync(x => x.Title == name);
+            => this.repository.All()
+                .AnyAsync(x => x.Title == name);
+
+        public async Task<IEnumerable<T>> TakeNewAsync<T>()
+            => await this.repository.All()
+                .OrderByDescending(x => x.CreatedOn)
+                .To<T>()
+                .ToListAsync();
     }
 }

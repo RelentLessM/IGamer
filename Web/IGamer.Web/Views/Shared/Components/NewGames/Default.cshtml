@@ -1,0 +1,31 @@
+﻿@model IGamer.Web.ViewModels.ViewComponents.NewGamesListViewModel
+
+<section class="live_stareams padding_bottom">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-md-2 offset-lg-2 offset-sm-1">
+                <div class="live_stareams_text">
+                    <h2>New games</h2>
+                    <h3>for this week!</h3>
+                    <a class="btn_1 mt-5" asp-area="" asp-action="Create" asp-controller="Guides">Go Guide!</a>
+                </div>
+            </div>
+            <div class="col-md-7 offset-sm-1">
+                <div class="live_stareams_slide owl-carousel">
+                    @foreach(var game in Model.Games)
+                    { 
+                        <div class="live_stareams_slide_img">
+                            <img src="@game.ImageUrl" alt="game img">
+                            <div class="extends_video">
+                                <a id="play-video_1" class="video-play-button popup-youtube"
+                                   href="@game.ImageUrl">
+                                    <span class="fas fa-play"></span>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

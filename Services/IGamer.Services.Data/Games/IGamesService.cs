@@ -10,5 +10,7 @@
         Task AddAsync<T>(T model);
 
         Task<bool> DoesGameExist(string name);
+
+        Task<IEnumerable<T>> TakeNewAsync<T>();
     }
 }
