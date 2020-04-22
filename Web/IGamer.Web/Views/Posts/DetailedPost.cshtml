@@ -22,10 +22,17 @@
 
 <section class="blog_area single-post-area section_padding">
     <div class="container">
-        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
+        @if (this.TempData["InfoMessage"] != null)
+        {
+            <div class="alert alert-info">
+                @this.TempData["InfoMessage"]
+            </div>
+        }
+        @if (this.User.IsInRole(GlobalConstants.ModeratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
         {
             <div>
-                <a type="button" asp-area="" asp-action="Delete" asp-controller="Posts" asp-route-id="@Model.Id" class="swiper-button-black primary text-white btn_1 circle large mb-5">Delete Post</a>
+                <a type="button" asp-area="" asp-action="Delete" asp-controller="Posts" asp-route-id="@Model.Id" class="text-white btn_1 mb-5 mr-5">Delete Post</a>
+                <a type="button" asp-area="" asp-action="Edit" asp-controller="Posts" asp-route-id="@Model.Id" class="text-white btn_1 mb-5">Edit Post</a>
             </div>
         }
         <div class="row">
@@ -46,13 +53,13 @@
                             @Html.Raw(Model.SanitizedContent)
                         </div>
                         @*<div class="quote-wrapper">
-                            <div class="quotes">
-                                MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                                should have to spend money on boot camp when you can get the MCSE study materials yourself at
-                                a fraction of the camp price. However, who has the willpower to actually sit through a
-                                self-imposed MCSE training.
-                            </div>
-                        </div>*@
+                                <div class="quotes">
+                                    MCSE boot camps have its supporters and its detractors. Some people do not understand why you
+                                    should have to spend money on boot camp when you can get the MCSE study materials yourself at
+                                    a fraction of the camp price. However, who has the willpower to actually sit through a
+                                    self-imposed MCSE training.
+                                </div>
+                            </div>*@
                     </div>
                 </div>
                 <div class="navigation-top">
@@ -91,7 +98,7 @@
                     <h4>@Model.CommentsCount comments.</h4>
                     <vc:comment-section id="@Model.Id"></vc:comment-section>
                 </div>
-                <partial name="_CommentFormPartial" model="@(new AddCommentInputModel() {PostId = Model.Id})"/>
+                <partial name="_CommentFormPartial" model="@(new AddCommentInputModel() {PostId = Model.Id})" />
             </div>
             <div class="col-lg-4">
                 <div class="blog_right_sidebar">

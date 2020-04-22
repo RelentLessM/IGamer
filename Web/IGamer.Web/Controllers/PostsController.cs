@@ -274,5 +274,40 @@
             this.TempData["InfoMessage"] = "Post successfully deleted!";
             return this.RedirectToAction("All", "Posts");
         }
+
+        [Authorize]
+        public async Task<IActionResult> Edit(string id)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = await this.userManager.GetUserIdAsync(user);
+            var doesPostBelongToUser = await this.postService.DoesPostBelongToUserAsync(userId, id);
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName) && !doesPostBelongToUser)
+            {
+                return this.RedirectToAction("All", "Posts");
+            }
+
+            var postForEdit = await this.postService.GetPostByIdAsync<EditPostViewModel>(id);
+            if (postForEdit == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(postForEdit);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(EditPostViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.TempData["InfoMessage"] = "Something went wrong!";
+                return this.View(model);
+            }
+
+            await this.postService.EditPostAsync(model.Id, model.Title, model.Content);
+            this.TempData["InfoMessage"] = "Post successfully edited!";
+            return this.RedirectToAction("DetailedPost", "Posts", new { id = model.Id });
+        }
     }
 }

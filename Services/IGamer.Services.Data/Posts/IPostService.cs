@@ -30,5 +30,7 @@
         Task DeletePostAsync(string id);
 
         Task<bool> DoesPostBelongToUserAsync(string userId, string postId);
+
+        Task EditPostAsync(string id, string title, string content);
     }
 }

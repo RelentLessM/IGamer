@@ -1,4 +1,6 @@
-﻿namespace IGamer.Services.Data.Posts
+﻿using IGamer.Web.ViewModels.Posts;
+
+namespace IGamer.Services.Data.Posts
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -96,5 +98,14 @@
 
         public async Task<bool> DoesPostBelongToUserAsync(string userId, string postId)
             => await this.repository.All().AnyAsync(x => x.UserId == userId && x.Id == postId);
+
+        public async Task EditPostAsync(string id, string title, string content)
+        {
+            var post = await this.repository.All().Where(x => x.Id == id).FirstOrDefaultAsync();
+            post.Description = content;
+            post.Title = title;
+            this.repository.Update(post);
+            await this.repository.SaveChangesAsync();
+        }
     }
 }
