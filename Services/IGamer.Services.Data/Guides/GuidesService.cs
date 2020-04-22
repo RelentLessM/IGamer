@@ -102,5 +102,11 @@
                 .Take(take)
                 .To<T>()
                 .ToListAsync();
+
+        public Task<T> TakeLatestGuideAsync<T>()
+            => this.repository.All()
+                .OrderByDescending(x => x.CreatedOn)
+                .To<T>()
+                .FirstOrDefaultAsync();
     }
 }

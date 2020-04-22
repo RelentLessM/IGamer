@@ -2958,7 +2958,7 @@ h1.t-clr, h2.t-clr, h3.t-clr, h4.t-clr, h5.t-clr, h6.t-clr{
 
 /* line 3, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_Latest_War.scss */
 .Latest_War .Latest_War_text {
-    background-image: url("../img/latest_war_img.png");
+    background-image: url("https://res.cloudinary.com/dikczyh4n/image/upload/v1586871173/default-guide-image_fhwpqw.webp");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

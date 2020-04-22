@@ -33,5 +33,7 @@ namespace IGamer.Services.Data.Guides
         Task DeleteGuideAsync(string id);
 
         Task<IEnumerable<T>> GetAllForAdminAsync<T>(int take, int skip = 0);
+
+        Task<T> TakeLatestGuideAsync<T>();
     }
 }
