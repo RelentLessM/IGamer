@@ -22,12 +22,6 @@
 
 <section class="blog_area single-post-area section_padding">
     <div class="container">
-        @if (this.TempData["InfoMessage"] != null)
-        {
-            <div class="alert alert-info">
-                @this.TempData["InfoMessage"]
-            </div>
-        }
         @if (this.User.IsInRole(GlobalConstants.ModeratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
         {
             <div>
