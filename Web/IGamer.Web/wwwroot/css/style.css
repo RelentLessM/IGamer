@@ -838,6 +838,10 @@ h1.t-clr, h2.t-clr, h3.t-clr, h4.t-clr, h5.t-clr, h6.t-clr{
     color: navajowhite
 }
 
+h1.t-clr-media, h2.t-clr-media, h3.t-clr-media, h4.t-clr-media, h5.t-clr-media, h6.t-clr-media {
+    color: white !important;
+}
+
 /* line 26, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_blog.scss */
 .single-blog {
     overflow: hidden;
