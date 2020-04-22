@@ -108,5 +108,14 @@
                 .OrderByDescending(x => x.CreatedOn)
                 .To<T>()
                 .FirstOrDefaultAsync();
+
+        public async Task EditGuideAsync(string id, string title, string content)
+        {
+            var guide = await this.repository.All().Where(x => x.Id == id).FirstOrDefaultAsync();
+            guide.Description = content;
+            guide.Title = title;
+            this.repository.Update(guide);
+            await this.repository.SaveChangesAsync();
+        }
     }
 }

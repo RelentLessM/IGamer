@@ -1,4 +1,4 @@
-﻿@model IGamer.Web.ViewModels.Posts.EditPostViewModel
+﻿@model IGamer.Web.ViewModels.Guides.EditGuideViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -18,7 +18,7 @@
                 <div class="breadcrumb_iner text-center">
                     <div class="breadcrumb_iner_item">
                         <h1>Edit</h1>
-                        <h4>Post</h4>
+                        <h4>Guide</h4>
                         <hr />
                         <div class="live_stareams_text">
                             <div class="col-md-12" align="center">
@@ -42,7 +42,7 @@
                         </div>
 
                         <div>
-                            <a asp-area="" asp-controller="Posts" asp-action="DetailedPost" asp-route-id="@Model.Id" class="genric-btn info circle large">Back to Post</a>
+                            <a asp-area="" asp-controller="Guides" asp-action="Details" asp-route-id="@Model.Id" class="genric-btn info circle large">Back to Post</a>
                         </div>
                     </div>
                 </div>

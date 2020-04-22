@@ -22,10 +22,17 @@
 
 <section class="blog_area single-post-area section_padding">
     <div class="container">
-        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
+        @if (this.TempData["InfoMessage"] != null)
+        {
+            <div class="alert alert-info">
+                @this.TempData["InfoMessage"]
+            </div>
+        }
+        @if (this.User.IsInRole(GlobalConstants.ModeratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
         {
             <div>
-                <a type="button" asp-area="" asp-action="Delete" asp-controller="Guides" asp-route-id="@Model.Id" class="swiper-button-black primary text-white btn_1 circle large mb-5">Delete Guide</a>
+                <a type="button" asp-area="" asp-action="Delete" asp-controller="Guides" asp-route-id="@Model.Id" class="text-white btn_1 mb-5 mr-5">Delete Guide</a>
+                <a type="button" asp-area="" asp-action="Edit" asp-controller="Guides" asp-route-id="@Model.Id" class="text-white btn_1 mb-5">Edit Guide</a>
             </div>
         }
         <div class="row">
@@ -48,7 +55,7 @@
                             <li><a asp-area="" asp-action="ByCategory" asp-controller="Guides" asp-route-name="@Model.Category"><i class="fa fa-stream"></i>@Model.Category</a></li>
                             <li class="text-light"><i class="fas fa-heart-broken"></i> @Model.ReportsCount Reports.</li>
                         </ul>
-                        <div class="single-blog-content text-secondary text-wrp" >
+                        <div class="single-blog-content text-secondary text-wrp">
                             @Html.Raw(Model.SanitizedContent)
                         </div>
                     </div>

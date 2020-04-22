@@ -281,5 +281,40 @@ namespace IGamer.Web.Controllers
             this.TempData["InfoMessage"] = "Guide successfully deleted!";
             return this.RedirectToAction("All", "Guides");
         }
+
+        [Authorize]
+        public async Task<IActionResult> Edit(string id)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = await this.userManager.GetUserIdAsync(user);
+            var doesGuideBelongToUser = await this.guidesService.DoesGuideBelongToUserAsync(userId, id);
+            if (!this.User.IsInRole(GlobalConstants.ModeratorRoleName) && !doesGuideBelongToUser)
+            {
+                return this.RedirectToAction("All", "Guides");
+            }
+
+            var guideToEdit = await this.guidesService.GetGuideByIdAsync<EditGuideViewModel>(id);
+            if (guideToEdit == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(guideToEdit);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(EditGuideViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.TempData["InfoMessage"] = "Something went wrong!";
+                return this.View(model);
+            }
+
+            await this.guidesService.EditGuideAsync(model.Id, model.Title, model.Content);
+            this.TempData["InfoMessage"] = "Guide successfully edited!";
+            return this.RedirectToAction("Details", "Guides", new { id = model.Id });
+        }
     }
 }

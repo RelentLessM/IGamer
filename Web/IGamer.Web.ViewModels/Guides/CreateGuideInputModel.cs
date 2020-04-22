@@ -26,7 +26,6 @@
         [Required]
         public string Category { get; set; }
 
-        [Range(1, int.MaxValue)]
         [Required(ErrorMessage = "Game is required!")]
         [Display(Name = "Game")]
         public string GameId { get; set; }
