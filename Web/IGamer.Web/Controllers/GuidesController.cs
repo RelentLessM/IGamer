@@ -44,16 +44,16 @@ namespace IGamer.Web.Controllers
 
         public async Task<IActionResult> All(int page = 1)
         {
-            if (page <= 0)
-            {
-                page = 1;
-            }
-
             var guidesCount = await this.guidesService.GetAllCountAsync();
             var pagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage);
             if (page > pagesCount)
             {
                 page = pagesCount;
+            }
+
+            if (page <= 0)
+            {
+                page = 1;
             }
 
             var guides = await this.guidesService.GetAllAsync<GuideViewModel>(GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage); ;
@@ -80,17 +80,17 @@ namespace IGamer.Web.Controllers
                 return this.RedirectToAction("All");
             }
 
-            if (page <= 0)
-            {
-                page = 1;
-            }
-
             var enumResult = Enum.Parse<CategoryOfGuide>(name);
             var guidesCount = await this.guidesService.GetCountByCategoryAsync(enumResult);
             var pagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage);
             if (page > pagesCount)
             {
                 page = pagesCount;
+            }
+
+            if (page <= 0)
+            {
+                page = 1;
             }
 
             var guides = await this.guidesService
@@ -123,17 +123,17 @@ namespace IGamer.Web.Controllers
                 return this.RedirectToAction("All");
             }
 
-            if (page <= 0)
-            {
-                page = 1;
-            }
-
             var userId = await this.userManager.GetUserIdAsync(user);
             var guidesCount = await this.guidesService.GetCountByUserAsync(userId);
             var pagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage);
             if (page > pagesCount)
             {
                 page = pagesCount;
+            }
+
+            if (page <= 0)
+            {
+                page = 1;
             }
 
             var guides = await this.guidesService
@@ -164,16 +164,16 @@ namespace IGamer.Web.Controllers
             var user = await this.userManager.GetUserAsync(this.User);
             var userId = await this.userManager.GetUserIdAsync(user);
 
-            if (page <= 0)
-            {
-                page = 1;
-            }
-
             var guidesCount = await this.guidesService.GetCountByUserAsync(userId);
             var pagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage);
             if (page > pagesCount)
             {
                 page = pagesCount;
+            }
+
+            if (page <= 0)
+            {
+                page = 1;
             }
 
             var guides = await this.guidesService

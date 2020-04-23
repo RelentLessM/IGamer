@@ -19,16 +19,16 @@
 
         public async Task<IActionResult> AllPosts(int page = 1)
         {
-            if (page <= 0)
-            {
-                page = 1;
-            }
-
             var postsCount = await this.postsService.GetAllCountAsync();
             var pagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
             if (page > pagesCount)
             {
                 page = pagesCount;
+            }
+
+            if (page <= 0)
+            {
+                page = 1;
             }
 
             var posts = await this.postsService

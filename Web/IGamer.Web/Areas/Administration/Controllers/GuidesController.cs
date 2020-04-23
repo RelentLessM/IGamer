@@ -19,16 +19,16 @@ namespace IGamer.Web.Areas.Administration.Controllers
 
         public async Task<IActionResult> AllGuides(int page = 1)
         {
-            if (page <= 0)
-            {
-                page = 1;
-            }
-
             var guidesCount = await this.guidesService.GetAllCountAsync();
             var pagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage);
             if (page > pagesCount)
             {
                 page = pagesCount;
+            }
+
+            if (page <= 0)
+            {
+                page = 1;
             }
 
             var guides = await this.guidesService

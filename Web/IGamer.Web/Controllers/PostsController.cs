@@ -43,17 +43,17 @@
                 return this.RedirectToAction("All");
             }
 
-            if (page <= 0)
-            {
-                page = 1;
-            }
-
             var enumResult = Enum.Parse<CategoryOfPost>(name);
             var postsCount = await this.postService.GetCountByCategoryAsync(enumResult);
             var pagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
             if (page > pagesCount)
             {
                 page = pagesCount;
+            }
+
+            if (page <= 0)
+            {
+                page = 1;
             }
 
             var posts = await this.postService
@@ -86,17 +86,17 @@
                 return this.RedirectToAction("All");
             }
 
-            if (page <= 0)
-            {
-                page = 1;
-            }
-
             var userId = await this.userManager.GetUserIdAsync(user);
             var postsCount = await this.postService.GetCountByUserAsync(userId);
             var pagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
             if (page > pagesCount)
             {
                 page = pagesCount;
+            }
+
+            if (page <= 0)
+            {
+                page = 1;
             }
 
             var posts = await this.postService
@@ -127,16 +127,17 @@
         {
             var user = await this.userManager.GetUserAsync(this.User);
             var userId = await this.userManager.GetUserIdAsync(user);
-            if (page <= 0)
-            {
-                page = 1;
-            }
 
             var postsCount = await this.postService.GetCountByUserAsync(userId);
             var pagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
             if (page > pagesCount)
             {
                 page = pagesCount;
+            }
+
+            if (page <= 0)
+            {
+                page = 1;
             }
 
             var posts = await this.postService
@@ -163,16 +164,16 @@
 
         public async Task<IActionResult> All(int page = 1)
         {
-            if (page <= 0)
-            {
-                page = 1;
-            }
-
             var postsCount = await this.postService.GetAllCountAsync();
             var pagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
             if (page > pagesCount)
             {
                 page = pagesCount;
+            }
+
+            if (page <= 0)
+            {
+                page = 1;
             }
 
             var posts = await this.postService

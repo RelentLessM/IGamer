@@ -15,7 +15,7 @@
             this.suggestionsService = suggestionsService;
         }
 
-        public async Task<IActionResult> All(int page = 1)
+        public async Task<IActionResult> All()
         {
             var suggestions = await this.suggestionsService
                 .GetAllForAdminAsync();
