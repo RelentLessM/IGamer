@@ -19,6 +19,14 @@
                 return defaultUrl;
             }
 
+            var isImage = ImageExtensions.IsImage(file);
+
+            if (!isImage)
+            {
+                var defaultUrl = GlobalConstants.DefaultUserImage;
+
+                return defaultUrl;
+            }
 
             var url = await this.UploadAsync(cloudinary, file);
             return url;
@@ -33,13 +41,9 @@
                 return defaultUrl;
             }
 
-            var url = await this.UploadAsync(cloudinary, file);
-            return url;
-        }
+            var isImage = ImageExtensions.IsImage(file);
 
-        public async Task<string> UploadGuideImageAsync(Cloudinary cloudinary, IFormFile file)
-        {
-            if (file == null)
+            if (!isImage)
             {
                 var defaultUrl = GlobalConstants.DefaultPostImage;
 
@@ -50,14 +54,44 @@
             return url;
         }
 
+        public async Task<string> UploadGuideImageAsync(Cloudinary cloudinary, IFormFile file)
+        {
+            if (file == null)
+            {
+                var defaultUrl = GlobalConstants.DefaultGuideImage;
+
+                return defaultUrl;
+            }
+
+            var isImage = ImageExtensions.IsImage(file);
+
+            if (!isImage)
+            {
+                var defaultUrl = GlobalConstants.DefaultGuideImage;
+
+                return defaultUrl;
+            }
+
+            var url = await this.UploadAsync(cloudinary, file);
+            return url;
+        }
+
         public async Task<string> UploadSuggestionImageAsync(Cloudinary cloudinary, IFormFile file)
         {
+            var isImage = ImageExtensions.IsImage(file);
+
+            if (!isImage)
+            {
+                return null;
+            }
+
             var url = await this.UploadAsync(cloudinary, file);
             return url;
         }
 
         private async Task<string> UploadAsync(Cloudinary cloudinary, IFormFile file)
         {
+
             byte[] image;
 
             using (var stream = new MemoryStream())

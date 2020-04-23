@@ -87,6 +87,11 @@ namespace IGamer.Web.Controllers
             }
 
             var imageUrl = await this.cloudinaryHelper.UploadSuggestionImageAsync(this.cloudinary, file);
+            if (imageUrl == null)
+            {
+                this.TempData["SuggestionExist"] = "You are trying to upload a non-image file.";
+                return this.View(model);
+            }
             model.ImageUrl = imageUrl;
 
             var suggestionId = await this.suggestionsService.CreateSuggestionAsync(model);
