@@ -1,17 +1,14 @@
-﻿using System;
-using System.Threading.Tasks;
-using IGamer.Data;
-using IGamer.Data.Repositories;
-using Microsoft.EntityFrameworkCore;
-
-namespace IGamer.Services.Data.Tests
+﻿namespace IGamer.Services.Data.Tests
 {
-    using System.Collections.Generic;
+    using System;
     using System.Linq;
+    using System.Threading.Tasks;
 
-    using IGamer.Data.Common.Repositories;
+    using IGamer.Data;
     using IGamer.Data.Models;
+    using IGamer.Data.Repositories;
     using IGamer.Services.Data.Votes;
+    using Microsoft.EntityFrameworkCore;
     using Moq;
     using Xunit;
 

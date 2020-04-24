@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace IGamer.Services.Data.Reports
+﻿namespace IGamer.Services.Data.Reports
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using IGamer.Data.Common.Repositories;
