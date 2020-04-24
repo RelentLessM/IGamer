@@ -1,11 +1,10 @@
-﻿using IGamer.Services.Data.Games;
-using IGamer.Services.Data.Suggestions;
-using IGamer.Web.ViewModels.Administration.Games;
-
-namespace IGamer.Web.Areas.Administration.Controllers
+﻿namespace IGamer.Web.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
 
+    using IGamer.Services.Data.Games;
+    using IGamer.Services.Data.Suggestions;
+    using IGamer.Web.ViewModels.Administration.Games;
     using Microsoft.AspNetCore.Mvc;
 
     public class GamesController : AdministrationController

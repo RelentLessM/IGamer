@@ -5,6 +5,7 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using CommandLine;
     using IGamer.Data;
     using IGamer.Data.Common;
     using IGamer.Data.Common.Repositories;
@@ -13,9 +14,6 @@
     using IGamer.Data.Seeding;
     using IGamer.Services.Data;
     using IGamer.Services.Messaging;
-
-    using CommandLine;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

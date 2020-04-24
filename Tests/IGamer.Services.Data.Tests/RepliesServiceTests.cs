@@ -51,7 +51,7 @@
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var context = new ApplicationDbContext(options.Options);
-            await context.Users.AddAsync(new ApplicationUser() {Id = "1"});
+            await context.Users.AddAsync(new ApplicationUser() { Id = "1" });
             var repository = new EfDeletableEntityRepository<ReplyOnPostComment>(context);
             var service = new ReplyService(repository);
             var model = new AddReplyInputModel()

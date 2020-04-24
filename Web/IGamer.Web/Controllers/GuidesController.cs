@@ -1,13 +1,11 @@
-﻿using IGamer.Common;
-using Microsoft.EntityFrameworkCore;
-
-namespace IGamer.Web.Controllers
+﻿namespace IGamer.Web.Controllers
 {
     using System;
     using System.Linq;
     using System.Threading.Tasks;
 
     using CloudinaryDotNet;
+    using IGamer.Common;
     using IGamer.Data.Models;
     using IGamer.Data.Models.Enums;
     using IGamer.Services.CloudinaryHelper;
@@ -18,6 +16,7 @@ namespace IGamer.Web.Controllers
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
 
     [Authorize]
     public class GuidesController : Controller
@@ -56,7 +55,7 @@ namespace IGamer.Web.Controllers
                 page = 1;
             }
 
-            var guides = await this.guidesService.GetAllAsync<GuideViewModel>(GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage); ;
+            var guides = await this.guidesService.GetAllAsync<GuideViewModel>(GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
             var model = new AllGuidesViewModel()
             {
                 Guides = guides,

@@ -164,7 +164,7 @@
                 Description = "test",
                 ImageUrl = "google",
             };
-            var id = await service.CreateAsync(model, "1");
+            await service.CreateAsync(model, "1");
 
             var actual = await service.GetByIdAsync<GuideViewModel>("123");
             Assert.Null(actual);

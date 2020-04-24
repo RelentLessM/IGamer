@@ -91,7 +91,6 @@
 
         private async Task<string> UploadAsync(Cloudinary cloudinary, IFormFile file)
         {
-
             byte[] image;
 
             using (var stream = new MemoryStream())

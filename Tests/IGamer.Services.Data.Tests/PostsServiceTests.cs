@@ -403,7 +403,7 @@
                     Category = "Rpg",
                     Content = "test3",
                     ImageUrl = "google3",
-                }
+                },
             };
             foreach (var model in models)
             {
