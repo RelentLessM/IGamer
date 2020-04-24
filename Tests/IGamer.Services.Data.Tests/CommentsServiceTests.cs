@@ -40,7 +40,7 @@
                 UserId = "1",
             };
 
-            var id = await service.AddCommentToPostAsync(model);
+            await service.AddCommentToPostAsync(model);
             var actual = await service.GetAllAsync<CommentViewModel>("1");
             Assert.Single(actual);
         }
