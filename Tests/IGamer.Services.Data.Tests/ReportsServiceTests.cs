@@ -14,7 +14,6 @@
     using IGamer.Web.ViewModels.Administration.Reports;
     using IGamer.Web.ViewModels.Guides;
     using IGamer.Web.ViewModels.Reports;
-    using IGamer.Web.ViewModels.Suggestions;
     using Microsoft.EntityFrameworkCore;
     using Xunit;
 

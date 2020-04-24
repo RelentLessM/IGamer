@@ -19,7 +19,7 @@
         public RepliesServiceTests()
         {
             AutoMapperConfig
-                .RegisterMappings(typeof(AddReportToGuideInputModel).GetTypeInfo().Assembly);
+                .RegisterMappings(typeof(AddReplyInputModel).GetTypeInfo().Assembly);
         }
 
         [Fact]
@@ -45,27 +45,27 @@
         }
 
         // TODO: Find why service is not taking any data when there is.
-        //[Fact]
-        //public async Task CountOfRepliesShouldBeOne()
-        //{
-        //    var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-        //        .UseInMemoryDatabase(Guid.NewGuid().ToString());
-        //    var context = new ApplicationDbContext(options.Options);
+        [Fact]
+        public async Task CountOfRepliesShouldBeOne()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var context = new ApplicationDbContext(options.Options);
+            await context.Users.AddAsync(new ApplicationUser() {Id = "1"});
+            var repository = new EfDeletableEntityRepository<ReplyOnPostComment>(context);
+            var service = new ReplyService(repository);
+            var model = new AddReplyInputModel()
+            {
+                UserId = "1",
+                CommentId = 1,
+                Description = "test reply",
+                PostId = "1",
+            };
 
-        //    var repository = new EfDeletableEntityRepository<ReplyOnPostComment>(context);
-        //    var service = new ReplyService(repository);
-        //    var model = new AddReplyInputModel()
-        //    {
-        //        UserId = "1",
-        //        CommentId = 1,
-        //        Description = "test reply",
-        //        PostId = "1",
-        //    };
+            var replyId = await service.AddReplyToPostCommentAsync(model);
+            var actual = await service.GetReplyByIdAsync<ReplyResponseModel>(replyId);
 
-        //    var replyId = await service.AddReplyToPostCommentAsync(model);
-        //    var actual = await service.GetReplyByIdAsync<ReplyResponseModel>(replyId);
-
-        //    Assert.IsType<ReplyResponseModel>(actual);
-        //}
+            Assert.IsType<ReplyResponseModel>(actual);
+        }
     }
 }
