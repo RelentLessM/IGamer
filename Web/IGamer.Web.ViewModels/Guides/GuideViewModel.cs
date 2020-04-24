@@ -40,10 +40,6 @@
 
         public string ImageUrl { get; set; }
 
-        // public string GameDescription { get; set; }
-
-        // public string GameImageUrl { get; set; }
-
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Guide, GuideViewModel>()
