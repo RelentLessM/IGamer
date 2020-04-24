@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using IGamer.Data;
-using IGamer.Data.Models;
-using IGamer.Data.Models.Enums;
-using IGamer.Data.Repositories;
-using IGamer.Services.Data.Posts;
-using IGamer.Services.Data.Replies;
-using IGamer.Services.Mapping;
-using IGamer.Web.ViewModels.Posts;
-using IGamer.Web.ViewModels.Replies;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-
-namespace IGamer.Services.Data.Tests
+﻿namespace IGamer.Services.Data.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using System.Threading.Tasks;
+
+    using IGamer.Data;
+    using IGamer.Data.Models;
+    using IGamer.Data.Models.Enums;
+    using IGamer.Data.Repositories;
+    using IGamer.Services.Data.Posts;
+    using IGamer.Services.Mapping;
+    using IGamer.Web.ViewModels.Posts;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class PostsServiceTests
     {
         public PostsServiceTests()
@@ -541,7 +540,6 @@ namespace IGamer.Services.Data.Tests
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var context = new ApplicationDbContext(options.Options);
-            await context.Users.AddAsync(new ApplicationUser() { Id = "1" });
             await context.Users.AddAsync(new ApplicationUser() { Id = "2" });
 
             var repository = new EfDeletableEntityRepository<Post>(context);
@@ -570,7 +568,6 @@ namespace IGamer.Services.Data.Tests
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var context = new ApplicationDbContext(options.Options);
-            await context.Users.AddAsync(new ApplicationUser() { Id = "1" });
             await context.Users.AddAsync(new ApplicationUser() { Id = "2" });
 
             var repository = new EfDeletableEntityRepository<Post>(context);

@@ -28,8 +28,6 @@ namespace IGamer.Services.Data.Guides
 
         Task<bool> DoesGuideBelongToUserAsync(string userId, string id);
 
-        Task<T> GetGuideByIdAsync<T>(string id);
-
         Task DeleteGuideAsync(string id);
 
         Task<IEnumerable<T>> GetAllForAdminAsync<T>(int take, int skip = 0);

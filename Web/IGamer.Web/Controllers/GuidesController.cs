@@ -258,7 +258,7 @@ namespace IGamer.Web.Controllers
                 return this.RedirectToAction("All", "Guides");
             }
 
-            var guideForDelete = await this.guidesService.GetGuideByIdAsync<DeleteGuideViewModel>(id);
+            var guideForDelete = await this.guidesService.GetByIdAsync<DeleteGuideViewModel>(id);
             if (guideForDelete == null)
             {
                 return this.NotFound();
@@ -293,7 +293,7 @@ namespace IGamer.Web.Controllers
                 return this.RedirectToAction("All", "Guides");
             }
 
-            var guideToEdit = await this.guidesService.GetGuideByIdAsync<EditGuideViewModel>(id);
+            var guideToEdit = await this.guidesService.GetByIdAsync<EditGuideViewModel>(id);
             if (guideToEdit == null)
             {
                 return this.NotFound();
