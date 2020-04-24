@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using IGamer.Data;
-using IGamer.Data.Models;
-using IGamer.Data.Repositories;
-using IGamer.Services.Data.Games;
-using IGamer.Services.Data.Guides;
-using IGamer.Services.Mapping;
-using IGamer.Web.ViewModels.Administration.Games;
-using IGamer.Web.ViewModels.Guides;
-using IGamer.Web.ViewModels.ViewComponents;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-
-namespace IGamer.Services.Data.Tests
+﻿namespace IGamer.Services.Data.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using System.Threading.Tasks;
+
+    using IGamer.Data;
+    using IGamer.Data.Models;
+    using IGamer.Data.Repositories;
+    using IGamer.Services.Data.Games;
+    using IGamer.Services.Mapping;
+    using IGamer.Web.ViewModels.Administration.Games;
+    using IGamer.Web.ViewModels.Guides;
+    using IGamer.Web.ViewModels.ViewComponents;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class GamesServiceTests
     {
         public GamesServiceTests()
