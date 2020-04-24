@@ -75,9 +75,7 @@
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var context = new ApplicationDbContext(options.Options);
 
-            var repository = new EfRepository<Report>(context);
             var guideRepository = new EfDeletableEntityRepository<Guide>(context);
-            var service = new ReportsService(repository);
             var guideService = new GuidesService(guideRepository);
             var guideModel = new CreateGuideInputModel()
             {
@@ -89,6 +87,8 @@
             };
             var guideId = await guideService.CreateAsync(guideModel, "1");
 
+            var repository = new EfRepository<Report>(context);
+            var service = new ReportsService(repository);
             var model = new AddReportToGuideInputModel()
             {
                 UserId = "1",
