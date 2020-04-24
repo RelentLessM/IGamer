@@ -1,8 +1,7 @@
-﻿using System.Linq;
-
-namespace IGamer.Services.Data.Games
+﻿namespace IGamer.Services.Data.Games
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using IGamer.Data.Common.Repositories;
@@ -39,6 +38,7 @@ namespace IGamer.Services.Data.Games
         public async Task<IEnumerable<T>> TakeNewAsync<T>()
             => await this.repository.All()
                 .OrderByDescending(x => x.CreatedOn)
+                .Take(3)
                 .To<T>()
                 .ToListAsync();
     }
