@@ -22,13 +22,16 @@
 
 <section class="blog_area single-post-area section_padding">
     <div class="container">
-        @if (this.User.IsInRole(GlobalConstants.ModeratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
-        {
-            <div>
+        <div>
+            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
+            {
                 <a type="button" asp-area="" asp-action="Delete" asp-controller="Guides" asp-route-id="@Model.Id" class="text-white btn_1 mb-5 mr-5">Delete Guide</a>
+            }
+            @if (this.User.IsInRole(GlobalConstants.ModeratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
+            {
                 <a type="button" asp-area="" asp-action="Edit" asp-controller="Guides" asp-route-id="@Model.Id" class="text-white btn_1 mb-5">Edit Guide</a>
-            </div>
-        }
+            }
+        </div>
         <div class="row">
             <div class="col-lg-8 posts-list">
                 <div class="single-post">
@@ -84,7 +87,7 @@
                         </div>
                     </div>
                     <div id="report" class="hide">
-                        <partial name="_ReportFormPartial" model="@(new AddReportToGuideInputModel() {GuideId = Model.Id})" />
+                        <partial name="_ReportFormPartial" model="@(new AddReportToGuideInputModel() {GuideId = Model.Id})"/>
                     </div>
                 </div>
                 <div class="blog-author bg-transparent">
