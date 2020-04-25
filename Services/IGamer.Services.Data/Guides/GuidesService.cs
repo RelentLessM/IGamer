@@ -31,6 +31,11 @@
             => await this.repository.All()
                 .CountAsync();
 
+        public async Task<int> GetCountBySearchAsync(string search)
+            => await this.repository.All()
+                .Where(x => x.Description.Contains(search) || x.Title.Contains(search))
+                .CountAsync();
+
         public async Task<string> CreateAsync<T>(T model, string userId)
         {
             var guide = AutoMapperConfig.MapperInstance.Map<Guide>(model);

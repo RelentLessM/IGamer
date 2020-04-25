@@ -1,10 +1,10 @@
 ﻿<aside class="single_sidebar_widget search_widget">
-    <form action="#">
+    <form method="post" asp-area="" asp-controller="Guides" asp-action="BySearch">
         <div class="form-group">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder='Search Keyword'
                        onfocus="this.placeholder = ''"
-                       onblur="this.placeholder = 'Search Keyword'">
+                       onblur="this.placeholder = 'Search Keyword'" name="search">
                 <div class="input-group-append">
                     <button class="btn" type="button"><i class="ti-search"></i></button>
                 </div>

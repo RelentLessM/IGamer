@@ -12,6 +12,8 @@ namespace IGamer.Services.Data.Guides
 
         Task<int> GetAllCountAsync();
 
+        Task<int> GetCountBySearchAsync(string search);
+
         Task<string> CreateAsync<T>(T model, string userId);
 
         Task<T> GetByIdAsync<T>(string id);

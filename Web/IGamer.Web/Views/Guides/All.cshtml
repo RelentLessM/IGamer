@@ -83,7 +83,7 @@
                                 @for (int i = 1; i <= this.Model.PagesCount; i++)
                                 {
                                     var active = i == this.Model.CurrentPage ? "active" : string.Empty;
-                                    <li class="page-item active">
+                                    <li class="page-item @active">
                                         <a class="page-link"
                                            asp-area=""
                                            asp-controller="Guides"
@@ -120,7 +120,7 @@
 
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
-                        <vc:search-bar></vc:search-bar>
+                        <vc:guide-search-bar></vc:guide-search-bar>
                         <vc:guide-category-list></vc:guide-category-list>
                         <vc:recent-guides></vc:recent-guides>
                     </div>

@@ -1,4 +1,6 @@
-﻿namespace IGamer.Web.Controllers
+﻿using IGamer.Services.Data.SearchBar;
+
+namespace IGamer.Web.Controllers
 {
     using System;
     using System.Linq;
@@ -23,6 +25,7 @@
     {
         private readonly IGuidesService guidesService;
         private readonly IGamesService gamesService;
+        private readonly ISearchBarService searchBarService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ICloudinaryHelper cloudinaryHelper;
         private readonly Cloudinary cloudinary;
@@ -30,12 +33,14 @@
         public GuidesController(
             IGuidesService guidesService,
             IGamesService gamesService,
+            ISearchBarService searchBarService,
             UserManager<ApplicationUser> userManager,
             ICloudinaryHelper cloudinaryHelper,
             Cloudinary cloudinary)
         {
             this.guidesService = guidesService;
             this.gamesService = gamesService;
+            this.searchBarService = searchBarService;
             this.userManager = userManager;
             this.cloudinaryHelper = cloudinaryHelper;
             this.cloudinary = cloudinary;
@@ -246,7 +251,6 @@
             return this.View(guide);
         }
 
-        [Authorize]
         public async Task<IActionResult> Delete(string id)
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -267,7 +271,6 @@
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Delete(DeleteGuideViewModel model)
         {
             if (!this.ModelState.IsValid)
@@ -281,7 +284,6 @@
             return this.RedirectToAction("All", "Guides");
         }
 
-        [Authorize]
         public async Task<IActionResult> Edit(string id)
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -302,7 +304,6 @@
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Edit(EditGuideViewModel model)
         {
             if (!this.ModelState.IsValid)
@@ -314,6 +315,38 @@
             await this.guidesService.EditGuideAsync(model.Id, model.Title, model.Content);
             this.TempData["InfoMessage"] = "Guide successfully edited!";
             return this.RedirectToAction("Details", "Guides", new { id = model.Id });
+        }
+
+        public async Task<IActionResult> BySearch(string search, int page = 1)
+        {
+            var guidesCount = await this.guidesService.GetCountBySearchAsync(search);
+            var pagesCount = (int)Math.Ceiling((double)guidesCount / GlobalConstants.ItemsPerPage);
+            if (page > pagesCount)
+            {
+                page = pagesCount;
+            }
+
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
+            var guides = await this.searchBarService.SearchGuide<GuideViewModel>(search ,GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
+            var model = new AllGuidesViewModel()
+            {
+                Guides = guides,
+                PagesCount = pagesCount,
+            };
+
+            if (model.PagesCount == 0)
+            {
+                model.PagesCount = 1;
+            }
+
+            model.CurrentPage = page;
+            model.SearchWord = search;
+
+            return this.View(model);
         }
     }
 }
