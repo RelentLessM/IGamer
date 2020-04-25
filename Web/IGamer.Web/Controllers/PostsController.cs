@@ -1,4 +1,6 @@
-﻿namespace IGamer.Web.Controllers
+﻿using IGamer.Services.Data.SearchBar;
+
+namespace IGamer.Web.Controllers
 {
     using System;
     using System.Linq;
@@ -20,17 +22,20 @@
     public class PostsController : Controller
     {
         private readonly IPostService postService;
+        private readonly ISearchBarService searchBarService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ICloudinaryHelper cloudinaryHelper;
         private readonly Cloudinary cloudinary;
 
         public PostsController(
             IPostService postService,
+            ISearchBarService searchBarService,
             UserManager<ApplicationUser> userManager,
             ICloudinaryHelper cloudinaryHelper,
             Cloudinary cloudinary)
         {
             this.postService = postService;
+            this.searchBarService = searchBarService;
             this.userManager = userManager;
             this.cloudinaryHelper = cloudinaryHelper;
             this.cloudinary = cloudinary;
@@ -309,6 +314,43 @@
             await this.postService.EditPostAsync(model.Id, model.Title, model.Content);
             this.TempData["InfoMessage"] = "Post successfully edited!";
             return this.RedirectToAction("DetailedPost", "Posts", new { id = model.Id });
+        }
+
+        public async Task<IActionResult> BySearch(string search, int page = 1)
+        {
+            var postsCount = await this.postService.GetCountBySearchAsync(search);
+            var pagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage);
+            if (page > pagesCount)
+            {
+                page = pagesCount;
+            }
+
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
+            var posts = await this.searchBarService
+                .SearchPost<PostViewModel>(search, GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
+            var result = new PostsAllViewModel()
+            {
+                Posts = posts,
+                PagesCount = (int)Math.Ceiling((double)postsCount / GlobalConstants.ItemsPerPage),
+            };
+
+            if (result.PagesCount == 0)
+            {
+                result.PagesCount = 1;
+            }
+
+            if (page > result.PagesCount)
+            {
+                page = result.PagesCount;
+            }
+
+            result.CurrentPage = page;
+            result.SearchWord = search;
+            return this.View(result);
         }
     }
 }

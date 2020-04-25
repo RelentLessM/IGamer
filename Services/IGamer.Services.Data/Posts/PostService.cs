@@ -47,6 +47,11 @@ namespace IGamer.Services.Data.Posts
                 .Where(x => x.Category == categoryName)
                 .CountAsync();
 
+        public async Task<int> GetCountBySearchAsync(string search)
+            => await this.repository.All()
+                .Where(x => x.Description.Contains(search) || x.Title.Contains(search))
+                .CountAsync();
+
         public async Task<IEnumerable<T>> GetByUserAsync<T>(string userId, int take, int skip = 0)
             => await this.repository.All()
                 .Where(x => x.UserId == userId)

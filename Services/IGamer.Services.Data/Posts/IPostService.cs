@@ -15,6 +15,8 @@
 
         Task<int> GetCountByCategoryAsync(CategoryOfPost categoryName);
 
+        Task<int> GetCountBySearchAsync(string search);
+
         Task<IEnumerable<T>> GetByUserAsync<T>(string userId, int take, int skip = 0);
 
         Task<int> GetCountByUserAsync(string userId);

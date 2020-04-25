@@ -20,19 +20,23 @@ namespace IGamer.Services.Data.SearchBar
             this.guideRepository = guideRepository;
         }
 
-        public async Task<IEnumerable<T>> SearchPost<T>(string input)
+        public async Task<IEnumerable<T>> SearchPost<T>(string input, int take, int skip = 0)
             => await this.postRepository.All()
                 .Where(x => x.Title.Contains(input)
                             || x.Description.Contains(input))
                 .OrderByDescending(x => x.CreatedOn)
+                .Skip(skip)
+                .Take(take)
                 .To<T>()
                 .ToListAsync();
 
-        public async Task<IEnumerable<T>> SearchGuide<T>(string input)
+        public async Task<IEnumerable<T>> SearchGuide<T>(string input, int take, int skip = 0)
             => await this.guideRepository.All()
                 .Where(x => x.Title.Contains(input)
                             || x.Description.Contains(input))
                 .OrderByDescending(x => x.CreatedOn)
+                .Skip(skip)
+                .Take(take)
                 .To<T>()
                 .ToListAsync();
     }

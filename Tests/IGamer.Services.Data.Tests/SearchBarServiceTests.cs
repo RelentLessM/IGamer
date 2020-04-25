@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -25,6 +26,73 @@ namespace IGamer.Services.Data.Tests
         }
 
         [Fact]
+        public async Task SearchPostShouldTakeFive()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var context = new ApplicationDbContext(options.Options);
+            await context.Users.AddAsync(new ApplicationUser() { Id = "1" });
+
+            var postRepository = new EfDeletableEntityRepository<Post>(context);
+            var guideRepository = new EfDeletableEntityRepository<Guide>(context);
+            var searchBarService = new SearchBarService(postRepository, guideRepository);
+
+            var postService = new PostService(postRepository);
+            var postModels = new List<CreatePostInputModel>()
+            {
+               new CreatePostInputModel()
+               {
+                   Title = "new",
+                   Category = "Action",
+                   Content = "test",
+                   ImageUrl = "google",
+               },
+               new CreatePostInputModel()
+               {
+                   Title = "new",
+                   Category = "Action",
+                   Content = "test1",
+                   ImageUrl = "google",
+               },
+               new CreatePostInputModel()
+               {
+                   Title = "testttt",
+                   Category = "Action",
+                   Content = "new",
+                   ImageUrl = "google",
+               },
+               new CreatePostInputModel()
+               {
+                   Title = "new",
+                   Category = "Action",
+                   Content = "test5",
+                   ImageUrl = "google",
+               },
+               new CreatePostInputModel()
+               {
+                   Title = "new",
+                   Category = "Action",
+                   Content = "test7",
+                   ImageUrl = "google",
+               },
+               new CreatePostInputModel()
+               {
+                   Title = "newtest3",
+                   Category = "Action",
+                   Content = "eee",
+                   ImageUrl = "google",
+               },
+            };
+            foreach (var postModel in postModels)
+            {
+                await postService.CreateAsync(postModel, "1");
+            }
+
+            var actual = await searchBarService.SearchPost<PostViewModel>("test", 5, 0);
+            Assert.Equal(5, actual.Count());
+        }
+
+        [Fact]
         public async Task SearchPostShouldFindOneByContent()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
@@ -47,7 +115,7 @@ namespace IGamer.Services.Data.Tests
 
             await postService.CreateAsync(postModel, "1");
 
-            var actual = await searchBarService.SearchPost<PostViewModel>("test");
+            var actual = await searchBarService.SearchPost<PostViewModel>("test", 5, 0);
             Assert.Single(actual);
         }
 
@@ -74,7 +142,7 @@ namespace IGamer.Services.Data.Tests
 
             await postService.CreateAsync(postModel, "1");
 
-            var actual = await searchBarService.SearchPost<PostViewModel>("test");
+            var actual = await searchBarService.SearchPost<PostViewModel>("test", 5, 0);
             Assert.Single(actual);
         }
 
@@ -111,8 +179,82 @@ namespace IGamer.Services.Data.Tests
 
             await postService.CreateAsync(postModel, "1");
 
-            var actual = await searchBarService.SearchPost<PostViewModel>("test");
+            var actual = await searchBarService.SearchPost<PostViewModel>("test", 5, 0);
             Assert.Equal(2, actual.Count());
+        }
+
+        [Fact]
+        public async Task SearchGuideShouldTakeFive()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var context = new ApplicationDbContext(options.Options);
+            await context.Users.AddAsync(new ApplicationUser() { Id = "1" });
+            await context.Games.AddAsync(new Game() { Id = "1" });
+
+            var postRepository = new EfDeletableEntityRepository<Post>(context);
+            var guideRepository = new EfDeletableEntityRepository<Guide>(context);
+            var searchBarService = new SearchBarService(postRepository, guideRepository);
+
+            var guideService = new GuidesService(guideRepository);
+            var guideModels = new List<CreateGuideInputModel>()
+            {
+               new CreateGuideInputModel()
+               {
+                   Title = "new",
+                   Category = "Action",
+                   Description = "test",
+                   GameId = "1",
+                   ImageUrl = "google",
+               },
+               new CreateGuideInputModel()
+               {
+                   Title = "new",
+                   Category = "Action",
+                   Description = "test1",
+                   ImageUrl = "google",
+                   GameId = "1",
+               },
+               new CreateGuideInputModel()
+               {
+                   Title = "testttt",
+                   Category = "Action",
+                   Description = "new",
+                   ImageUrl = "google",
+                   GameId = "1",
+               },
+               new CreateGuideInputModel()
+               {
+                   Title = "new",
+                   Category = "Action",
+                   Description = "test5",
+                   ImageUrl = "google",
+                   GameId = "1",
+               },
+               new CreateGuideInputModel()
+               {
+                   Title = "new",
+                   Category = "Action",
+                   Description = "test7",
+                   ImageUrl = "google",
+                   GameId = "1",
+               },
+               new CreateGuideInputModel()
+               {
+                   Title = "newtest3",
+                   Category = "Action",
+                   Description = "eee",
+                   ImageUrl = "google",
+                   GameId = "1",
+               },
+            };
+            foreach (var guideModel in guideModels)
+            {
+                await guideService.CreateAsync(guideModel, "1");
+            }
+
+            var actual = await searchBarService.SearchGuide<GuideViewModel>("test", 5, 0);
+            Assert.Equal(5, actual.Count());
         }
 
         [Fact]
@@ -140,7 +282,7 @@ namespace IGamer.Services.Data.Tests
 
             await guideService.CreateAsync(guideModel, "2");
 
-            var actual = await searchBarService.SearchGuide<GuideViewModel>("test");
+            var actual = await searchBarService.SearchGuide<GuideViewModel>("test", 5, 0);
             Assert.Single(actual);
         }
 
@@ -169,7 +311,7 @@ namespace IGamer.Services.Data.Tests
 
             await guideService.CreateAsync(guideModel, "2");
 
-            var actual = await searchBarService.SearchGuide<GuideViewModel>("test");
+            var actual = await searchBarService.SearchGuide<GuideViewModel>("test", 5, 0);
             Assert.Single(actual);
         }
 
@@ -208,7 +350,7 @@ namespace IGamer.Services.Data.Tests
 
             await guideService.CreateAsync(newGuideModel, "2");
 
-            var actual = await searchBarService.SearchGuide<GuideViewModel>("test");
+            var actual = await searchBarService.SearchGuide<GuideViewModel>("test", 5, 0);
             Assert.Equal(2, actual.Count());
         }
     }

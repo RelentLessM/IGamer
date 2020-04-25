@@ -5,8 +5,8 @@
 
     public interface ISearchBarService
     {
-        Task<IEnumerable<T>> SearchPost<T>(string input);
+        Task<IEnumerable<T>> SearchPost<T>(string input, int take, int skip = 0);
 
-        Task<IEnumerable<T>> SearchGuide<T>(string input);
+        Task<IEnumerable<T>> SearchGuide<T>(string input, int take, int skip = 0);
     }
 }

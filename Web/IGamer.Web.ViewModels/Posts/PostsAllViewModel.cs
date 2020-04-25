@@ -9,5 +9,7 @@
         public int CurrentPage { get; set; }
 
         public int PagesCount { get; set; }
+
+        public string SearchWord { get; set; }
     }
 }
