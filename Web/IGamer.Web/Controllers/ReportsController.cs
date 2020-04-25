@@ -1,15 +1,15 @@
-﻿using System.Threading.Tasks;
-using Ganss.XSS;
-using IGamer.Data.Models;
-using IGamer.Services.Data.Reports;
-using IGamer.Web.ViewModels.Reports;
-using IGamer.Web.ViewModels.Votes;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-
-namespace IGamer.Web.Controllers
+﻿namespace IGamer.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using Ganss.XSS;
+    using IGamer.Data.Models;
+    using IGamer.Services.Data.Reports;
+    using IGamer.Web.ViewModels.Reports;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     public class ReportsController : Controller
     {
         private readonly IReportsService reportsService;

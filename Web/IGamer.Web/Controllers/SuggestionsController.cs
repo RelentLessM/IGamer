@@ -1,19 +1,18 @@
-﻿using CloudinaryDotNet;
-using IGamer.Data.Models;
-using IGamer.Services.CloudinaryHelper;
-using IGamer.Services.Data.Games;
-using IGamer.Services.Data.Votes;
-using IGamer.Web.ViewModels.Votes;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-
-namespace IGamer.Web.Controllers
+﻿namespace IGamer.Web.Controllers
 {
     using System.Threading.Tasks;
 
+    using CloudinaryDotNet;
+    using IGamer.Data.Models;
+    using IGamer.Services.CloudinaryHelper;
+    using IGamer.Services.Data.Games;
     using IGamer.Services.Data.Suggestions;
+    using IGamer.Services.Data.Votes;
     using IGamer.Web.ViewModels.Suggestions;
+    using IGamer.Web.ViewModels.Votes;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class SuggestionsController : Controller
@@ -92,6 +91,7 @@ namespace IGamer.Web.Controllers
                 this.TempData["SuggestionExist"] = "You are trying to upload a non-image file.";
                 return this.View(model);
             }
+
             model.ImageUrl = imageUrl;
 
             var suggestionId = await this.suggestionsService.CreateSuggestionAsync(model);

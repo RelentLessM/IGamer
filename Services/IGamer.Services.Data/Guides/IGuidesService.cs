@@ -1,5 +1,4 @@
-﻿
-namespace IGamer.Services.Data.Guides
+﻿namespace IGamer.Services.Data.Guides
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

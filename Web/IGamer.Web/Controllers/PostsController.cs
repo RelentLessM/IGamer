@@ -1,6 +1,4 @@
-﻿using IGamer.Services.Data.SearchBar;
-
-namespace IGamer.Web.Controllers
+﻿namespace IGamer.Web.Controllers
 {
     using System;
     using System.Linq;
@@ -12,6 +10,7 @@ namespace IGamer.Web.Controllers
     using IGamer.Data.Models.Enums;
     using IGamer.Services.CloudinaryHelper;
     using IGamer.Services.Data.Posts;
+    using IGamer.Services.Data.SearchBar;
     using IGamer.Web.ViewModels.Posts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;

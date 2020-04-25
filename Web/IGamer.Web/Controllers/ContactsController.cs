@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
-using IGamer.Common;
-using IGamer.Services.Messaging;
-using IGamer.Web.ViewModels.Contacts;
-using Microsoft.AspNetCore.Mvc;
-
-namespace IGamer.Web.Controllers
+﻿namespace IGamer.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using IGamer.Common;
+    using IGamer.Services.Messaging;
+    using IGamer.Web.ViewModels.Contacts;
+    using Microsoft.AspNetCore.Mvc;
+
     public class ContactsController : Controller
     {
         private readonly IEmailSender emailSender;

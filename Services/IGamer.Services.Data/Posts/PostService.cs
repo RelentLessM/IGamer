@@ -1,6 +1,4 @@
-﻿using IGamer.Web.ViewModels.Posts;
-
-namespace IGamer.Services.Data.Posts
+﻿namespace IGamer.Services.Data.Posts
 {
     using System.Collections.Generic;
     using System.Linq;

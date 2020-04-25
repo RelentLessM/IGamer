@@ -1,6 +1,4 @@
-﻿using IGamer.Services.Data.SearchBar;
-
-namespace IGamer.Web.Controllers
+﻿namespace IGamer.Web.Controllers
 {
     using System;
     using System.Linq;
@@ -13,6 +11,7 @@ namespace IGamer.Web.Controllers
     using IGamer.Services.CloudinaryHelper;
     using IGamer.Services.Data.Games;
     using IGamer.Services.Data.Guides;
+    using IGamer.Services.Data.SearchBar;
     using IGamer.Web.ViewModels.Guides;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
@@ -331,7 +330,7 @@ namespace IGamer.Web.Controllers
                 page = 1;
             }
 
-            var guides = await this.searchBarService.SearchGuide<GuideViewModel>(search ,GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
+            var guides = await this.searchBarService.SearchGuide<GuideViewModel>(search, GlobalConstants.ItemsPerPage, (page - 1) * GlobalConstants.ItemsPerPage);
             var model = new AllGuidesViewModel()
             {
                 Guides = guides,

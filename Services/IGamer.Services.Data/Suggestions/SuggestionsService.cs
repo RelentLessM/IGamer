@@ -1,6 +1,4 @@
-﻿using IGamer.Web.ViewModels.Administration.Suggestions;
-
-namespace IGamer.Services.Data.Suggestions
+﻿namespace IGamer.Services.Data.Suggestions
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -9,6 +7,7 @@ namespace IGamer.Services.Data.Suggestions
     using IGamer.Data.Common.Repositories;
     using IGamer.Data.Models;
     using IGamer.Services.Mapping;
+    using IGamer.Web.ViewModels.Administration.Suggestions;
     using IGamer.Web.ViewModels.Suggestions;
     using Microsoft.EntityFrameworkCore;
 

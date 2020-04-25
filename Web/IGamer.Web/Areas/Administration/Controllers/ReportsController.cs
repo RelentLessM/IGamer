@@ -1,10 +1,9 @@
-﻿using IGamer.Services.Data.Reports;
-using IGamer.Web.ViewModels.Administration.Reports;
-
-namespace IGamer.Web.Areas.Administration.Controllers
+﻿namespace IGamer.Web.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
 
+    using IGamer.Services.Data.Reports;
+    using IGamer.Web.ViewModels.Administration.Reports;
     using Microsoft.AspNetCore.Mvc;
 
     public class ReportsController : AdministrationController

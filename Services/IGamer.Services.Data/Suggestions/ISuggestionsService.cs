@@ -1,10 +1,9 @@
-﻿using IGamer.Web.ViewModels.Administration.Suggestions;
-
-namespace IGamer.Services.Data.Suggestions
+﻿namespace IGamer.Services.Data.Suggestions
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using IGamer.Web.ViewModels.Administration.Suggestions;
     using IGamer.Web.ViewModels.Suggestions;
 
     public interface ISuggestionsService

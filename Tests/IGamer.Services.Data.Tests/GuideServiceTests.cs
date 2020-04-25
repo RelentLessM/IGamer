@@ -517,6 +517,64 @@
         }
 
         [Fact]
+        public async Task GetCountBySearchShouldGetFour()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var context = new ApplicationDbContext(options.Options);
+            await context.Users.AddAsync(new ApplicationUser() { Id = "1" });
+            await context.Games.AddAsync(new Game() { Id = "1" });
+
+            var repository = new EfDeletableEntityRepository<Guide>(context);
+            var service = new GuidesService(repository);
+            var models = new List<CreateGuideInputModel>()
+            {
+                new CreateGuideInputModel()
+                {
+                    Title = "new",
+                    GameId = "1",
+                    Category = "Action",
+                    Description = "test",
+                    ImageUrl = "google",
+                },
+                new CreateGuideInputModel()
+                {
+                    Title = "new2",
+                    GameId = "1",
+                    Category = "Action",
+                    Description = "test2",
+                    ImageUrl = "google2",
+                },
+                new CreateGuideInputModel()
+                {
+                    Title = "new3",
+                    GameId = "1",
+                    Category = "Mmo",
+                    Description = "test3",
+                    ImageUrl = "google3",
+                },
+            };
+
+            foreach (var model in models)
+            {
+                await service.CreateAsync(model, "1");
+            }
+
+            var lastModel = new CreateGuideInputModel()
+            {
+                Title = "teeest",
+                GameId = "1",
+                Category = "Mmo",
+                Description = "newwwwwwww",
+                ImageUrl = "google4",
+            };
+            await service.CreateAsync(lastModel, "2");
+
+            var actual = await service.GetCountBySearchAsync("new");
+            Assert.Equal(4, actual);
+        }
+
+        [Fact]
         public async Task DoesGuideBelongToUserShouldReturnTrue()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()

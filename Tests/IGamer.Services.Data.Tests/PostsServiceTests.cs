@@ -286,6 +286,50 @@
         }
 
         [Fact]
+        public async Task GetCountBySearchShouldTakeThree()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var context = new ApplicationDbContext(options.Options);
+
+            var repository = new EfDeletableEntityRepository<Post>(context);
+            var service = new PostService(repository);
+            var models = new List<CreatePostInputModel>()
+            {
+                new CreatePostInputModel()
+                {
+                    Title = "new",
+                    Category = "Action",
+                    Content = "test",
+                    ImageUrl = "google",
+                },
+                new CreatePostInputModel()
+                {
+                    Title = "testing it",
+                    Category = "Action",
+                    Content = "test2",
+                    ImageUrl = "google2",
+                },
+            };
+            foreach (var model in models)
+            {
+                await service.CreateAsync(model, "1");
+            }
+
+            var newModel = new CreatePostInputModel()
+            {
+                Title = "new3",
+                Category = "Action",
+                Content = "test3",
+                ImageUrl = "google3",
+            };
+            await service.CreateAsync(newModel, "2");
+
+            var actual = await service.GetCountBySearchAsync("test");
+            Assert.Equal(3, actual);
+        }
+
+        [Fact]
         public async Task GetCountByCategoryShouldTake2()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()

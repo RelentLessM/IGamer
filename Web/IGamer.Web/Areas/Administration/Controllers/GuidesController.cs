@@ -1,13 +1,14 @@
-﻿using System;
-using System.Threading.Tasks;
-using IGamer.Common;
-using IGamer.Services.Data.Guides;
-using IGamer.Web.ViewModels.Administration.Guides;
-using IGamer.Web.ViewModels.Administration.Posts;
-using Microsoft.AspNetCore.Mvc;
-
-namespace IGamer.Web.Areas.Administration.Controllers
+﻿namespace IGamer.Web.Areas.Administration.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+
+    using IGamer.Common;
+    using IGamer.Services.Data.Guides;
+    using IGamer.Web.ViewModels.Administration.Guides;
+    using IGamer.Web.ViewModels.Administration.Posts;
+    using Microsoft.AspNetCore.Mvc;
+
     public class GuidesController : AdministrationController
     {
         private readonly IGuidesService guidesService;
