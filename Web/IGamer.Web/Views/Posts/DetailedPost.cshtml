@@ -28,13 +28,17 @@
                 @this.TempData["InfoMessage"]
             </div>
         }
-        @if (this.User.IsInRole(GlobalConstants.ModeratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
-        {
-            <div>
+        <div>
+            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
+            {
                 <a type="button" asp-area="" asp-action="Delete" asp-controller="Posts" asp-route-id="@Model.Id" class="text-white btn_1 mb-5 mr-5">Delete Post</a>
+
+            }
+            @if (this.User.IsInRole(GlobalConstants.ModeratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
+            {
                 <a type="button" asp-area="" asp-action="Edit" asp-controller="Posts" asp-route-id="@Model.Id" class="text-white btn_1 mb-5">Edit Post</a>
-            </div>
-        }
+            }
+        </div>
         <div class="row">
             <div class="col-lg-8 posts-list">
                 <div class="single-post">
